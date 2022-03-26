@@ -3,33 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeSlowZone : MonoBehaviour
+using Penwyn.Tools;
+
+
+namespace Penwyn.Game
 {
-    [SerializeField] LayerMask mask;
-    [HideInInspector] public float currentRadius = 360;
-    [SerializeField] float durationToNormalize;
-
-    float slowTimeScale = 0.5F;
-
-    Collider2D[] objectsInRange = new Collider2D[] { };
-
-    void OnTriggerEnter2D(Collider2D other)
+    public class TimeSlowZone : MonoBehaviour
     {
-        objectsInRange = Physics2D.OverlapCircleAll((Vector2)this.transform.position, currentRadius);
-        if (currentRadius > 0 && objectsInRange != null && objectsInRange.ToList().Contains(other))
+        [SerializeField] LayerMask mask;
+        [HideInInspector] public float currentRadius = 360;
+        [SerializeField] float durationToNormalize;
+
+        float slowTimeScale = 0.5F;
+
+        Collider2D[] objectsInRange = new Collider2D[] { };
+
+        void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.FindComponent<Slowable>())
+            objectsInRange = Physics2D.OverlapCircleAll((Vector2)this.transform.position, currentRadius);
+            if (currentRadius > 0 && objectsInRange != null && objectsInRange.ToList().Contains(other))
             {
-                other.gameObject.FindComponent<Slowable>()?.Slow(slowTimeScale);
+                if (other.gameObject.FindComponent<Slowable>())
+                {
+                    other.gameObject.FindComponent<Slowable>()?.Slow(slowTimeScale);
+                }
             }
         }
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        other.gameObject.FindComponent<Slowable>()?.Normalize(durationToNormalize);
-    }
+        void OnTriggerExit2D(Collider2D other)
+        {
+            other.gameObject.FindComponent<Slowable>()?.Normalize(durationToNormalize);
+        }
 
-    public float SlowTimeScale { get => slowTimeScale; set => slowTimeScale = value; }
-    public Collider2D[] ObjectsInRange { get => objectsInRange; set => objectsInRange = value; }
+        public float SlowTimeScale { get => slowTimeScale; set => slowTimeScale = value; }
+        public Collider2D[] ObjectsInRange { get => objectsInRange; set => objectsInRange = value; }
+    }
 }

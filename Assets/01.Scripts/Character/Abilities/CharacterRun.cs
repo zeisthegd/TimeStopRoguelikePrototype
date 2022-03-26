@@ -2,64 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterRun : CharacterAbility
+
+using Penwyn.Tools;
+
+namespace Penwyn.Game
 {
-    [SerializeField] private float runSpeed;
-    [SerializeField] private bool usingRawMovement = false;
-
-    public override void AwakeAbility(Character character)
+    public class CharacterRun : CharacterAbility
     {
-        base.AwakeAbility(character);
-    }
+        [Header("Speed")]
+        public float RunSpeed;
 
-    public override void UpdateAbility()
-    {
-        base.UpdateAbility();
-        Vector3.ClampMagnitude(CharacterController.Velocity, runSpeed);
-    }
-
-    public override void FixedUpdateAbility()
-    {
-        base.FixedUpdateAbility();
-        if (InputReader.Instance.MoveInput.magnitude >= 0.01F)
+        public override void AwakeAbility(Character character)
         {
-            if (!usingRawMovement)
-                Run(InputReader.Instance.MoveInput);
-            else RunRaw(InputReader.Instance.MoveInput);
+            base.AwakeAbility(character);
+        }
+
+        public override void UpdateAbility()
+        {
+            base.UpdateAbility();
+            Vector3.ClampMagnitude(_controller.Velocity, RunSpeed);
+        }
+
+        public override void FixedUpdateAbility()
+        {
+            base.FixedUpdateAbility();
+            RunRaw(InputReader.Instance.MoveInput);
+        }
+
+        public void RunRaw(Vector2 input)
+        {
+            _controller.SetVelocity(input.normalized * RunSpeed);
+        }
+
+        public override void ConnectEvents()
+        {
+            base.ConnectEvents();
+        }
+
+        public override void DisconnectEvents()
+        {
+            base.DisconnectEvents();
+        }
+
+        public override void OnDisable()
+        {
+            base.OnDisable();
         }
     }
-
-    /// <summary>
-    /// Use add force and difference between desired and current velocity to make the player move.
-    /// </summary>
-    public void Run(Vector2 input)
-    {
-        float desiredSpeed = (input * runSpeed).magnitude; // Desired top speed.
-        float accelRate = CharacterController.GetAccelerationRate(input);
-        float velPower = CharacterController.Settings.runPower;
-
-        float moveForce = accelRate * runSpeed;// Apply the acceleration to the speed difference.
-        CharacterController.AddForce(input.normalized * moveForce);
-    }
-
-    public void RunRaw(Vector2 input)
-    {
-        CharacterController.SetVelocity(input.normalized * runSpeed);
-    }
-
-    public override void ConnectEvents()
-    {
-        base.ConnectEvents();
-    }
-
-    public override void DisconnectEvents()
-    {
-        base.DisconnectEvents();
-    }
-
-    public override void OnDisable()
-    {
-        base.OnDisable();
-    }
-    public float RunSpeed { get => runSpeed; set => runSpeed = value; }
 }

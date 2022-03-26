@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterAbilityStates
+namespace Penwyn.Game
 {
-    Idling,
-    Running
+    public enum CharacterAbilityStates
+    {
+        Idling,
+        Running
+    }
 }

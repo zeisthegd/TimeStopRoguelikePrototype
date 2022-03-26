@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterSlowTimeSurround : CharacterAbility
+namespace Penwyn.Game
 {
-    [SerializeField][Range(0, 1)] private float slowTimeScale = 0.75F;
-    [SerializeField] float timeZoneRange = 2;
-    [SerializeField] private TimeSlowZone timeSlowZone;
-
-    private TimeSlowZone _TimeSlowZone;
-
-    public event UnityAction<float> TimeScaleChanged;
-
-    public override void AwakeAbility(Character character)
+    public class CharacterSlowTimeSurround : CharacterAbility
     {
-        base.AwakeAbility(character);
-        _TimeSlowZone = Instantiate(timeSlowZone, character.Position, Quaternion.identity, character.transform);
-        _TimeSlowZone.SlowTimeScale = slowTimeScale;
-        _TimeSlowZone.transform.localScale = Vector3.one * timeZoneRange;
-    }
+        [Header("")]
+        [SerializeField][Range(0, 1)] protected float slowTimeScale = 0.75F;
+        public float TimeZoneRange = 2;
+        public TimeSlowZone TimeSlowZone;
 
-    public float SlowTimeScale
-    {
-        get => slowTimeScale;
-        set
+        private TimeSlowZone _TimeSlowZone;
+
+        public event UnityAction<float> TimeScaleChanged;
+
+        public override void AwakeAbility(Character character)
         {
-            slowTimeScale = value;
-            _TimeSlowZone.SlowTimeScale = value;
-            TimeScaleChanged?.Invoke(value);
+            base.AwakeAbility(character);
+            _TimeSlowZone = Instantiate(TimeSlowZone, character.Position, Quaternion.identity, character.transform);
+            _TimeSlowZone.SlowTimeScale = slowTimeScale;
+            _TimeSlowZone.transform.localScale = Vector3.one * TimeZoneRange;
+        }
+
+        public float SlowTimeScale
+        {
+            get => slowTimeScale;
+            set
+            {
+                slowTimeScale = value;
+                _TimeSlowZone.SlowTimeScale = value;
+                TimeScaleChanged?.Invoke(value);
+            }
         }
     }
 }

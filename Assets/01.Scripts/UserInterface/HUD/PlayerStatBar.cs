@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStatBar : MonoBehaviour
+namespace Penwyn.UI
 {
-    [SerializeField] Image totalLife;
-    [SerializeField] Image totalEnergy;
+    public class PlayerStatBar : MonoBehaviour
+    {
+        [SerializeField] Image totalLife;
+        [SerializeField] Image totalEnergy;
 
-    [SerializeField] Image currentLife;
-    [SerializeField] Image currentEnergy;
+        [SerializeField] Image currentLife;
+        [SerializeField] Image currentEnergy;
 
-    [SerializeField] List<float> fillThreshold;    
+        [SerializeField] List<float> fillThreshold;
+    }
 }

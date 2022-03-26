@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Characters
+namespace Penwyn.Game
 {
-    public static Character Player;
+    public static class Characters
+    {
+        public static Character Player;
+    }
 }

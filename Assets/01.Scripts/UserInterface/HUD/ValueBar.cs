@@ -3,42 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using Util;
+using Penwyn.Tools;
 using DG.Tweening;
-
-public class ValueBar : MonoBehaviour
+namespace Penwyn.UI
 {
-    [SerializeField] Color lowColor;
-    [SerializeField] Color highColor;
-    [SerializeField] Vector3 offset;
-    [SerializeField] Slider slider;
-
-
-    void Update()
+    public class ValueBar : MonoBehaviour
     {
-        slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset);
-    }
+        [SerializeField] Color lowColor;
+        [SerializeField] Color highColor;
+        [SerializeField] Vector3 offset;
+        [SerializeField] Slider slider;
 
-    public void SetUp(FloatValue value)
-    {
-        slider.DOComplete();
-        slider.gameObject.SetActive(false);
-    }
 
-    public void SetValue(FloatValue value)
-    {
-        slider.DOKill();
-        slider.gameObject.SetActive(true);
-        slider.maxValue = value.BaseValue;
-        slider.DOValue(value.CurrentValue, 0.25F);
-        slider.transform.DOScale(1, 3).onComplete += () =>
+        void Update()
         {
+            slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset);
+        }
+
+        public void SetUp(FloatValue value)
+        {
+            slider.DOComplete();
             slider.gameObject.SetActive(false);
-        };
+        }
 
-        slider.fillRect.GetComponent<Image>().color = Color.Lerp(lowColor, highColor, value.NormalizedValue);
+        public void SetValue(FloatValue value)
+        {
+            slider.DOKill();
+            slider.gameObject.SetActive(true);
+            slider.maxValue = value.BaseValue;
+            slider.DOValue(value.CurrentValue, 0.25F);
+            slider.transform.DOScale(1, 3).onComplete += () =>
+            {
+                slider.gameObject.SetActive(false);
+            };
 
+            slider.fillRect.GetComponent<Image>().color = Color.Lerp(lowColor, highColor, value.NormalizedValue);
+
+        }
+
+        public Slider Slider { get => slider; set => slider = value; }
     }
-
-    public Slider Slider { get => slider; set => slider = value; }
 }

@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+using Penwyn.Tools;
+
+namespace Penwyn.Game
 {
-    [SerializeField] InputReader inputReader;
+    public class InputManager : MonoBehaviour
+    {
+        [SerializeField] InputReader inputReader;
+    }
 }

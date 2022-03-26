@@ -2,48 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAbility : MonoBehaviour
+namespace Penwyn.Game
 {
-    [SerializeField] private bool abilityPermitted;
-    public new string name;
-
-    public List<CharacterAbilityStates> forbidStates;
-
-
-
-    private Character character;
-    private CharacterController characterController;
-
-
-    public virtual void AwakeAbility(Character character)
+    public class CharacterAbility : MonoBehaviour
     {
-        this.character = character;
-        this.characterController = character.Controller;
-        if (abilityPermitted)
+        public bool AbilityPermitted = true;
+        public string Name;
+
+        public List<CharacterAbilityStates> forbidStates;
+
+        protected Character _character;
+        protected CharacterController _controller;
+
+
+        public virtual void AwakeAbility(Character character)
         {
-            ConnectEvents();
+            this._character = character;
+            this._controller = character.Controller;
+            if (AbilityPermitted)
+            {
+                ConnectEvents();
+            }
         }
+
+        public void ChangePermission(bool permission)
+        {
+            if (permission)
+            {
+                ConnectEvents();
+            }
+            else
+            {
+                DisconnectEvents();
+            }
+        }
+
+        public virtual void UpdateAbility() { }
+        public virtual void FixedUpdateAbility() { }
+        public virtual void ConnectEvents() { }
+        public virtual void DisconnectEvents() { }
+        public virtual void OnDisable() { }
+
     }
-
-    public void ChangePermission(bool permission)
-    {
-        if (permission)
-        {
-            ConnectEvents();
-        }
-        else
-        {
-            DisconnectEvents();
-        }
-    }
-
-    public virtual void UpdateAbility() { }
-    public virtual void FixedUpdateAbility() { }
-    public virtual void ConnectEvents() { }
-    public virtual void DisconnectEvents() { }
-    public virtual void OnDisable() { }
-
-    public Character Character { get => character; set => character = value; }
-    public CharacterController CharacterController { get => characterController; }
-    public bool AbilityPermitted { get => abilityPermitted; }
 }

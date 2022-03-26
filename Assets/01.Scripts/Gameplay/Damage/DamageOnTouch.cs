@@ -3,31 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DamageOnTouch : MonoBehaviour
+using Penwyn.Tools;
+
+namespace Penwyn.Game
 {
-    public LayerMask TargetMask;
-    public LayerMask ObstacleMask;
-    private float damage;
-
-    public event UnityAction CollideWithObstacle;
-
-    void DealDamage(GameObject gObject)
+    public class DamageOnTouch : MonoBehaviour
     {
-        Character character = gObject.FindComponent<Character>();
-        character.Health?.Take(damage);
-    }
+        public LayerMask TargetMask;
+        public LayerMask ObstacleMask;
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (TargetMask.Contains(col.gameObject.layer))
+        public float Damage;
+
+        public event UnityAction CollideWithObstacle;
+
+        public virtual void DealDamage(GameObject gObject)
         {
-            DealDamage(col.gameObject);
+            Character character = gObject.FindComponent<Character>();
+            character.Health?.Take(Damage);
         }
-        else if (ObstacleMask.Contains(col.gameObject.layer))
+
+        public virtual void OnTriggerEnter2D(Collider2D col)
         {
-            CollideWithObstacle?.Invoke();
+            if (TargetMask.Contains(col.gameObject.layer))
+            {
+                DealDamage(col.gameObject);
+            }
+            else if (ObstacleMask.Contains(col.gameObject.layer))
+            {
+                CollideWithObstacle?.Invoke();
+            }
         }
     }
-
-    public float Damage { get => damage; set => damage = value; }
 }

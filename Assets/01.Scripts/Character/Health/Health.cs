@@ -3,89 +3,92 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+
+namespace Penwyn.Game
 {
-    [Header("Health")]
-    public float StartingHealth = 10;
-    [Header("Invincible")]
-    public bool Invincible = false;
-    public Color InvincibleFlickerColor = Color.yellow;
-
-    [Header("Invulnerable")]
-    public float InvulnerableTime = 1;
-    [Header("Damaged Feedback")]
-    public Color DamageTakenFlickerColor = Color.red;
-
-    private float _health = 0;
-    private float _invulnerableTime = 0;
-    private bool _currentlyInvulnerable = false;
-    private Character character;
-
-
-    public event UnityAction OutOfHealth;
-
-    void Start()
+    public class Health : MonoBehaviour
     {
-        character = GetComponent<Character>();
-        _health = StartingHealth;
-    }
+        [Header("Health")]
+        public float StartingHealth = 10;
+        [Header("Invincible")]
+        public bool Invincible = false;
+        public Color InvincibleFlickerColor = Color.yellow;
 
-    public void Take(float damage)
-    {
-        if (_health > 0 && !_currentlyInvulnerable && !Invincible)
+        [Header("Invulnerable")]
+        public float InvulnerableTime = 1;
+        [Header("Damaged Feedback")]
+        public Color DamageTakenFlickerColor = Color.red;
+
+        private float _health = 0;
+        private float _invulnerableTime = 0;
+        private bool _currentlyInvulnerable = false;
+        private Character character;
+
+
+        public event UnityAction OutOfHealth;
+
+        void Start()
         {
-            _health -= damage;
-            MakeInvulnerable();
-            if (_health <= 0)
+            character = GetComponent<Character>();
+            _health = StartingHealth;
+        }
+
+        public void Take(float damage)
+        {
+            if (_health > 0 && !_currentlyInvulnerable && !Invincible)
             {
-                OutOfHealth?.Invoke();
+                _health -= damage;
+                MakeInvulnerable();
+                if (_health <= 0)
+                {
+                    OutOfHealth?.Invoke();
+                }
             }
         }
-    }
 
-    public void MakeInvulnerable()
-    {
-        StartCoroutine(PerformInvulnerable());
-    }
-
-    private IEnumerator PerformInvulnerable()
-    {
-        _currentlyInvulnerable = true;
-        _invulnerableTime = 0;
-        Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableTime));
-        while (_invulnerableTime < InvulnerableTime)
+        public void MakeInvulnerable()
         {
-            _invulnerableTime += Time.deltaTime;
-            yield return null;
+            StartCoroutine(PerformInvulnerable());
         }
-        _currentlyInvulnerable = false;
-        StopCoroutine(flicker);
-    }
 
-    public void MakeInvincible(float duration)
-    {
-        Invincible = true;
-        if (duration > 0)
+        private IEnumerator PerformInvulnerable()
         {
-            StartCoroutine(InvincibleCoroutine(duration));
+            _currentlyInvulnerable = true;
+            _invulnerableTime = 0;
+            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableTime));
+            while (_invulnerableTime < InvulnerableTime)
+            {
+                _invulnerableTime += Time.deltaTime;
+                yield return null;
+            }
+            _currentlyInvulnerable = false;
+            StopCoroutine(flicker);
         }
-        else
+
+        public void MakeInvincible(float duration)
         {
-            //TODO change shader or soemthing.
+            Invincible = true;
+            if (duration > 0)
+            {
+                StartCoroutine(InvincibleCoroutine(duration));
+            }
+            else
+            {
+                //TODO change shader or soemthing.
+            }
+        }
+
+        private IEnumerator InvincibleCoroutine(float duration)
+        {
+            _invulnerableTime = 0;
+            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, InvincibleFlickerColor, duration));
+            while (_invulnerableTime < duration)
+            {
+                _invulnerableTime += Time.deltaTime;
+                yield return null;
+            }
+            Invincible = false;
+            StopCoroutine(flicker);
         }
     }
-
-    private IEnumerator InvincibleCoroutine(float duration)
-    {
-        _invulnerableTime = 0;
-        Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, InvincibleFlickerColor, duration));
-        while (_invulnerableTime < duration)
-        {
-            _invulnerableTime += Time.deltaTime;
-            yield return null;
-        }
-        Invincible = false;
-        StopCoroutine(flicker);
-    }
-
 }
