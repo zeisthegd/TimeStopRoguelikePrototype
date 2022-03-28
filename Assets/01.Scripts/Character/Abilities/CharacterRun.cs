@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using NaughtyAttributes;
 using Penwyn.Tools;
 
 namespace Penwyn.Game
 {
     public class CharacterRun : CharacterAbility
     {
-        [Header("Speed")]
-        public float RunSpeed;
+        [BoxGroup("Speed")]
+        public float RunSpeed = 5;
 
         public override void AwakeAbility(Character character)
         {
@@ -20,7 +20,7 @@ namespace Penwyn.Game
         public override void UpdateAbility()
         {
             base.UpdateAbility();
-            Vector3.ClampMagnitude(_controller.Velocity, RunSpeed);
+            Vector3.ClampMagnitude(_Controller.Velocity, RunSpeed);
         }
 
         public override void FixedUpdateAbility()
@@ -31,7 +31,7 @@ namespace Penwyn.Game
 
         public void RunRaw(Vector2 input)
         {
-            _controller.SetVelocity(input.normalized * RunSpeed);
+            _Controller.SetVelocity(input.normalized * RunSpeed);
         }
 
         public override void ConnectEvents()

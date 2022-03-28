@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+using NaughtyAttributes;
+
 using Penwyn.Tools;
 
 
@@ -10,69 +12,95 @@ namespace Penwyn.Game
 {
     public class Slowable : MonoBehaviour
     {
-        Character character;
-        bool isSlowed;
-        float currentScale;
+        [InfoBox("This components will slow animations speed, rigidbody2D's velocity when the gameObject enter a SlowTimeZone.", EInfoBoxType.Normal)]
+        protected Character _character;
+        protected bool _isSlowed;
+        protected float _currentScale;
+        protected Vector2 _velocityJustAfterSlowed;
+        protected CharacterController _controller;
 
-        Vector2 velocityJustAfterSlowed;
 
-
-        void Start()
+        protected virtual void Start()
         {
-            character = gameObject.FindComponent<Character>();
-            CharacterSlowTimeSurround characterSlowTimeSurroundAbility = Characters.Player?.FindAbility<CharacterSlowTimeSurround>();
-            if (characterSlowTimeSurroundAbility)
-                characterSlowTimeSurroundAbility.TimeScaleChanged += OnTimeScaleChanged;
+            _character = gameObject.FindComponent<Character>();
+            _controller = gameObject.FindComponent<CharacterController>();
+
+            CharacterTimeZoneControl playerTimeZoneControlAbility = Characters.Player?.FindAbility<CharacterTimeZoneControl>();
+            if (playerTimeZoneControlAbility)
+                playerTimeZoneControlAbility.TimeScaleChanged += OnTimeScaleChanged;
 
         }
 
-        void Update()
+        protected virtual void Update()
         {
-            if (isSlowed)
-            {
-                character.Controller.SetVelocity(velocityJustAfterSlowed * currentScale);
-            }
+            _controller?.SetVelocity(_character.Controller.Body2D.velocity * _currentScale);
         }
 
-        public void Slow(float scale)
+        protected virtual void UpdateSlowState()
+        {
+
+        }
+
+        protected virtual void UpdateNormalState()
+        {
+
+        }
+
+        /// <summary>
+        /// Slow this gameObject.
+        /// </summary>
+        public virtual void Slow(float scale)
         {
             this.DOComplete();
-            if (character != null && !isSlowed)
+            if (_character != null && !_isSlowed)
             {
-                isSlowed = true;
+                _isSlowed = true;
                 ChangeTimeScale(scale);
-                character.Controller.SlowScale = scale;
-                velocityJustAfterSlowed = character.Controller.Body2D.velocity;
+                _velocityJustAfterSlowed = _character.Controller.Body2D.velocity;
             }
         }
 
-        public void Normalize(float duration)
+        public virtual void Normalize(float duration)
         {
-
-            DOTween.To(x => currentScale = x, currentScale, 1, duration).SetId(this);
-            Tweener tween = DOTween.To(x => character.Model.GetComponent<Animator>().speed = x, character.Model.GetComponent<Animator>().speed, 1, duration).SetId(this);
-            DOTween.To(() => character.Controller.Body2D.velocity, x => character.Controller.Body2D.velocity = x, velocityJustAfterSlowed, 2).SetId(this);
-            tween.onComplete
-            += () =>
-            {
-                isSlowed = false;
-                character.Controller.SlowScale = 1;
-            };
-
+            StartCoroutine(NormalizeCoroutine(duration));
         }
 
-        private void OnTimeScaleChanged(float scale)
+        /// <summary>
+        /// Slowly move recover the timescale.
+        /// </summary>
+        public IEnumerator NormalizeCoroutine(float duration)
+        {
+            float time = 0;
+
+            while (time < duration && this.gameObject.activeInHierarchy)
+            {
+                _currentScale = time / duration;
+                _character.Model.GetComponent<Animator>().speed = time / duration;
+                yield return null;
+            }
+
+            _isSlowed = false;
+            _currentScale = 1;
+            _character.Model.GetComponent<Animator>().speed = 1;
+        }
+
+        protected virtual void OnTimeScaleChanged(float scale)
         {
             ChangeTimeScale(scale);
         }
 
-        private void ChangeTimeScale(float scale)
+        protected virtual void ChangeTimeScale(float scale)
         {
-            currentScale = scale;
-            character.Model.GetComponent<Animator>().speed = scale;
+            _currentScale = scale;
+            _character.Model.GetComponent<Animator>().speed = scale;
         }
 
-        public bool IsSlowed { get => isSlowed; }
-        public float CurrentScale { get => currentScale; set => currentScale = value; }
+        protected virtual void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        public bool IsSlowed { get => _isSlowed; }
+        public float CurrentScale { get => _currentScale; }
     }
 }

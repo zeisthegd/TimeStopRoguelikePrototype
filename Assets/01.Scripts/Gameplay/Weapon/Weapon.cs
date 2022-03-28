@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using NaughtyAttributes;
+using Penwyn.Tools;
 
 namespace Penwyn.Game
 {
@@ -17,10 +19,34 @@ namespace Penwyn.Game
         public SpriteRenderer SpriteRenderer;
         [HorizontalLine]
 
+        [Header("Input")]
+        public WeaponInputType InputType;
+
         [Header("Owner")]
         [ReadOnly] public Character Owner;
 
 
+        public virtual void Initialization()
+        {
+            SetUpInput();
+        }
+
+        public virtual void SetUpInput()
+        {
+            if (InputType == WeaponInputType.NormalAttack)
+                InputReader.Instance.NormalAttackPressed += HandleWeaponRequestInput;
+            if (InputType == WeaponInputType.SpecialAttack)
+                InputReader.Instance.SpecialAttackPressed += HandleWeaponRequestInput;
+        }
+
+        public virtual void HandleWeaponRequestInput()
+        {
+            //*Derive this
+        }
+
+        /// <summary>
+        /// Load the weapon data from a scriptable data.
+        /// </summary>
         public virtual void LoadWeapon(WeaponData data)
         {
             CurrentData = data;

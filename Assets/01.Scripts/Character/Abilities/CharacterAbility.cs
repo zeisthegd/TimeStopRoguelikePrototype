@@ -11,14 +11,14 @@ namespace Penwyn.Game
 
         public List<CharacterAbilityStates> forbidStates;
 
-        protected Character _character;
-        protected CharacterController _controller;
+        protected Character _Character;
+        protected CharacterController _Controller;
 
 
         public virtual void AwakeAbility(Character character)
         {
-            this._character = character;
-            this._controller = character.Controller;
+            this._Character = character;
+            this._Controller = character.Controller;
             if (AbilityPermitted)
             {
                 ConnectEvents();

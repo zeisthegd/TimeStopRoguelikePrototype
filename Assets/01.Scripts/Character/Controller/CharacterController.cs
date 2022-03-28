@@ -9,8 +9,6 @@ public class CharacterController : MonoBehaviour
     Rigidbody2D body2D;
     new Collider2D collider;
 
-    [HideInInspector] public float SlowScale = 1;
-
     void Awake()
     {
         body2D = GetComponent<Rigidbody2D>();
@@ -19,12 +17,12 @@ public class CharacterController : MonoBehaviour
 
     public virtual void AddForce(Vector2 force, ForceMode2D mode = ForceMode2D.Force)
     {
-        body2D.AddForce(force * SlowScale, mode);
+        body2D.AddForce(force, mode);
     }
 
     public virtual void AddPosition(Vector3 positionAddition)
     {
-        transform.position += positionAddition * SlowScale;
+        transform.position += positionAddition;
     }
 
     public virtual void MultiplyVelocity(float multiplier)
@@ -39,7 +37,7 @@ public class CharacterController : MonoBehaviour
 
     public virtual void SetVelocity(Vector2 newVelocity)
     {
-        body2D.velocity = newVelocity * SlowScale;
+        body2D.velocity = newVelocity;
     }
 
     public float GetAccelerationRate(Vector2 input)

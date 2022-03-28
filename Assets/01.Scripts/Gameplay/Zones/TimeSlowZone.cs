@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using NaughtyAttributes;
 using Penwyn.Tools;
 
 
@@ -10,32 +11,30 @@ namespace Penwyn.Game
 {
     public class TimeSlowZone : MonoBehaviour
     {
-        [SerializeField] LayerMask mask;
-        [HideInInspector] public float currentRadius = 360;
-        [SerializeField] float durationToNormalize;
+        [ReadOnly] public float Radius = 360;
+        [ReadOnly] public float SlowTimeScale = 0.5F;
+        public float DurationToNormalize = 1;
 
-        float slowTimeScale = 0.5F;
+        protected Collider2D[] _ObjectsInRange = new Collider2D[] { };
 
-        Collider2D[] objectsInRange = new Collider2D[] { };
-
-        void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            objectsInRange = Physics2D.OverlapCircleAll((Vector2)this.transform.position, currentRadius);
-            if (currentRadius > 0 && objectsInRange != null && objectsInRange.ToList().Contains(other))
+            _ObjectsInRange = Physics2D.OverlapCircleAll((Vector2)this.transform.position, Radius);
+            if (Radius > 0 && _ObjectsInRange != null && _ObjectsInRange.ToList().Contains(other))
             {
                 if (other.gameObject.FindComponent<Slowable>())
                 {
-                    other.gameObject.FindComponent<Slowable>()?.Slow(slowTimeScale);
+                    other.gameObject.FindComponent<Slowable>()?.Slow(SlowTimeScale);
                 }
             }
         }
 
-        void OnTriggerExit2D(Collider2D other)
+        protected virtual void OnTriggerExit2D(Collider2D other)
         {
-            other.gameObject.FindComponent<Slowable>()?.Normalize(durationToNormalize);
+            if (other.gameObject.activeInHierarchy)
+                other.gameObject.FindComponent<Slowable>()?.Normalize(DurationToNormalize);
         }
 
-        public float SlowTimeScale { get => slowTimeScale; set => slowTimeScale = value; }
-        public Collider2D[] ObjectsInRange { get => objectsInRange; set => objectsInRange = value; }
+        public Collider2D[] ObjectsInRange { get => _ObjectsInRange; }
     }
 }

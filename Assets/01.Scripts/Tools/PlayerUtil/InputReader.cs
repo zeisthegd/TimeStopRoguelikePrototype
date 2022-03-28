@@ -15,23 +15,25 @@ namespace Penwyn.Tools
         public event UnityAction<Vector2> Move;
 
         //Skills Using
-        public event UnityAction FirstSkillPressed;
-        public event UnityAction FirstSkillReleased;
+        public event UnityAction NormalAttackPressed;
+        public event UnityAction NormalAttackReleased;
 
-        public event UnityAction SecondSkillPressed;
-        public event UnityAction SecondSkillReleased;
+        public event UnityAction SpecialAttackPressed;
+        public event UnityAction SpecialAttackReleased;
 
-        public event UnityAction ThirdSkillPressed;
-        public event UnityAction ThirdSkillReleased;
+        public event UnityAction DashPressed;
+        public event UnityAction DashReleased;
+
+        public event UnityAction GrabProjectilesPressed;
+        public event UnityAction GrabProjectilesReleased;
 
 
         #endregion
 
         #region Logic Variables
 
-        public bool IsHoldingFirstSkill { get; set; }
-        public bool IsHoldingSecondSkill { get; set; }
-        public bool IsHoldingThirdSkill { get; set; }
+        public bool IsHoldingNormalAttack { get; set; }
+        public bool IsHoldingSpecialAttack { get; set; }
 
         #endregion
 
@@ -58,46 +60,56 @@ namespace Penwyn.Tools
                 MoveInput = Vector2.zero;
         }
 
-        public void OnSkill_First(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        public void OnNormalAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                IsHoldingFirstSkill = true;
-                FirstSkillPressed?.Invoke();
+                IsHoldingNormalAttack = true;
+                NormalAttackPressed?.Invoke();
             }
             else
             {
-                IsHoldingFirstSkill = false;
-                FirstSkillReleased?.Invoke();
+                IsHoldingNormalAttack = false;
+                NormalAttackReleased?.Invoke();
             }
 
         }
 
-        public void OnSkill_Second(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        public void OnSpecialAttack(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                IsHoldingSecondSkill = true;
-                SecondSkillPressed?.Invoke();
+                IsHoldingSpecialAttack = true;
+                SpecialAttackPressed?.Invoke();
             }
             else
             {
-                IsHoldingSecondSkill = false;
-                SecondSkillReleased?.Invoke();
+                IsHoldingSpecialAttack = false;
+                SpecialAttackReleased?.Invoke();
             }
         }
 
-        public void OnSkill_Third(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        public void OnDash(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                IsHoldingThirdSkill = true;
-                ThirdSkillPressed?.Invoke();
+                DashPressed?.Invoke();
             }
             else
             {
-                IsHoldingThirdSkill = false;
-                ThirdSkillReleased?.Invoke();
+                DashReleased?.Invoke();
+            }
+        }
+
+        public void OnGrabProjectiles(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                GrabProjectilesPressed?.Invoke();
+            }
+            else
+            {
+                GrabProjectilesReleased?.Invoke();
             }
         }
 

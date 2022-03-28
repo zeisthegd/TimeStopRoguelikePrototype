@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Skill_First",
+                    "name": "NormalAttack",
                     "type": "PassThrough",
                     "id": "83a73beb-aafa-48f1-a4ba-e7d91cba886d",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill_Second",
+                    "name": "SpecialAttack",
                     "type": "PassThrough",
                     "id": "584775cb-3f05-43ab-90e3-10de3639e15d",
                     "expectedControlType": "Button",
@@ -33,12 +33,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill_Third",
+                    "name": "Dash",
                     "type": "PassThrough",
                     "id": "c4fbc320-a701-405a-ab53-4d9c85670e0b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GrabProjectiles",
+                    "type": "Button",
+                    "id": "f441964d-98d9-40e7-ad0a-ee01505bbfd4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -215,29 +224,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Skill_First",
+                    "action": "NormalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "e864bd10-631b-47d0-9614-2b0c81c4643d",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Skill_Second",
+                    "action": "SpecialAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "3bf226cc-e6a8-4bb0-8a72-e421ca37f9ec",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Skill_Third",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21def52b-fb47-48eb-a01d-c148a3a1b6ec",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "GrabProjectiles",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

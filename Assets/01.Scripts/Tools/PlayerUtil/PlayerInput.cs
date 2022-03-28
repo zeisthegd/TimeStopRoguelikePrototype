@@ -37,7 +37,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Skill_First"",
+                    ""name"": ""NormalAttack"",
                     ""type"": ""PassThrough"",
                     ""id"": ""83a73beb-aafa-48f1-a4ba-e7d91cba886d"",
                     ""expectedControlType"": ""Button"",
@@ -46,7 +46,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Skill_Second"",
+                    ""name"": ""SpecialAttack"",
                     ""type"": ""PassThrough"",
                     ""id"": ""584775cb-3f05-43ab-90e3-10de3639e15d"",
                     ""expectedControlType"": ""Button"",
@@ -55,12 +55,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Skill_Third"",
+                    ""name"": ""Dash"",
                     ""type"": ""PassThrough"",
                     ""id"": ""c4fbc320-a701-405a-ab53-4d9c85670e0b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GrabProjectiles"",
+                    ""type"": ""Button"",
+                    ""id"": ""f441964d-98d9-40e7-ad0a-ee01505bbfd4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -237,29 +246,40 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Skill_First"",
+                    ""action"": ""NormalAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""e864bd10-631b-47d0-9614-2b0c81c4643d"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Skill_Second"",
+                    ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""3bf226cc-e6a8-4bb0-8a72-e421ca37f9ec"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Skill_Third"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21def52b-fb47-48eb-a01d-c148a3a1b6ec"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""GrabProjectiles"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -310,9 +330,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Skill_First = m_Gameplay.FindAction("Skill_First", throwIfNotFound: true);
-        m_Gameplay_Skill_Second = m_Gameplay.FindAction("Skill_Second", throwIfNotFound: true);
-        m_Gameplay_Skill_Third = m_Gameplay.FindAction("Skill_Third", throwIfNotFound: true);
+        m_Gameplay_NormalAttack = m_Gameplay.FindAction("NormalAttack", throwIfNotFound: true);
+        m_Gameplay_SpecialAttack = m_Gameplay.FindAction("SpecialAttack", throwIfNotFound: true);
+        m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_GrabProjectiles = m_Gameplay.FindAction("GrabProjectiles", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -373,17 +394,19 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Skill_First;
-    private readonly InputAction m_Gameplay_Skill_Second;
-    private readonly InputAction m_Gameplay_Skill_Third;
+    private readonly InputAction m_Gameplay_NormalAttack;
+    private readonly InputAction m_Gameplay_SpecialAttack;
+    private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_GrabProjectiles;
     public struct GameplayActions
     {
         private @PlayerInput m_Wrapper;
         public GameplayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Skill_First => m_Wrapper.m_Gameplay_Skill_First;
-        public InputAction @Skill_Second => m_Wrapper.m_Gameplay_Skill_Second;
-        public InputAction @Skill_Third => m_Wrapper.m_Gameplay_Skill_Third;
+        public InputAction @NormalAttack => m_Wrapper.m_Gameplay_NormalAttack;
+        public InputAction @SpecialAttack => m_Wrapper.m_Gameplay_SpecialAttack;
+        public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @GrabProjectiles => m_Wrapper.m_Gameplay_GrabProjectiles;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -396,15 +419,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Skill_First.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_First;
-                @Skill_First.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_First;
-                @Skill_First.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_First;
-                @Skill_Second.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Second;
-                @Skill_Second.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Second;
-                @Skill_Second.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Second;
-                @Skill_Third.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Third;
-                @Skill_Third.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Third;
-                @Skill_Third.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkill_Third;
+                @NormalAttack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNormalAttack;
+                @NormalAttack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNormalAttack;
+                @NormalAttack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNormalAttack;
+                @SpecialAttack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpecialAttack;
+                @SpecialAttack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpecialAttack;
+                @SpecialAttack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSpecialAttack;
+                @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @GrabProjectiles.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrabProjectiles;
+                @GrabProjectiles.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrabProjectiles;
+                @GrabProjectiles.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrabProjectiles;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -412,15 +438,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Skill_First.started += instance.OnSkill_First;
-                @Skill_First.performed += instance.OnSkill_First;
-                @Skill_First.canceled += instance.OnSkill_First;
-                @Skill_Second.started += instance.OnSkill_Second;
-                @Skill_Second.performed += instance.OnSkill_Second;
-                @Skill_Second.canceled += instance.OnSkill_Second;
-                @Skill_Third.started += instance.OnSkill_Third;
-                @Skill_Third.performed += instance.OnSkill_Third;
-                @Skill_Third.canceled += instance.OnSkill_Third;
+                @NormalAttack.started += instance.OnNormalAttack;
+                @NormalAttack.performed += instance.OnNormalAttack;
+                @NormalAttack.canceled += instance.OnNormalAttack;
+                @SpecialAttack.started += instance.OnSpecialAttack;
+                @SpecialAttack.performed += instance.OnSpecialAttack;
+                @SpecialAttack.canceled += instance.OnSpecialAttack;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+                @GrabProjectiles.started += instance.OnGrabProjectiles;
+                @GrabProjectiles.performed += instance.OnGrabProjectiles;
+                @GrabProjectiles.canceled += instance.OnGrabProjectiles;
             }
         }
     }
@@ -455,8 +484,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnSkill_First(InputAction.CallbackContext context);
-        void OnSkill_Second(InputAction.CallbackContext context);
-        void OnSkill_Third(InputAction.CallbackContext context);
+        void OnNormalAttack(InputAction.CallbackContext context);
+        void OnSpecialAttack(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnGrabProjectiles(InputAction.CallbackContext context);
     }
 }
