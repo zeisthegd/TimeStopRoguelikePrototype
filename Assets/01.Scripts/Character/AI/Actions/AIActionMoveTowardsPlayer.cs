@@ -7,22 +7,17 @@ using Penwyn.Tools;
 
 namespace Penwyn.Game
 {
-    public class AIActionMoveTowardsPlayer : MonoBehaviour
+    public class AIActionMoveTowardsPlayer : AIAction
     {
-        [SerializeField] Character character;
-        [SerializeField] float speed;
+        public float Speed = 1;
         GameObject target;
-        void Start()
-        {
-            character = gameObject.FindComponent<Character>();
-        }
 
         void FixedUpdate()
         {
             target = GameObject.FindGameObjectWithTag("Player");
             if (target != null)
             {
-                character.Controller.SetVelocity((target.transform.position - this.transform.position).normalized * speed);
+                _character.Controller.SetVelocity((target.transform.position - this.transform.position).normalized * Speed);
             }
         }
     }

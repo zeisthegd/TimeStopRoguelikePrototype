@@ -17,7 +17,7 @@ namespace Penwyn.Game
             gameObject.SetActive(false);
         }
 
-        public virtual void OnEnable()
+        protected virtual void OnEnable()
         {
             if (LifeTime > 0)
             {
@@ -25,7 +25,7 @@ namespace Penwyn.Game
             }
         }
 
-        public virtual void OnDisable()
+        protected virtual void OnDisable()
         {
             CancelInvoke();
         }

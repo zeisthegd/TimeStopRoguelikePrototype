@@ -28,8 +28,10 @@ namespace Penwyn.Game
         public virtual void SpawnProjectile()
         {
             Projectile projectile = (Projectile)_projectilePooler.PullOneObject();
-            projectile.gameObject.SetActive(true);
             projectile.transform.position = this.transform.position;
+            projectile.transform.rotation = this.transform.rotation;
+            projectile.gameObject.SetActive(true);
+            projectile.FlyTowards((transform.rotation * Vector3.right));
         }
 
         public override void LoadWeapon(WeaponData data)

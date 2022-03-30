@@ -56,7 +56,7 @@ namespace Penwyn.Game
         {
             foreach (PoolableObject item in _objectPool.PooledObjects)
             {
-                if (item.gameObject.activeInHierarchy)
+                if (!item.gameObject.activeInHierarchy)
                     return item;
             }
             return AddOnePoolObject();
