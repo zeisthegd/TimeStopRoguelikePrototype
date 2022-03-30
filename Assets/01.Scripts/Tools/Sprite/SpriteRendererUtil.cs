@@ -7,13 +7,15 @@ public class SpriteRendererUtil
     public static IEnumerator Flicker(SpriteRenderer spriteRenderer, Color color, float duration, float interval = 0.05F)
     {
         float _duration = 0;
+        Color baseColor = spriteRenderer.color;
         while (_duration < duration)
         {
-            _duration += Time.deltaTime;
-            spriteRenderer.material.color = color;
+            _duration += Time.deltaTime + interval * 2;
+            spriteRenderer.color = color;
             yield return new WaitForSeconds(interval);
-            spriteRenderer.material.color = Color.white;
+            spriteRenderer.color = baseColor;
+            yield return new WaitForSeconds(interval);
         }
-        spriteRenderer.material.color = Color.white;
+        spriteRenderer.color = baseColor;
     }
 }

@@ -15,7 +15,7 @@ namespace Penwyn.Game
         public Color InvincibleFlickerColor = Color.yellow;
 
         [Header("Invulnerable")]
-        public float InvulnerableTime = 1;
+        public float InvulnerableDuration = 1;
         [Header("Damaged Feedback")]
         public Color DamageTakenFlickerColor = Color.red;
 
@@ -25,6 +25,7 @@ namespace Penwyn.Game
         private Character character;
 
 
+        public event UnityAction OnHit;
         public event UnityAction OutOfHealth;
 
         void Start()
@@ -39,6 +40,7 @@ namespace Penwyn.Game
             {
                 _health -= damage;
                 MakeInvulnerable();
+                OnHit?.Invoke();
                 if (_health <= 0)
                 {
                     OutOfHealth?.Invoke();
@@ -48,24 +50,11 @@ namespace Penwyn.Game
 
         public void MakeInvulnerable()
         {
-            StartCoroutine(PerformInvulnerable());
+            if (InvulnerableDuration > 0)
+                StartCoroutine(PerformInvulnerable());
         }
 
-        private IEnumerator PerformInvulnerable()
-        {
-            _currentlyInvulnerable = true;
-            _invulnerableTime = 0;
-            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableTime));
-            while (_invulnerableTime < InvulnerableTime)
-            {
-                _invulnerableTime += Time.deltaTime;
-                yield return null;
-            }
-            _currentlyInvulnerable = false;
-            StopCoroutine(flicker);
-        }
-
-        public void MakeInvincible(float duration)
+        public virtual void MakeInvincible(float duration)
         {
             Invincible = true;
             if (duration > 0)
@@ -78,7 +67,20 @@ namespace Penwyn.Game
             }
         }
 
-        private IEnumerator InvincibleCoroutine(float duration)
+        protected virtual IEnumerator PerformInvulnerable()
+        {
+            _currentlyInvulnerable = true;
+            _invulnerableTime = 0;
+            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableDuration, 0.1F));
+            while (_invulnerableTime < InvulnerableDuration)
+            {
+                _invulnerableTime += Time.deltaTime;
+                yield return null;
+            }
+            _currentlyInvulnerable = false;
+        }
+
+        protected virtual IEnumerator InvincibleCoroutine(float duration)
         {
             _invulnerableTime = 0;
             Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, InvincibleFlickerColor, duration));

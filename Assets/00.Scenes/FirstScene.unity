@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
+  MinDistance: 3
 --- !u!1 &48934558
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +916,7 @@ MonoBehaviour:
   StartingHealth: 10
   Invincible: 0
   InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  InvulnerableTime: 1
+  InvulnerableDuration: 1
   DamageTakenFlickerColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!58 &568794102
 CircleCollider2D:
@@ -1339,6 +1340,7 @@ GameObject:
   - component: {fileID: 1012041599}
   - component: {fileID: 1012041598}
   - component: {fileID: 1012041603}
+  - component: {fileID: 1012041604}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -1433,7 +1435,7 @@ MonoBehaviour:
   characterID: 0
   controller: {fileID: 1012041600}
   model: {fileID: 1801507812}
-  health: {fileID: 0}
+  health: {fileID: 1012041604}
   AbilitiesContainer: []
 --- !u!4 &1012041602
 Transform:
@@ -1477,6 +1479,23 @@ MonoBehaviour:
     Name: 
     Actions: []
     Decisions: []
+--- !u!114 &1012041604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012041596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2d5eff8049b5b4fbb31ab42802be6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 10
+  Invincible: 0
+  InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  InvulnerableDuration: 1
+  DamageTakenFlickerColor: {r: 0, g: 1, b: 0.78456664, a: 1}
 --- !u!1 &1048791788
 GameObject:
   m_ObjectHideFlags: 0
@@ -102995,7 +103014,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1555613beaca26b4990c49023f99334e, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.09197807, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
