@@ -151,5 +151,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToPool: {fileID: 221415823, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
   Size: 10
-  NestBelowThis: 0
-  UseShareInstance: 0
+  NestPoolBelowThis: 0
+  NestObjectsInPool: 1

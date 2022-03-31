@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8637054361584821487}
   - component: {fileID: 221415823}
   - component: {fileID: 8512598768966799358}
+  - component: {fileID: -7243949194675849221}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -161,8 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c134d02e2bce17498029bf668e03388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfiniteLifeTime: 0
   LifeTime: 4
-  Speed: 20
+  Speed: 25
 --- !u!114 &8512598768966799358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,4 +183,24 @@ MonoBehaviour:
   ObstacleMask:
     serializedVersion: 2
     m_Bits: 1024
-  Damage: 1
+  DamageDeal: 1
+  RecoilDamage: 1
+  DestroyWhenCollidingNonDamageable: 1
+--- !u!114 &-7243949194675849221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383801527214349399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2d5eff8049b5b4fbb31ab42802be6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 1
+  Invincible: 0
+  InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  InvulnerableDuration: 1
+  DamageTakenFlickerColor: {r: 1, g: 0, b: 0, a: 1}
+  _health: 0

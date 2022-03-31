@@ -14,12 +14,13 @@ namespace Penwyn.Game
         public int Size = 1;
 
         [HorizontalLine]
-        public bool NestBelowThis;
-        public bool UseShareInstance;
+        public bool NestPoolBelowThis = true;
+        public bool NestObjectsInPool = true;
 
         protected GameObject _waitingPool;
         protected ObjectPool _objectPool;
 
+        [Button("Init Pool", EButtonEnableMode.Always)]
         public virtual void Init()
         {
             CreatePool();
@@ -71,8 +72,7 @@ namespace Penwyn.Game
             {
                 PoolableObject poolObject = (PoolableObject)Instantiate(ObjectToPool);
                 poolObject.gameObject.SetActive(false);
-                poolObject.transform.SetParent(NestBelowThis ? _objectPool.transform : null);
-
+                poolObject.transform.SetParent(NestObjectsInPool ? _objectPool.transform : null);
                 _objectPool.PooledObjects.Add(poolObject);
                 return poolObject;
             }
@@ -87,7 +87,7 @@ namespace Penwyn.Game
         {
             if (_waitingPool)
             {
-                _waitingPool.transform.SetParent(NestBelowThis ? this.transform : null);
+                _waitingPool.transform.SetParent(NestPoolBelowThis ? this.transform : null);
             }
         }
 

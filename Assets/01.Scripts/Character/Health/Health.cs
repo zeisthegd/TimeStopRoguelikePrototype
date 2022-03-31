@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+using NaughtyAttributes;
+
 
 namespace Penwyn.Game
 {
@@ -19,35 +21,50 @@ namespace Penwyn.Game
         [Header("Damaged Feedback")]
         public Color DamageTakenFlickerColor = Color.red;
 
-        private float _health = 0;
-        private float _invulnerableTime = 0;
-        private bool _currentlyInvulnerable = false;
-        private Character character;
-
+        [SerializeField][ReadOnly] protected float _health = 0;
+        protected float _invulnerableTime = 0;
+        protected bool _currentlyInvulnerable = false;
+        protected Character _character;
 
         public event UnityAction OnHit;
-        public event UnityAction OutOfHealth;
+        public event UnityAction OnDeath;
 
         void Start()
         {
-            character = GetComponent<Character>();
+            _character = GetComponent<Character>();
             _health = StartingHealth;
         }
 
-        public void Take(float damage)
+        #region Damage Taken
+
+        public virtual void Take(float damage)
         {
             if (_health > 0 && !_currentlyInvulnerable && !Invincible)
             {
                 _health -= damage;
-                MakeInvulnerable();
-                OnHit?.Invoke();
-                if (_health <= 0)
+                if (_health > 0)
                 {
-                    OutOfHealth?.Invoke();
+                    MakeInvulnerable();
+                    OnHit?.Invoke();
+                }
+                else
+                {
+                    Kill();
                 }
             }
         }
+        #endregion
 
+        #region Kill
+        public virtual void Kill()
+        {
+            _health = 0;
+            OnDeath?.Invoke();
+            gameObject.SetActive(false);
+        }
+        #endregion
+
+        #region Invulnerable and Invincible
         public void MakeInvulnerable()
         {
             if (InvulnerableDuration > 0)
@@ -71,7 +88,7 @@ namespace Penwyn.Game
         {
             _currentlyInvulnerable = true;
             _invulnerableTime = 0;
-            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableDuration, 0.1F));
+            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(_character.SpriteRenderer, DamageTakenFlickerColor, InvulnerableDuration, 0.1F));
             while (_invulnerableTime < InvulnerableDuration)
             {
                 _invulnerableTime += Time.deltaTime;
@@ -83,7 +100,7 @@ namespace Penwyn.Game
         protected virtual IEnumerator InvincibleCoroutine(float duration)
         {
             _invulnerableTime = 0;
-            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(character.SpriteRenderer, InvincibleFlickerColor, duration));
+            Coroutine flicker = StartCoroutine(SpriteRendererUtil.Flicker(_character.SpriteRenderer, InvincibleFlickerColor, duration));
             while (_invulnerableTime < duration)
             {
                 _invulnerableTime += Time.deltaTime;
@@ -91,6 +108,19 @@ namespace Penwyn.Game
             }
             Invincible = false;
             StopCoroutine(flicker);
+        }
+        #endregion
+
+        public virtual void OnEnable()
+        {
+            _health = StartingHealth;
+            _currentlyInvulnerable = false;
+            _invulnerableTime = 0;
+        }
+
+        public virtual void OnDisable()
+        {
+            StopAllCoroutines();
         }
     }
 }

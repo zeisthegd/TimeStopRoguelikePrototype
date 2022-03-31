@@ -8,6 +8,24 @@ namespace Penwyn.Game
     public class ObjectPool : MonoBehaviour
     {
         [ReadOnly] public List<PoolableObject> PooledObjects;
+
+        [Button("Enable All Objects", EButtonEnableMode.Always)]
+        public virtual void EnableAllObjects()
+        {
+            for (int i = 0; i < PooledObjects.Count; i++)
+            {
+                PooledObjects[i].gameObject.SetActive(true);
+            }
+        }
+        
+        [Button("Disable All Objects", EButtonEnableMode.Always)]
+        public virtual void DisableAllObjects()
+        {
+            for (int i = 0; i < PooledObjects.Count; i++)
+            {
+                PooledObjects[i].gameObject.SetActive(true);
+            }
+        }
     }
 }
 
