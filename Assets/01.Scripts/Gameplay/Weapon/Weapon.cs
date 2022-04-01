@@ -25,23 +25,52 @@ namespace Penwyn.Game
         [Header("Owner")]
         [ReadOnly] public Character Owner;
 
+        [ReadOnly][SerializeField] protected WeaponState _currentWeaponState;
+
 
         public virtual void Initialization()
         {
             SetUpInput();
         }
 
+        protected virtual void Update()
+        {
+
+        }
+
         public virtual void SetUpInput()
         {
             if (InputType == WeaponInputType.NormalAttack)
-                InputReader.Instance.NormalAttackPressed += HandleWeaponRequestInput;
+                InputReader.Instance.NormalAttackPressed += HandleRequestWeaponUse;
             if (InputType == WeaponInputType.SpecialAttack)
-                InputReader.Instance.SpecialAttackPressed += HandleWeaponRequestInput;
+                InputReader.Instance.SpecialAttackPressed += HandleRequestWeaponUse;
         }
 
-        public virtual void HandleWeaponRequestInput()
+        public virtual void HandleRequestWeaponUse()
         {
             //*Derive this
+            if (_currentWeaponState == WeaponState.WeaponIdle)
+            {
+                _currentWeaponState = WeaponState.WeaponUse;
+                UseWeapon();
+            }
+        }
+
+        protected virtual void UseWeapon()
+        {
+            StartCooldown();
+        }
+
+        public virtual void StartCooldown()
+        {
+            _currentWeaponState = WeaponState.WeaponCooldown;
+            StartCoroutine(CooldownCoroutine());
+        }
+
+        protected virtual IEnumerator CooldownCoroutine()
+        {
+            yield return new WaitForSeconds(CurrentData.Cooldown);
+            _currentWeaponState = WeaponState.WeaponIdle;
         }
 
         /// <summary>

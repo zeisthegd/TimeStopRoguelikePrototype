@@ -14,11 +14,23 @@ namespace Penwyn.Game
         public int Size = 1;
 
         [HorizontalLine]
+        public bool InitAtStart = false;
+        public bool EnableObjectsAtStart = false;
         public bool NestPoolBelowThis = true;
         public bool NestObjectsInPool = true;
 
         protected GameObject _waitingPool;
         protected ObjectPool _objectPool;
+
+        protected virtual void Start()
+        {
+            if (InitAtStart)
+            {
+                Init();
+                if (EnableObjectsAtStart)
+                    _objectPool.EnableAllObjects();
+            }
+        }
 
         [Button("Init Pool", EButtonEnableMode.Always)]
         public virtual void Init()

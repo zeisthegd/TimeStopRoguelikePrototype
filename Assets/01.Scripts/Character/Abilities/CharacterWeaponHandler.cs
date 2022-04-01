@@ -44,5 +44,8 @@ namespace Penwyn.Game
                 _currentWeapon.LoadWeapon(newData);
             }
         }
+
+        public Weapon CurrentWeapon { get => _currentWeapon; }
+        public WeaponData WeaponData { get => _currentWeaponData; }
     }
 }

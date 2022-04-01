@@ -11,14 +11,23 @@ namespace Penwyn.Game
     {
         public float Speed = 1;
         public float MinDistance = 2;
-        GameObject target;
+        public AnimationCurve DistanceToSpeedCurve;
+        protected GameObject _target;
 
-        void FixedUpdate()
+        public override void AwakeComponent(Character character)
         {
-            target = GameObject.FindGameObjectWithTag("Player");
-            if (target != null && Vector2.Distance(target.transform.position, this.transform.position) > MinDistance)
+            base.AwakeComponent(character);
+        }
+
+        public override void UpdateComponent()
+        {
+            _target = Characters.Player.gameObject;
+            float distanceToPlayer = Vector2.Distance(_target.transform.position, _character.transform.position);
+            if (_target != null && distanceToPlayer > MinDistance)
             {
-                _character.Controller.SetVelocity((target.transform.position - this.transform.position).normalized * Speed);
+                _character.Controller.SetVelocity((_target.transform.position - _character.transform.position).normalized * Speed * DistanceToSpeedCurve.Evaluate(distanceToPlayer));
+                Debug.Log(Vector2.Distance(_target.transform.position, _character.transform.position));
+                Debug.DrawRay(_character.transform.position, _character.Controller.Velocity);
             }
         }
     }

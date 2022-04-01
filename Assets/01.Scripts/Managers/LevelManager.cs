@@ -18,7 +18,7 @@ namespace Penwyn.Game
 
         void SpawnPlayer()
         {
-            if (existedPlayer == null)
+            if (existedPlayer != null)
                 Characters.Player = existedPlayer.GetComponent<Character>();
             else if (playerToSpawn != null)
             {

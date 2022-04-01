@@ -9,8 +9,9 @@ namespace Penwyn.Game
     public class AIBrain : MonoBehaviour
     {
         public List<AIState> States;
-        public bool Enabled;
-        [ReadOnly] public AIState CurrentState;
+        public AIState CurrentState;
+        public bool Enabled = true;
+        [ReadOnly] public string CurrentStateName;
 
         protected Character _character;
 
@@ -30,6 +31,11 @@ namespace Penwyn.Game
             }
         }
 
+        /// <summary>
+        /// If the input state name is not null
+        /// and the new state is not the old state,
+        /// change to the new state.
+        /// </summary>
         public void ChangeState(string stateName)
         {
             if (stateName != "")
@@ -46,13 +52,20 @@ namespace Penwyn.Game
             }
         }
 
+        /// <summary>
+        /// Exit the old state, change into the new state.
+        /// </summary>
         public void ChangeState(AIState state)
         {
             CurrentState.Exit();
             CurrentState = state;
             CurrentState.Enter();
+            CurrentStateName = CurrentState.Name;
         }
 
+        /// <summary>
+        /// Wake every states up.
+        /// </summary>
         public virtual void AwakeStates()
         {
             for (int i = 0; i < States.Count; i++)

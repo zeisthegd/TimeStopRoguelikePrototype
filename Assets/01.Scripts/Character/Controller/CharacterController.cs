@@ -40,17 +40,6 @@ public class CharacterController : MonoBehaviour
         body2D.velocity = newVelocity;
     }
 
-    public float GetAccelerationRate(Vector2 input)
-    {
-        // Change acceleration rate depends on the desired direction. If desired direction is on the opposite of the current velocity means the player wants to turn and vice versa.
-        return (Mathf.Abs(Vector2.SignedAngle(input, Velocity)) <= 90) ? Settings.accelleration : Settings.decelleration;
-    }
-
-    public void SetGravityScale(float scale)
-    {
-        body2D.gravityScale = scale;
-    }
-
     #region Physics Check
 
     public RaycastHit2D RayCast(Collider2D origin, Vector2 direction, float distance, LayerMask mask)

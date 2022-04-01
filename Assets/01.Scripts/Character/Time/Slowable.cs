@@ -33,7 +33,7 @@ namespace Penwyn.Game
 
         protected virtual void Update()
         {
-            _controller?.SetVelocity(_character.Controller.Body2D.velocity * _currentScale);
+            //_controller?.SetVelocity(_character.Controller.Body2D.velocity * _currentScale);
         }
 
         protected virtual void UpdateSlowState()

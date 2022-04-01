@@ -18,15 +18,19 @@ namespace Penwyn.Game
 
         public List<GameObject> AbilitiesContainer;
 
-        private List<CharacterAbility> abilities;
+        protected List<CharacterAbility> abilities;
 
-        void Awake()
+        protected CharacterWeaponHandler _characterWeaponHandler;
+        protected CharacterRun _characterRun;
+
+        protected virtual void Awake()
         {
             GetAbilities();
             WakeUpAbilities();
+            GetGeneralAbilities();
         }
 
-        void Update()
+        protected virtual void Update()
         {
             for (int i = 0; i < abilities.Count; i++)
             {
@@ -37,7 +41,7 @@ namespace Penwyn.Game
             }
         }
 
-        void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             for (int i = 0; i < abilities.Count; i++)
             {
@@ -59,7 +63,15 @@ namespace Penwyn.Game
             }
         }
 
-        public T FindAbility<T>() where T : CharacterAbility
+        protected virtual void GetGeneralAbilities()
+        {
+            _characterRun = FindAbility<CharacterRun>();
+            _characterWeaponHandler = FindAbility<CharacterWeaponHandler>();
+        }
+
+        #region Ability Utilities
+
+        public virtual T FindAbility<T>() where T : CharacterAbility
         {
             Type typeOfSearchAb = typeof(T);
             foreach (CharacterAbility ability in abilities)
@@ -70,7 +82,7 @@ namespace Penwyn.Game
             return null;
         }
 
-        void GetAbilities()
+        protected virtual void GetAbilities()
         {
             abilities = GetComponents<CharacterAbility>().ToList();
             foreach (GameObject abilitiesContainer in AbilitiesContainer)
@@ -82,6 +94,7 @@ namespace Penwyn.Game
                 }
             }
         }
+        #endregion
 
         public CharacterController Controller { get => controller; }
         public GameObject Model { get => model; }
@@ -90,5 +103,8 @@ namespace Penwyn.Game
         public Vector3 Position { get => transform.position; }
         public List<CharacterAbility> Abilities { get => abilities; }
         public Health Health { get => health; }
+
+        public CharacterRun CharacterRun { get => _characterRun; }
+        public CharacterWeaponHandler CharacterWeaponHandler { get => _characterWeaponHandler; }
     }
 }

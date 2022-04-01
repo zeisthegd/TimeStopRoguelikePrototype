@@ -20,8 +20,8 @@ namespace Penwyn.Game
         public Projectile Projectile;
 
         [Header("Settings")]
-        public float BulletPerShot = 1;
-        public float TimeBetweenBulletSpawn = 0;
+        public int BulletPerShot = 1;
+        public float DelayBetweenBullets = 0.1F;
         public float Cooldown = 1;
     }
 }
