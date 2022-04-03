@@ -26,10 +26,12 @@ namespace Penwyn.Game
         [ReadOnly] public Character Owner;
 
         [ReadOnly][SerializeField] protected WeaponState _currentWeaponState;
+        protected WeaponAim _weaponAim;
 
 
         public virtual void Initialization()
         {
+            GetComponents();
             SetUpInput();
         }
 
@@ -44,6 +46,11 @@ namespace Penwyn.Game
                 InputReader.Instance.NormalAttackPressed += HandleRequestWeaponUse;
             if (InputType == WeaponInputType.SpecialAttack)
                 InputReader.Instance.SpecialAttackPressed += HandleRequestWeaponUse;
+        }
+
+        public virtual void GetComponents()
+        {
+            _weaponAim = GetComponent<WeaponAim>();
         }
 
         public virtual void HandleRequestWeaponUse()

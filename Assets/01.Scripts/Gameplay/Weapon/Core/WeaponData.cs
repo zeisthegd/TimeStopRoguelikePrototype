@@ -22,7 +22,9 @@ namespace Penwyn.Game
         [Header("Settings")]
         public int BulletPerShot = 1;
         public float DelayBetweenBullets = 0.1F;
+        public float Angle = 0;
         public float Cooldown = 1;
+
     }
 }
 

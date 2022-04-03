@@ -17,5 +17,10 @@ namespace Penwyn.Tools
                 Debug.Log($"Component not found: {from.gameObject.name} finding {typeof(T)}");
             return componentFound;
         }
+
+        public static void RotateZ(this GameObject gameObject, float angle)
+        {
+            gameObject.transform.Rotate(new Vector3(0, 0, 1), angle);
+        }
     }
 }

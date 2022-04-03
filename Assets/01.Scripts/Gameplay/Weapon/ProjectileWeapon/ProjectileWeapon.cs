@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Penwyn.Tools;
+
 namespace Penwyn.Game
 {
     public class ProjectileWeapon : Weapon
@@ -24,12 +26,20 @@ namespace Penwyn.Game
 
         protected virtual IEnumerator UseWeaponCoroutine()
         {
+            float projectileStep = GetProjectileStep();
+            _weaponAim.enabled = false;
+            gameObject.RotateZ(CurrentData.Angle / 2);
             for (int i = 0; i < CurrentData.BulletPerShot; i++)
             {
                 SpawnProjectile();
                 if (CurrentData.BulletPerShot > 1)
-                    yield return new WaitForSeconds(CurrentData.DelayBetweenBullets);
+                {
+                    if (CurrentData.DelayBetweenBullets > 0)
+                        yield return new WaitForSeconds(CurrentData.DelayBetweenBullets);
+                    gameObject.RotateZ(-projectileStep);
+                }
             }
+            _weaponAim.enabled = true;
         }
 
         /// <summary>
@@ -42,6 +52,16 @@ namespace Penwyn.Game
             projectile.transform.rotation = this.transform.rotation;
             projectile.gameObject.SetActive(true);
             projectile.FlyTowards((transform.rotation * Vector3.right));
+        }
+
+        /// <summary>
+        /// Angle distance of each projectile.
+        /// </summary>
+        protected virtual float GetProjectileStep()
+        {
+            if (CurrentData.BulletPerShot != 0)
+                return CurrentData.Angle / CurrentData.BulletPerShot;
+            return 0;
         }
 
         public override void LoadWeapon(WeaponData data)

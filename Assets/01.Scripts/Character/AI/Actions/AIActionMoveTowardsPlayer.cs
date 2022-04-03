@@ -26,7 +26,7 @@ namespace Penwyn.Game
             if (_target != null && distanceToPlayer > MinDistance)
             {
                 _character.Controller.SetVelocity((_target.transform.position - _character.transform.position).normalized * Speed * DistanceToSpeedCurve.Evaluate(distanceToPlayer));
-                Debug.Log(Vector2.Distance(_target.transform.position, _character.transform.position));
+                //Debug.Log(Vector2.Distance(_target.transform.position, _character.transform.position));
                 Debug.DrawRay(_character.transform.position, _character.Controller.Velocity);
             }
         }
