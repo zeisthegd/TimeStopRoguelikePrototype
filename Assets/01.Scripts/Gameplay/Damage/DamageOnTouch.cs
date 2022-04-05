@@ -33,8 +33,8 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void DealDamage(GameObject gObject)
         {
-            Character character = gObject.FindComponent<Character>();
-            character.Health?.Take(DamageDeal);
+            Health objectHealth = gObject.FindComponent<Health>();
+            objectHealth?.Take(DamageDeal);
         }
 
         /// <summary>
@@ -58,7 +58,6 @@ namespace Penwyn.Game
                 _health.Kill();
             }
         }
-
 
         public virtual void OnTriggerEnter2D(Collider2D col)
         {

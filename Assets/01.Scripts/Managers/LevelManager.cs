@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using Penwyn.Tools;
 
@@ -8,22 +9,25 @@ namespace Penwyn.Game
 {
     public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
-        [SerializeField] GameObject playerToSpawn;
-        [SerializeField] GameObject existedPlayer;
+        public GameObject PlayerToSpawn;
+        public GameObject ExistedPlayer;
 
-        void Start()
+        public static event UnityAction PlayerSpawned;
+
+        protected virtual void Start()
         {
             SpawnPlayer();
         }
 
-        void SpawnPlayer()
+        public virtual void SpawnPlayer()
         {
-            if (existedPlayer != null)
-                Characters.Player = existedPlayer.GetComponent<Character>();
-            else if (playerToSpawn != null)
+            if (ExistedPlayer != null)
+                Characters.Player = ExistedPlayer.GetComponent<Character>();
+            else if (PlayerToSpawn != null)
             {
-                Characters.Player = Instantiate(playerToSpawn).GetComponent<Character>();
+                Characters.Player = Instantiate(PlayerToSpawn).GetComponent<Character>();
             }
+            PlayerSpawned?.Invoke();
         }
     }
 }

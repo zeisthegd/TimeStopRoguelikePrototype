@@ -25,6 +25,7 @@ namespace Penwyn.Game
         protected float _invulnerableTime = 0;
         protected bool _currentlyInvulnerable = false;
         protected Character _character;
+        protected HealthBar _healthBar;
 
         public event UnityAction OnHit;
         public event UnityAction OnDeath;
@@ -33,6 +34,8 @@ namespace Penwyn.Game
         {
             _character = GetComponent<Character>();
             _health = StartingHealth;
+
+            CreateHealthBar();
         }
 
         #region Damage Taken
@@ -46,6 +49,8 @@ namespace Penwyn.Game
                 {
                     MakeInvulnerable();
                     OnHit?.Invoke();
+                    if (_healthBar)
+                        _healthBar.SetHealth(_health);
                 }
                 else
                 {
@@ -111,16 +116,28 @@ namespace Penwyn.Game
         }
         #endregion
 
+        protected virtual void CreateHealthBar()
+        {
+            _healthBar = GetComponent<HealthBar>();
+            if (_healthBar)
+                _healthBar.Initialization();
+        }
+
         public virtual void OnEnable()
         {
             _health = StartingHealth;
             _currentlyInvulnerable = false;
             _invulnerableTime = 0;
+            if (_healthBar)
+                _healthBar.SetHealthSlidersValue();
         }
 
         public virtual void OnDisable()
         {
             StopAllCoroutines();
         }
+
+        public Character Character { get => _character; }
+        public float CurrentHealth { get => _health; }
     }
 }

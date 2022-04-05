@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 221415823}
   - component: {fileID: 8512598768966799358}
   - component: {fileID: -7243949194675849221}
-  m_Layer: 0
+  - component: {fileID: -8381563678912500393}
+  m_Layer: 9
   m_Name: EnemyProjectile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c134d02e2bce17498029bf668e03388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfiniteLifeTime: 0
+  InfiniteLifeTime: 1
   LifeTime: 4
   Speed: 15
 --- !u!114 &8512598768966799358
@@ -204,3 +205,15 @@ MonoBehaviour:
   InvulnerableDuration: 1
   DamageTakenFlickerColor: {r: 1, g: 0, b: 0, a: 1}
   _health: 0
+--- !u!114 &-8381563678912500393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383801527214349399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2fcfea7fd9ec04e8d1cd9a596cc5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

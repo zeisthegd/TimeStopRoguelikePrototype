@@ -130,9 +130,10 @@ GameObject:
   - component: {fileID: 2006300841245699178}
   - component: {fileID: 2006300841245699176}
   - component: {fileID: 2006300841245699179}
-  - component: {fileID: 2006300841245699183}
   - component: {fileID: -5255441062222112624}
   - component: {fileID: 2006300841245699222}
+  - component: {fileID: 2006300841245699183}
+  - component: {fileID: -5845153555277089952}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006300841245699223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.55, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -182,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &2006300841245699221
 Rigidbody2D:
@@ -260,24 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 9b256f3d3cfa23842aee9c6360becf33, type: 2}
---- !u!114 &2006300841245699183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006300841245699223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2d5eff8049b5b4fbb31ab42802be6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingHealth: 10
-  Invincible: 0
-  InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  InvulnerableDuration: 0.1
-  DamageTakenFlickerColor: {r: 0, g: 1, b: 0.78456664, a: 1}
-  _health: 0
 --- !u!114 &-5255441062222112624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +287,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2fcfea7fd9ec04e8d1cd9a596cc5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2006300841245699183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006300841245699223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2d5eff8049b5b4fbb31ab42802be6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingHealth: 10
+  Invincible: 0
+  InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  InvulnerableDuration: 0.1
+  DamageTakenFlickerColor: {r: 0, g: 1, b: 0.78456664, a: 1}
+  _health: 0
+--- !u!114 &-5845153555277089952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006300841245699223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d5573a300be054983139ded7b6dcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Canvas: {fileID: 8616408475051074906, guid: cccb3da08421ae8468a0d016cf4afb49, type: 3}
+  HealthBarPrefab: {fileID: 1392665138393269310, guid: d8aecf18056a389468a72ddba67345ce, type: 3}
+  HealthBarOffset: {x: 0, y: 2, z: 0}
 --- !u!1 &2006300842071046159
 GameObject:
   m_ObjectHideFlags: 0

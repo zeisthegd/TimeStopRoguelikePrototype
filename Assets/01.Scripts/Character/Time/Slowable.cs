@@ -13,17 +13,19 @@ namespace Penwyn.Game
     public class Slowable : MonoBehaviour
     {
         [InfoBox("This components will slow animations speed, rigidbody2D's velocity when the gameObject enter a SlowTimeZone.", EInfoBoxType.Normal)]
-        protected Character _character;
         protected bool _isSlowed;
         protected float _currentScale;
         protected Vector2 _velocityJustAfterSlowed;
         protected CharacterController _controller;
+        protected Animator _animator;
+
+        protected Coroutine _normalizeCoroutine;
 
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
-            _character = gameObject.FindComponent<Character>();
             _controller = gameObject.FindComponent<CharacterController>();
+            _animator = gameObject.FindComponent<Animator>();
 
             CharacterTimeZoneControl playerTimeZoneControlAbility = Characters.Player?.FindAbility<CharacterTimeZoneControl>();
             if (playerTimeZoneControlAbility)
@@ -33,7 +35,8 @@ namespace Penwyn.Game
 
         protected virtual void Update()
         {
-            //_controller?.SetVelocity(_character.Controller.Body2D.velocity * _currentScale);
+            if (IsSlowed)
+                _controller?.SetVelocity(_velocityJustAfterSlowed * _currentScale);
         }
 
         protected virtual void UpdateSlowState()
@@ -51,18 +54,19 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void Slow(float scale)
         {
-            this.DOComplete();
-            if (_character != null && !_isSlowed)
+            if (_normalizeCoroutine != null)
+                StopCoroutine(_normalizeCoroutine);
+            if (!_isSlowed && scale < 1)
             {
                 _isSlowed = true;
                 ChangeTimeScale(scale);
-                _velocityJustAfterSlowed = _character.Controller.Body2D.velocity;
+                _velocityJustAfterSlowed = _controller.Velocity;
             }
         }
 
         public virtual void Normalize(float duration)
         {
-            StartCoroutine(NormalizeCoroutine(duration));
+            _normalizeCoroutine = StartCoroutine(NormalizeCoroutine(duration));
         }
 
         /// <summary>
@@ -75,13 +79,15 @@ namespace Penwyn.Game
             while (time < duration && this.gameObject.activeInHierarchy)
             {
                 _currentScale = time / duration;
-                _character.Model.GetComponent<Animator>().speed = time / duration;
+                SetAnimatorSpeed(time / duration);
+                time += Time.deltaTime;
                 yield return null;
             }
 
             _isSlowed = false;
             _currentScale = 1;
-            _character.Model.GetComponent<Animator>().speed = 1;
+            _controller.SetVelocity(_velocityJustAfterSlowed);
+            SetAnimatorSpeed(1);
         }
 
         protected virtual void OnTimeScaleChanged(float scale)
@@ -91,10 +97,25 @@ namespace Penwyn.Game
 
         protected virtual void ChangeTimeScale(float scale)
         {
-            _currentScale = scale;
-            _character.Model.GetComponent<Animator>().speed = scale;
+            if (IsSlowed)
+            {
+                _currentScale = scale;
+                SetAnimatorSpeed(scale);
+            }
         }
 
+        protected virtual void SetAnimatorSpeed(float speed)
+        {
+            if (_animator)
+                _animator.speed = speed;
+        }
+
+        protected virtual void OnEnable()
+        {
+            _currentScale = 1;
+            _isSlowed = false;
+            SetAnimatorSpeed(1);
+        }
         protected virtual void OnDisable()
         {
             StopAllCoroutines();

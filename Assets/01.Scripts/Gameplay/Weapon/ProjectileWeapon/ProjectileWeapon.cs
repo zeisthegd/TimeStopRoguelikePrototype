@@ -27,7 +27,8 @@ namespace Penwyn.Game
         protected virtual IEnumerator UseWeaponCoroutine()
         {
             float projectileStep = GetProjectileStep();
-            _weaponAim.enabled = false;
+            if (_weaponAim)
+                _weaponAim.enabled = false;
             gameObject.RotateZ(CurrentData.Angle / 2);
             for (int i = 0; i < CurrentData.BulletPerShot; i++)
             {
@@ -39,7 +40,8 @@ namespace Penwyn.Game
                     gameObject.RotateZ(-projectileStep);
                 }
             }
-            _weaponAim.enabled = true;
+            if (_weaponAim)
+                _weaponAim.enabled = true;
         }
 
         /// <summary>

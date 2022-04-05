@@ -32,14 +32,15 @@ namespace Penwyn.Game
             _TimeSlowZone.transform.localScale = Vector3.one * TimeZoneRange;
         }
 
+        /// <summary>
+        /// Grab the slowed projectiles inside of the time zone.
+        /// </summary>
         public virtual void GrabProjectiles()
         {
-            Debug.Log("------------------- Grab projectiles -------------------");
             foreach (Collider2D item in _TimeSlowZone.ObjectsInRange)
             {
                 if (TargetMask.Contains(item.gameObject.layer))
                 {
-                    Debug.Log(item);
                     item.gameObject.SetActive(false);
                 }
             }

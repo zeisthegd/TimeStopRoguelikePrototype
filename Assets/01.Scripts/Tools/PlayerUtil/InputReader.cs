@@ -67,7 +67,7 @@ namespace Penwyn.Tools
                 IsHoldingNormalAttack = true;
                 NormalAttackPressed?.Invoke();
             }
-            else
+            else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)
             {
                 IsHoldingNormalAttack = false;
                 NormalAttackReleased?.Invoke();
@@ -82,7 +82,7 @@ namespace Penwyn.Tools
                 IsHoldingSpecialAttack = true;
                 SpecialAttackPressed?.Invoke();
             }
-            else
+            else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)
             {
                 IsHoldingSpecialAttack = false;
                 SpecialAttackReleased?.Invoke();
@@ -95,7 +95,7 @@ namespace Penwyn.Tools
             {
                 DashPressed?.Invoke();
             }
-            else
+            else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)
             {
                 DashReleased?.Invoke();
             }
@@ -107,7 +107,7 @@ namespace Penwyn.Tools
             {
                 GrabProjectilesPressed?.Invoke();
             }
-            else
+            else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)
             {
                 GrabProjectilesReleased?.Invoke();
             }

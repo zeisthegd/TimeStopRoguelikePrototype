@@ -32,21 +32,16 @@ namespace Penwyn.Game
         public virtual void Initialization()
         {
             GetComponents();
-            SetUpInput();
         }
 
         protected virtual void Update()
         {
-
+            if (InputType == WeaponInputType.NormalAttack && InputReader.Instance.IsHoldingNormalAttack)
+                HandleRequestWeaponUse();
+            if (InputType == WeaponInputType.SpecialAttack && InputReader.Instance.IsHoldingSpecialAttack)
+                HandleRequestWeaponUse();
         }
 
-        public virtual void SetUpInput()
-        {
-            if (InputType == WeaponInputType.NormalAttack)
-                InputReader.Instance.NormalAttackPressed += HandleRequestWeaponUse;
-            if (InputType == WeaponInputType.SpecialAttack)
-                InputReader.Instance.SpecialAttackPressed += HandleRequestWeaponUse;
-        }
 
         public virtual void GetComponents()
         {
