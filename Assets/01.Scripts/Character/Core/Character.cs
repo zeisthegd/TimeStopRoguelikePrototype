@@ -9,17 +9,24 @@ namespace Penwyn.Game
     public class Character : MonoBehaviour
     {
         [Header("Character ID")]
-        [SerializeField] float characterID;
+        public string CharacterID;
+        
+        [Header("Controller")]
+        public CharacterController Controller;
 
+        [Header("Graphics")]
+        public GameObject Model;
+        public Animator Animator;
 
-        [SerializeField] CharacterController controller;
-        [SerializeField] GameObject model;
-        [SerializeField] Health health;
+        [Header("Stats")]
+        public Health Health;
+        public Energy Energy;
 
+        [Header("Abilities")]
         public List<GameObject> AbilitiesContainer;
 
-        protected List<CharacterAbility> abilities;
 
+        protected List<CharacterAbility> _abilities;
         protected CharacterWeaponHandler _characterWeaponHandler;
         protected CharacterRun _characterRun;
 
@@ -32,33 +39,33 @@ namespace Penwyn.Game
 
         protected virtual void Update()
         {
-            for (int i = 0; i < abilities.Count; i++)
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                if (abilities[i].AbilityPermitted)
+                if (_abilities[i].AbilityPermitted)
                 {
-                    abilities[i].UpdateAbility();
+                    _abilities[i].UpdateAbility();
                 }
             }
         }
 
         protected virtual void FixedUpdate()
         {
-            for (int i = 0; i < abilities.Count; i++)
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                if (abilities[i].AbilityPermitted)
+                if (_abilities[i].AbilityPermitted)
                 {
-                    abilities[i].FixedUpdateAbility();
+                    _abilities[i].FixedUpdateAbility();
                 }
             }
         }
 
         protected virtual void WakeUpAbilities()
         {
-            for (int i = 0; i < abilities.Count; i++)
+            for (int i = 0; i < _abilities.Count; i++)
             {
-                if (abilities[i].AbilityPermitted)
+                if (_abilities[i].AbilityPermitted)
                 {
-                    abilities[i].AwakeAbility(this);
+                    _abilities[i].AwakeAbility(this);
                 }
             }
         }
@@ -74,7 +81,7 @@ namespace Penwyn.Game
         public virtual T FindAbility<T>() where T : CharacterAbility
         {
             Type typeOfSearchAb = typeof(T);
-            foreach (CharacterAbility ability in abilities)
+            foreach (CharacterAbility ability in _abilities)
             {
                 if (ability is T characterAbility)
                     return characterAbility;
@@ -84,26 +91,21 @@ namespace Penwyn.Game
 
         protected virtual void GetAbilities()
         {
-            abilities = GetComponents<CharacterAbility>().ToList();
+            _abilities = GetComponents<CharacterAbility>().ToList();
             foreach (GameObject abilitiesContainer in AbilitiesContainer)
             {
                 var abilitiesList = GetComponentsInChildren<CharacterAbility>().ToList();
                 if (abilitiesList.Count > 0)
                 {
-                    abilities.AddRange(abilitiesList);
+                    _abilities.AddRange(abilitiesList);
                 }
             }
         }
         #endregion
 
-        public CharacterController Controller { get => controller; }
-        public GameObject Model { get => model; }
-        public SpriteRenderer SpriteRenderer { get => model.GetComponent<SpriteRenderer>(); }
-        public Animator Animator { get => model.GetComponent<Animator>(); }
+        public SpriteRenderer SpriteRenderer { get => Model.GetComponent<SpriteRenderer>(); }
         public Vector3 Position { get => transform.position; }
-        public List<CharacterAbility> Abilities { get => abilities; }
-        public Health Health { get => health; }
-
+        public List<CharacterAbility> Abilities { get => _abilities; }
         public CharacterRun CharacterRun { get => _characterRun; }
         public CharacterWeaponHandler CharacterWeaponHandler { get => _characterWeaponHandler; }
     }

@@ -20,7 +20,7 @@ namespace Penwyn.Game
         public override void UpdateAbility()
         {
             base.UpdateAbility();
-            Vector3.ClampMagnitude(_Controller.Velocity, RunSpeed);
+            Vector3.ClampMagnitude(_controller.Velocity, RunSpeed);
         }
 
         public override void FixedUpdateAbility()
@@ -31,7 +31,7 @@ namespace Penwyn.Game
 
         public void RunRaw(Vector2 input)
         {
-            _Controller.SetVelocity(input.normalized * RunSpeed);
+            _controller.SetVelocity(input.normalized * RunSpeed);
         }
 
         public override void ConnectEvents()

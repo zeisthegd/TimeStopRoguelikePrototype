@@ -21,3 +21,5 @@ MonoBehaviour:
   DelayBetweenBullets: 0
   Angle: 60
   Cooldown: 0.25
+  RequiresEnergy: 1
+  EnergyPerUse: 1

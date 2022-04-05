@@ -46,4 +46,14 @@ public class ProgressBar : MonoBehaviour
             LostValue.maxValue = newMaxValue;
     }
 
+    public virtual void SetWidth(float newWidth)
+    {
+        Vector2 newSize = new Vector2(newWidth, ActualValue.GetComponent<RectTransform>().sizeDelta.y);
+        if (ActualValue != null)
+            ActualValue.GetComponent<RectTransform>().sizeDelta = newSize;
+        if (LostValue != null)
+            LostValue.GetComponent<RectTransform>().sizeDelta = newSize;
+    }
+
+
 }

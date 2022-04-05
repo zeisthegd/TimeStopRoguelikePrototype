@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,26 +11,25 @@ namespace Penwyn.Game
 {
     public class CharacterTimeZoneControl : CharacterAbility
     {
-        [Header("Time Zone")]
-        [SerializeField][Range(0, 1)] protected float slowTimeScale = 0.75F;
+        [Header("Settings")]
+        [Range(0, 1)] public float SlowTimeScale = 0.75F;
         public float TimeZoneRange = 2;
+        [Header("Prefab")]
         public TimeSlowZone TimeSlowZone;
-        [HorizontalLine]
 
-        [Header("Projectiles Grab")]
-        public LayerMask TargetMask;
+        [Header("Energy Regen")]
+        public float EnergyPerObject = 0.2F;
 
-
-        protected TimeSlowZone _TimeSlowZone;
+        protected TimeSlowZone _timeSlowZone;
 
         public event UnityAction<float> TimeScaleChanged;
 
         public override void AwakeAbility(Character character)
         {
             base.AwakeAbility(character);
-            _TimeSlowZone = Instantiate(TimeSlowZone, character.Position, Quaternion.identity, character.transform);
-            _TimeSlowZone.SlowTimeScale = slowTimeScale;
-            _TimeSlowZone.transform.localScale = Vector3.one * TimeZoneRange;
+            _timeSlowZone = Instantiate(TimeSlowZone, character.Position, Quaternion.identity, character.transform);
+            _timeSlowZone.SlowTimeScale = SlowTimeScale;
+            _timeSlowZone.transform.localScale = Vector3.one * TimeZoneRange;
         }
 
         /// <summary>
@@ -37,13 +37,20 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void GrabProjectiles()
         {
-            foreach (Collider2D item in _TimeSlowZone.ObjectsInRange)
+            GameObject[] grabableInRange = new GameObject[_timeSlowZone.ObjectsInRange.Count];
+            _timeSlowZone.ObjectsInRange.CopyTo(grabableInRange);
+            foreach (GameObject item in grabableInRange)
             {
-                if (TargetMask.Contains(item.gameObject.layer))
-                {
-                    item.gameObject.SetActive(false);
-                }
+                item.SetActive(false);
+                _character.Energy.Add(EnergyPerObject);
             }
+        }
+
+        public void SetTimeScale(float newScale)
+        {
+            SlowTimeScale = newScale;
+            _timeSlowZone.SlowTimeScale = newScale;
+            TimeScaleChanged?.Invoke(newScale);
         }
 
         public override void ConnectEvents()
@@ -54,17 +61,6 @@ namespace Penwyn.Game
         public override void DisconnectEvents()
         {
             InputReader.Instance.GrabProjectilesPressed -= GrabProjectiles;
-        }
-
-        public float SlowTimeScale
-        {
-            get => slowTimeScale;
-            set
-            {
-                slowTimeScale = value;
-                _TimeSlowZone.SlowTimeScale = value;
-                TimeScaleChanged?.Invoke(value);
-            }
         }
     }
 }

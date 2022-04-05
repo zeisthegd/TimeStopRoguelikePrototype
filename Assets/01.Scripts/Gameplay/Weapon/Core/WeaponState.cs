@@ -9,7 +9,8 @@ namespace Penwyn.Game
     {
         WeaponIdle,
         WeaponUse,
-        WeaponCooldown
+        WeaponCooldown,
+        WeaponNoEnergy
     }
 }
 

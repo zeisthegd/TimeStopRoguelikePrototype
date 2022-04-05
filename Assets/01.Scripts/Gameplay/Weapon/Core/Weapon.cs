@@ -27,11 +27,13 @@ namespace Penwyn.Game
 
         [ReadOnly][SerializeField] protected WeaponState _currentWeaponState;
         protected WeaponAim _weaponAim;
+        protected Coroutine _cooldownCoroutine;
 
 
         public virtual void Initialization()
         {
             GetComponents();
+            SetEnergyRequirements();
         }
 
         protected virtual void Update()
@@ -40,12 +42,6 @@ namespace Penwyn.Game
                 HandleRequestWeaponUse();
             if (InputType == WeaponInputType.SpecialAttack && InputReader.Instance.IsHoldingSpecialAttack)
                 HandleRequestWeaponUse();
-        }
-
-
-        public virtual void GetComponents()
-        {
-            _weaponAim = GetComponent<WeaponAim>();
         }
 
         public virtual void HandleRequestWeaponUse()
@@ -61,18 +57,41 @@ namespace Penwyn.Game
         protected virtual void UseWeapon()
         {
             StartCooldown();
+            UseEnergy();
         }
 
         public virtual void StartCooldown()
         {
             _currentWeaponState = WeaponState.WeaponCooldown;
-            StartCoroutine(CooldownCoroutine());
+            _cooldownCoroutine = StartCoroutine(CooldownCoroutine());
         }
 
         protected virtual IEnumerator CooldownCoroutine()
         {
             yield return new WaitForSeconds(CurrentData.Cooldown);
             _currentWeaponState = WeaponState.WeaponIdle;
+        }
+
+        protected virtual void UseEnergy()
+        {
+            if (Owner.Energy != null)
+                Owner.Energy.Use(CurrentData.EnergyPerUse);
+        }
+
+        protected virtual void OnEnergyChanged()
+        {
+            if (Owner.Energy.CurrentEnergy < CurrentData.EnergyPerUse)
+            {
+                if (_currentWeaponState == WeaponState.WeaponCooldown && _cooldownCoroutine != null)
+                    StopCoroutine(_cooldownCoroutine);
+                _currentWeaponState = WeaponState.WeaponNoEnergy;
+                // Debug.Break();
+            }
+            else
+            {
+                if (_currentWeaponState == WeaponState.WeaponNoEnergy)
+                    _currentWeaponState = WeaponState.WeaponIdle;
+            }
         }
 
         /// <summary>
@@ -91,6 +110,32 @@ namespace Penwyn.Game
                 LoadWeapon(CurrentData);
             else
                 Debug.Log("Please insert Weapon Data");
+        }
+
+        public virtual void SetEnergyRequirements()
+        {
+            if (CurrentData.RequiresEnergy)
+            {
+                if (Owner.Energy != null)
+                {
+                    Owner.Energy.OnChanged += OnEnergyChanged;
+                }
+                else
+                {
+                    Debug.LogWarning($"No energy assigned to {Owner.name} although this {CurrentData.Name} requires energy!");
+                }
+            }
+        }
+
+        public virtual void GetComponents()
+        {
+            _weaponAim = GetComponent<WeaponAim>();
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (Owner.Energy != null)
+                Owner.Energy.OnChanged -= OnEnergyChanged;
         }
     }
 }

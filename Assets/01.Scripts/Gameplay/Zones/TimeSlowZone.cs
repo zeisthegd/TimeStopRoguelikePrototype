@@ -13,28 +13,30 @@ namespace Penwyn.Game
     {
         [ReadOnly] public float Radius = 360;
         [ReadOnly] public float SlowTimeScale = 0.5F;
-        public float DurationToNormalize = 1;
+        public float NormalizeDuration = 1;
 
-        protected Collider2D[] _ObjectsInRange = new Collider2D[] { };
+        protected List<GameObject> _objectsInRange = new List<GameObject>();
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            _ObjectsInRange = Physics2D.OverlapCircleAll((Vector2)this.transform.position, Radius);
-            if (Radius > 0 && _ObjectsInRange != null && _ObjectsInRange.ToList().Contains(other))
+            Slowable slowableObject = other.gameObject.GetComponent<Slowable>();
+            if (Radius > 0 && slowableObject && !_objectsInRange.Contains(other.gameObject))
             {
-                if (other.gameObject.FindComponent<Slowable>())
-                {
-                    other.gameObject.FindComponent<Slowable>()?.Slow(SlowTimeScale);
-                }
+                _objectsInRange.Add(other.gameObject);
+                slowableObject?.Slow(SlowTimeScale);
             }
         }
 
         protected virtual void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.activeInHierarchy)
-                other.gameObject.FindComponent<Slowable>()?.Normalize(DurationToNormalize);
+            if (_objectsInRange.Contains(other.gameObject))
+            {
+                _objectsInRange.Remove(other.gameObject);
+                if (other.gameObject.activeInHierarchy)
+                    other.gameObject.GetComponent<Slowable>().Normalize(NormalizeDuration);
+            }
         }
 
-        public Collider2D[] ObjectsInRange { get => _ObjectsInRange; }
+        public List<GameObject> ObjectsInRange { get => _objectsInRange; }
     }
 }

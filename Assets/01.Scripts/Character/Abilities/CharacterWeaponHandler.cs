@@ -30,9 +30,9 @@ namespace Penwyn.Game
                 WeaponHolder = this.transform;
 
             _currentWeapon = Instantiate(InitialWeaponPrefab, WeaponHolder.position, Quaternion.identity, WeaponHolder);
+            _currentWeapon.Owner = this._character;
             _currentWeapon.LoadWeapon(InitialWeaponData);
             _currentWeapon.Initialization();
-            _currentWeapon.Owner = this._Character;
         }
 
         public virtual void ChangeWeapon(WeaponData newData)

@@ -24,7 +24,9 @@ namespace Penwyn.Game
         public float DelayBetweenBullets = 0.1F;
         public float Angle = 0;
         public float Cooldown = 1;
-
+        [Header("Energy Requirements")]
+        public bool RequiresEnergy = false;
+        public float EnergyPerUse = 0;
     }
 }
 
