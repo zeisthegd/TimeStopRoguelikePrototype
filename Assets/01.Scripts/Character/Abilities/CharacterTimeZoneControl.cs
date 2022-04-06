@@ -7,6 +7,8 @@ using UnityEngine.Events;
 using NaughtyAttributes;
 using Penwyn.Tools;
 
+using DG.Tweening;
+
 namespace Penwyn.Game
 {
     public class CharacterTimeZoneControl : CharacterAbility
@@ -17,8 +19,13 @@ namespace Penwyn.Game
         [Header("Prefab")]
         public TimeSlowZone TimeSlowZone;
 
-        [Header("Energy Regen")]
+        [Header("The Grab")]
         public float EnergyPerObject = 0.2F;
+        public float ZoneClosingDuration = 0.5F;
+
+        [Header("Cooldown After Grab")]
+        public float DelayBeforeRecoverDuration = 1F;
+        public float RecoverDuration = 1F;
 
         protected TimeSlowZone _timeSlowZone;
 
@@ -28,8 +35,7 @@ namespace Penwyn.Game
         {
             base.AwakeAbility(character);
             _timeSlowZone = Instantiate(TimeSlowZone, character.Position, Quaternion.identity, character.transform);
-            _timeSlowZone.SlowTimeScale = SlowTimeScale;
-            _timeSlowZone.transform.localScale = Vector3.one * TimeZoneRange;
+            _timeSlowZone.Initialization(this);
         }
 
         /// <summary>
@@ -37,14 +43,20 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void GrabProjectiles()
         {
-            GameObject[] grabableInRange = new GameObject[_timeSlowZone.ObjectsInRange.Count];
-            _timeSlowZone.ObjectsInRange.CopyTo(grabableInRange);
-            foreach (GameObject item in grabableInRange)
+            if (_timeSlowZone.IsUseable)
             {
-                item.SetActive(false);
-                _character.Energy.Add(EnergyPerObject);
+                GameObject[] grabableInRange = new GameObject[_timeSlowZone.ObjectsInRange.Count];
+                _timeSlowZone.ObjectsInRange.CopyTo(grabableInRange);
+                foreach (GameObject item in grabableInRange)
+                {
+                    item.SetActive(false);
+                    _character.Energy.Add(EnergyPerObject);
+                    //TODO Play feedback
+                }
+                _timeSlowZone.CloseZone();
             }
         }
+
 
         public void SetTimeScale(float newScale)
         {

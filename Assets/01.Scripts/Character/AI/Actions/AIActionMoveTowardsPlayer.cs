@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using NaughtyAttributes;
 
 using Penwyn.Tools;
 
@@ -9,10 +9,16 @@ namespace Penwyn.Game
 {
     public class AIActionMoveTowardsPlayer : AIAction
     {
+        [Header("Base")]
         public float Speed = 1;
         public float MinDistance = 2;
         public AnimationCurve DistanceToSpeedCurve;
+        [Header("Random Movement")]
+        public Vector2 MinMaxAngle;
+        public Vector2 TimeBeforeChangingDirecion;
+
         protected GameObject _target;
+        protected float _randomAngle;
 
         public override void AwakeComponent(Character character)
         {
@@ -25,10 +31,33 @@ namespace Penwyn.Game
             float distanceToPlayer = Vector2.Distance(_target.transform.position, _character.transform.position);
             if (_target != null && distanceToPlayer > MinDistance)
             {
-                _character.Controller.SetVelocity((_target.transform.position - _character.transform.position).normalized * Speed * DistanceToSpeedCurve.Evaluate(distanceToPlayer));
-                //Debug.Log(Vector2.Distance(_target.transform.position, _character.transform.position));
+                Vector2 dirToPlayer = _target.transform.position - _character.transform.position;
+                dirToPlayer = Quaternion.AngleAxis(_randomAngle, Vector3.forward) * dirToPlayer;
+
+                _character.Controller.SetVelocity((dirToPlayer).normalized * Speed * DistanceToSpeedCurve.Evaluate(distanceToPlayer));
                 Debug.DrawRay(_character.transform.position, _character.Controller.Velocity);
             }
+        }
+
+        protected virtual IEnumerator ChangeDirection()
+        {
+            while (true)
+            {
+                _randomAngle = Randomizer.RandomNumber(MinMaxAngle.x, MinMaxAngle.y) * Randomizer.RandomBetween(-1, 1);
+                yield return new WaitForSeconds(Randomizer.RandomNumber(TimeBeforeChangingDirecion.x, TimeBeforeChangingDirecion.y));
+            }
+        }
+
+        public override void StateEnter()
+        {
+            base.StateEnter();
+            StartCoroutine(ChangeDirection());
+        }
+
+        public override void StateExit()
+        {
+            base.StateExit();
+            StopAllCoroutines();
         }
     }
 }

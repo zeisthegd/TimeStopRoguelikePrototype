@@ -74,6 +74,16 @@ namespace Penwyn.Game
             }
         }
 
+        public virtual void OnEnable()
+        {
+            CurrentState.Enter();
+        }
+
+        public virtual void OnDisable()
+        {
+            CurrentState.Exit();
+        }
+
         public Character Character => _character;
     }
 }

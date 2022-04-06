@@ -27,6 +27,10 @@ namespace Penwyn.Game
         [Header("Energy Requirements")]
         public bool RequiresEnergy = false;
         public float EnergyPerUse = 0;
+        [Header("Add-On")]
+        public bool ProjectileRotating = false;
+        public float RotateSpeed = 1;
+
     }
 }
 

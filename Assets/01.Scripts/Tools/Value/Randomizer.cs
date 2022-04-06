@@ -43,9 +43,12 @@ namespace Penwyn.Tools
             return Random.Range(min, max);
         }
 
+        /// <summary>
+        /// Return either the first or the second number.
+        /// </summary>
         public static int RandomBetween(int numA, int numB)
         {
-            return Random.Range(0, 1) == 0 ? numA : numB;
+            return Random.Range(0, 2) == 0 ? numA : numB;
         }
 
         public static int RandomNumber(IntMinMax intMinMax)

@@ -18,5 +18,8 @@ MonoBehaviour:
   Animator: {fileID: 0}
   Projectile: {fileID: 221415823, guid: 549e601aa82b47a41abe15309070c4d3, type: 3}
   BulletPerShot: 1
-  TimeBetweenBulletSpawn: 0
-  Cooldown: 1
+  DelayBetweenBullets: 0
+  Angle: 0
+  Cooldown: 1.5
+  RequiresEnergy: 0
+  EnergyPerUse: 0

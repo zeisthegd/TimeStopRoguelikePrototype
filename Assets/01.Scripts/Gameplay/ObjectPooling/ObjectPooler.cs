@@ -14,6 +14,8 @@ namespace Penwyn.Game
         public int Size = 1;
 
         [HorizontalLine]
+        [Tooltip("Find an existing pool of the same objects and use it instead of creating a new one.")]
+        public bool UseSharedInstance = false;
         public bool InitAtStart = false;
         public bool EnableObjectsAtStart = false;
         public bool NestPoolBelowThis = true;
@@ -35,6 +37,7 @@ namespace Penwyn.Game
         [Button("Init Pool", EButtonEnableMode.Always)]
         public virtual void Init()
         {
+            FindSharedPool();
             CreatePool();
             FillPool();
         }
@@ -51,6 +54,18 @@ namespace Penwyn.Game
                 _objectPool = _waitingPool.AddComponent<ObjectPool>();
                 _objectPool.PooledObjects = new List<PoolableObject>();
                 ApplyNesting();
+            }
+        }
+
+        public virtual void FindSharedPool()
+        {
+            if (UseSharedInstance)
+            {
+                _waitingPool = GameObject.Find(DefinePoolName());
+                if (_waitingPool != null)
+                {
+                    _objectPool = _waitingPool.GetComponent<ObjectPool>();
+                }
             }
         }
 

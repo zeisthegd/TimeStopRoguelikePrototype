@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 3383801527214349397}
   - component: {fileID: 3383801527214349398}
   - component: {fileID: -4232107899133536837}
-  - component: {fileID: 3580129492523402949}
+  - component: {fileID: 6731932392186436829}
   - component: {fileID: 8637054361584821487}
   - component: {fileID: 221415823}
   - component: {fileID: 8512598768966799358}
   - component: {fileID: -7243949194675849221}
   - component: {fileID: -8381563678912500393}
+  - component: {fileID: 2366856227260652313}
   m_Layer: 9
   m_Name: EnemyProjectile1
   m_TagString: Untagged
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: -506653161
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6a37b659fe49b7c43a9abf1e73b2980b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f6d1c7e45fca6148a40d33cf612e239, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3580129492523402949
-BoxCollider2D:
+--- !u!58 &6731932392186436829
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,19 +126,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03153538, y: -0.0008523166}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.18348894, y: 0.25167364}
-  m_EdgeRadius: 0
+  m_Radius: 0.375
 --- !u!114 &8637054361584821487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InfiniteLifeTime: 1
   LifeTime: 4
-  Speed: 8
+  Speed: 5
 --- !u!114 &8512598768966799358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,3 +208,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2fcfea7fd9ec04e8d1cd9a596cc5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2366856227260652313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383801527214349399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e246a6b104ae954a94c862e8c221b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObjectToRotate: {fileID: 3383801527214349399}
+  Speed: 100

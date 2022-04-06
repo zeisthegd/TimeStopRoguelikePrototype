@@ -11,13 +11,17 @@ PrefabInstance:
       propertyPath: InputType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1093525898766143882, guid: 55fdb189b0bb94947864f8b3aad4e912, type: 3}
+      propertyPath: UseSharedInstance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8024443830137324026, guid: 55fdb189b0bb94947864f8b3aad4e912, type: 3}
       propertyPath: InputType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8024443830137324030, guid: 55fdb189b0bb94947864f8b3aad4e912, type: 3}
       propertyPath: m_Name
-      value: ScriptedInputAttackWeapon Variant
+      value: Auto_ScriptedInputAttackWeapon Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8024443830137324031, guid: 55fdb189b0bb94947864f8b3aad4e912, type: 3}
       propertyPath: m_RootOrder

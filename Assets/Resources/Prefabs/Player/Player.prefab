@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794aeb5480db01e4b8cfc7fc4c9d393e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterID: 0
+  CharacterID: MainPlayer
   Controller: {fileID: 614565485682820542}
   Model: {fileID: 614565486169196504}
   Animator: {fileID: 0}
@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53063e11ff4bc5442877832e49c04ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxEnergy: 10
+  _energy: 0
 --- !u!1 &614565485822407723
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,12 +463,13 @@ MonoBehaviour:
   AbilityPermitted: 1
   Name: Slow Time
   forbidStates: 
-  slowTimeScale: 0.672
-  TimeZoneRange: 8
+  SlowTimeScale: 0.699
+  TimeZoneRange: 4
   TimeSlowZone: {fileID: 3191496777183214233, guid: 910ba73857f52c74aa5792e0bbed2c46, type: 3}
-  TargetMask:
-    serializedVersion: 2
-    m_Bits: 512
+  EnergyPerObject: 1
+  ZoneClosingDuration: 0.25
+  DelayBeforeRecoverDuration: 0.5
+  RecoverDuration: 1
 --- !u!114 &614565487340159100
 MonoBehaviour:
   m_ObjectHideFlags: 0

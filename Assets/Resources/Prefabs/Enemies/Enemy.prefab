@@ -71,6 +71,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MinMaxAngle: {x: 45, y: 90}
+  TimeBeforeChangingDirecion: {x: 1, y: 3}
 --- !u!114 &2625301013526094647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,11 +290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2d5eff8049b5b4fbb31ab42802be6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 10
+  StartingHealth: 5
   Invincible: 0
   InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   InvulnerableDuration: 0.001
-  DamageTakenFlickerColor: {r: 0, g: 1, b: 0.78456664, a: 1}
+  DamageTakenFlickerColor: {r: 0.9622642, g: 0.27905324, b: 0.24964403, a: 1}
   _health: 0
 --- !u!114 &-5845153555277089952
 MonoBehaviour:
@@ -308,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 8616408475051074906, guid: cccb3da08421ae8468a0d016cf4afb49, type: 3}
   HealthBarPrefab: {fileID: 1392665138393269310, guid: d8aecf18056a389468a72ddba67345ce, type: 3}
-  HealthBarOffset: {x: 0, y: 2, z: 0}
+  HealthBarOffset: {x: 0, y: 1, z: 0}
 --- !u!1 &2006300842071046159
 GameObject:
   m_ObjectHideFlags: 0

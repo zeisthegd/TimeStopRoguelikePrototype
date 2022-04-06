@@ -85,7 +85,6 @@ namespace Penwyn.Game
                 if (_currentWeaponState == WeaponState.WeaponCooldown && _cooldownCoroutine != null)
                     StopCoroutine(_cooldownCoroutine);
                 _currentWeaponState = WeaponState.WeaponNoEnergy;
-                // Debug.Break();
             }
             else
             {
@@ -130,6 +129,11 @@ namespace Penwyn.Game
         public virtual void GetComponents()
         {
             _weaponAim = GetComponent<WeaponAim>();
+        }
+
+        protected virtual void OnEnable()
+        {
+            _currentWeaponState = WeaponState.WeaponIdle;
         }
 
         protected virtual void OnDisable()

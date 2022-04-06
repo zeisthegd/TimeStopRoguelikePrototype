@@ -43,6 +43,7 @@ namespace Penwyn.Game
             }
         }
 
+
         protected virtual void UpdateActions()
         {
             foreach (AIAction action in Actions)
@@ -66,8 +67,33 @@ namespace Penwyn.Game
             }
         }
 
-        public virtual void Enter() { }
-        public virtual void Exit() { }
+        protected virtual void InvokeActionsMethod(string methodName)
+        {
+            foreach (AIAction action in Actions)
+            {
+                action.Invoke(methodName, 0);
+            }
+        }
+
+        protected virtual void InvokeDecisionsMethod(string methodName)
+        {
+            foreach (DecisionsLogic decisionsLogic in Decisions)
+            {
+                decisionsLogic.Decision.Invoke(methodName, 0);
+            }
+        }
+
+        public virtual void Enter()
+        {
+            InvokeActionsMethod(nameof(AIAction.StateEnter));
+            InvokeDecisionsMethod(nameof(AIAction.StateEnter));
+        }
+
+        public virtual void Exit()
+        {
+            InvokeActionsMethod(nameof(AIAction.StateExit));
+            InvokeDecisionsMethod(nameof(AIAction.StateExit));
+        }
     }
 
     [Serializable]
