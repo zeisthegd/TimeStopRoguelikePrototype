@@ -54,6 +54,7 @@ namespace Penwyn.Game
                     //TODO Play feedback
                 }
                 _timeSlowZone.CloseZone();
+                StartCoroutine(_character.CharacterWeaponHandler.CurrentWeapon.UseWeaponTillNoTargetOrEnergy());
             }
         }
 

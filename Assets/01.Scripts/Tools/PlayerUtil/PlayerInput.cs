@@ -282,6 +282,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""GrabProjectiles"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7596c032-1376-451b-8449-9912219b67c8"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabProjectiles"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }

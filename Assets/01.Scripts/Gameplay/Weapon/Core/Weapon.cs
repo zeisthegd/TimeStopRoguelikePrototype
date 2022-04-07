@@ -27,6 +27,7 @@ namespace Penwyn.Game
 
         [ReadOnly][SerializeField] protected WeaponState _currentWeaponState;
         protected WeaponAim _weaponAim;
+        protected WeaponAutoAim _weaponAutoAim;
         protected Coroutine _cooldownCoroutine;
 
 
@@ -39,25 +40,43 @@ namespace Penwyn.Game
         protected virtual void Update()
         {
             if (InputType == WeaponInputType.NormalAttack && InputReader.Instance.IsHoldingNormalAttack)
-                HandleRequestWeaponUse();
+                RequestWeaponUse();
             if (InputType == WeaponInputType.SpecialAttack && InputReader.Instance.IsHoldingSpecialAttack)
-                HandleRequestWeaponUse();
+                RequestWeaponUse();
         }
 
-        public virtual void HandleRequestWeaponUse()
+        public virtual void RequestWeaponUse()
         {
             //*Derive this
             if (_currentWeaponState == WeaponState.WeaponIdle)
             {
-                _currentWeaponState = WeaponState.WeaponUse;
                 UseWeapon();
             }
         }
 
         protected virtual void UseWeapon()
         {
+            _currentWeaponState = WeaponState.WeaponUse;
             StartCooldown();
             UseEnergy();
+        }
+
+        public virtual IEnumerator UseWeaponTillNoTargetOrEnergy()
+        {
+            do
+            {
+                if (Owner.Energy.CurrentEnergy < CurrentData.EnergyPerUse)
+                    break;
+                if (_weaponAutoAim)
+                {
+                    _weaponAutoAim.FindTarget();
+                    if (_weaponAutoAim.Target == null)
+                        break;
+                }
+                RequestWeaponUse();
+                yield return null;
+            }
+            while (true);
         }
 
         public virtual void StartCooldown()
@@ -129,6 +148,7 @@ namespace Penwyn.Game
         public virtual void GetComponents()
         {
             _weaponAim = GetComponent<WeaponAim>();
+            _weaponAutoAim = GetComponent<WeaponAutoAim>();
         }
 
         protected virtual void OnEnable()

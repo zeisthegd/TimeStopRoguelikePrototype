@@ -16,7 +16,7 @@ namespace Penwyn.Game
         {
             base.UpdateComponent();
             RotateWeaponToPlayer();
-            _character.CharacterWeaponHandler.CurrentWeapon.HandleRequestWeaponUse();
+            _character.CharacterWeaponHandler.CurrentWeapon.RequestWeaponUse();
         }
 
         public override void StateEnter()

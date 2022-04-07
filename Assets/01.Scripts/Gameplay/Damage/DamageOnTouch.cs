@@ -33,8 +33,11 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void DealDamage(GameObject gObject)
         {
-            Health objectHealth = gObject.FindComponent<Health>();
-            objectHealth?.Take(DamageDeal);
+            if (this.gameObject.activeInHierarchy)
+            {
+                Health objectHealth = gObject.FindComponent<Health>();
+                objectHealth?.Take(DamageDeal);
+            }
         }
 
         /// <summary>

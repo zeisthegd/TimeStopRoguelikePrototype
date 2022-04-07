@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 248487134125919222}
   - component: {fileID: 2599031266288734798}
   - component: {fileID: 1090797985896204363}
+  - component: {fileID: -1368405924357492}
   m_Layer: 6
   m_Name: NormalAttackWeapon
   m_TagString: Weapon
@@ -123,8 +124,9 @@ MonoBehaviour:
   CurrentData: {fileID: 0}
   Animator: {fileID: 8021821169114175549}
   SpriteRenderer: {fileID: 8021821169114175548}
-  InputType: 0
+  InputType: 2
   Owner: {fileID: 0}
+  _currentWeaponState: 0
 --- !u!114 &2599031266288734798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68775a700b5e8a4b9f8ab132e7d0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AimType: 1
 --- !u!114 &1090797985896204363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,5 +154,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToPool: {fileID: 221415823, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
   Size: 10
+  UseSharedInstance: 0
+  InitAtStart: 0
+  EnableObjectsAtStart: 0
   NestPoolBelowThis: 0
   NestObjectsInPool: 1
+--- !u!114 &-1368405924357492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021821169114175551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bc9d5c0223c9c4fa9afad63b06c82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetsMask:
+    serializedVersion: 2
+    m_Bits: 256
+  Target: {fileID: 0}

@@ -8,7 +8,9 @@ namespace Penwyn.Game
 {
     public class WeaponAim : MonoBehaviour
     {
+        public WeaponAimType AimType;
         protected Weapon _weapon;
+
 
         protected virtual void Start()
         {
@@ -17,7 +19,14 @@ namespace Penwyn.Game
 
         protected virtual void Update()
         {
-            Aim();
+            switch (AimType)
+            {
+                case WeaponAimType.Mouse:
+                    Aim();
+                    break;
+                default:
+                    break;
+            }
         }
 
         protected virtual void Aim()
@@ -25,6 +34,12 @@ namespace Penwyn.Game
             Vector3 dirToMouse = CursorUtility.GetMousePosition() - _weapon.transform.position;
             _weapon.transform.right = dirToMouse;
         }
+    }
+
+    public enum WeaponAimType
+    {
+        Mouse,
+        Script
     }
 }
 
