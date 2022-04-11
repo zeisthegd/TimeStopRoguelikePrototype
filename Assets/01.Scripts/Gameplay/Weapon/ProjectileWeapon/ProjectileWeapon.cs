@@ -10,18 +10,20 @@ namespace Penwyn.Game
     {
         protected ObjectPooler _projectilePooler;
 
-        public override void Initialization()
-        {
-            base.Initialization();
-            _projectilePooler = GetComponent<ObjectPooler>();
-            _projectilePooler.ObjectToPool = CurrentData.Projectile.gameObject;
-            _projectilePooler.Init();
-        }
-
         protected override void UseWeapon()
         {
             base.UseWeapon();
-            StartCoroutine(UseWeaponCoroutine());
+            StartCoroutine(IterationCoroutine());
+        }
+
+
+        protected virtual IEnumerator IterationCoroutine()
+        {
+            for (int i = 0; i < CurrentData.Iteration; i++)
+            {
+                StartCoroutine(UseWeaponCoroutine());
+                yield return new WaitForSeconds(CurrentData.DelayBetweenIterations);
+            }
         }
 
         protected virtual IEnumerator UseWeaponCoroutine()
@@ -69,12 +71,21 @@ namespace Penwyn.Game
         public override void LoadWeapon(WeaponData data)
         {
             base.LoadWeapon(data);
+            CurrentData.Projectile.DamageOnTouch.DamageDeal = CurrentData.Damage;
+            CreateNewPool();
         }
 
-        public override void LoadWeapon()
+        public virtual void CreateNewPool()
         {
-            base.LoadWeapon();
+            _projectilePooler.ClearPool();
+            _projectilePooler.ObjectToPool = CurrentData.Projectile.gameObject;
+            _projectilePooler.Init();
+        }
+
+        public override void GetComponents()
+        {
+            base.GetComponents();
+            _projectilePooler = GetComponent<ObjectPooler>();
         }
     }
-
 }

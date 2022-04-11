@@ -27,7 +27,7 @@ namespace Penwyn.Game
         protected Character _character;
         protected HealthBar _healthBar;
 
-        public event UnityAction OnHit;
+        public event UnityAction OnChanged;
         public event UnityAction<Character> OnDeath;
 
         void Start()
@@ -48,7 +48,7 @@ namespace Penwyn.Game
                 if (_health > 0)
                 {
                     MakeInvulnerable();
-                    OnHit?.Invoke();
+                    OnChanged?.Invoke();
                     if (_healthBar)
                         _healthBar.SetHealth(_health);
                 }
@@ -58,6 +58,38 @@ namespace Penwyn.Game
                 }
             }
         }
+
+        /// <summary>
+        /// Lose flat HP. No invulnerable started.
+        /// </summary>
+        /// <param name="health">Amount</param>
+        public virtual void Lose(float health)
+        {
+            _health -= health;
+            if (_health > 0)
+            {
+                OnChanged?.Invoke();
+                if (_healthBar)
+                    _healthBar.SetHealth(_health);
+            }
+            else
+            {
+                Kill();
+            }
+        }
+
+        /// <summary>
+        /// Get a flat amount of HP, positive value only.
+        /// </summary>
+        /// <param name="health"></param>
+        public virtual void Get(float health)
+        {
+            if (health < 0)
+                return;
+            _health += health;
+            OnChanged?.Invoke();
+        }
+
         #endregion
 
         #region Kill

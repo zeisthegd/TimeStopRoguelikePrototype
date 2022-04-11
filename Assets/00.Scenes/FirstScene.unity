@@ -536,11 +536,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1392665138293639547, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269308, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_Name
       value: EnergyHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392665138393269308, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_Pivot.x
@@ -560,7 +564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMin.x
@@ -568,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_SizeDelta.x
@@ -608,11 +612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 1392665138393269309, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -628,11 +632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1392665139633536317, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392665139633536317, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392665139633536318, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
       propertyPath: m_Color.b
@@ -1135,19 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHealth: {fileID: 2129579110}
-  PlayerEnergy: {fileID: 1321632808}
   WidthPerValue: 5
---- !u!114 &1321632808 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1392665138393269310, guid: ada19b5a08b66774a9f7dfff21ce2e00, type: 3}
-  m_PrefabInstance: {fileID: 992892738}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2dcde7e751360e4d8486f55f5211f98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1382744210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,10 +1559,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 614565487340159100, guid: b51da53175e802345a6b69a7effe2159, type: 3}
-      propertyPath: Name
-      value: Weapon Handler
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b51da53175e802345a6b69a7effe2159, type: 3}
 --- !u!1 &1741529399 stripped
@@ -1681,7 +1669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803318213}
   - component: {fileID: 1803318216}
-  - component: {fileID: 1803318215}
+  - component: {fileID: 1803318217}
   - component: {fileID: 1803318214}
   m_Layer: 0
   m_Name: LevelManager
@@ -1722,19 +1710,6 @@ MonoBehaviour:
   MapData: {fileID: 0}
   DistanceToPlayer: {x: 4, y: 8}
   TimeTillSpawnNewEnemies: 3
---- !u!114 &1803318215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803318212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ed408950cbc6b4d9dd5f5e38c21459, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MapData: {fileID: 0}
 --- !u!114 &1803318216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,9 +1726,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c125aab481063284189393cd537668f8, type: 2}
   PlayerToSpawn: {fileID: 0}
   ExistedPlayer: {fileID: 1741529399}
-  LevelGeneration: {fileID: 1803318215}
+  LevelGenerator: {fileID: 1803318217}
   EnemySpawner: {fileID: 1803318214}
   ThreatLevel: 4
+--- !u!114 &1803318217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803318212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ed408950cbc6b4d9dd5f5e38c21459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapData: {fileID: 0}
 --- !u!1 &1819262323
 GameObject:
   m_ObjectHideFlags: 0

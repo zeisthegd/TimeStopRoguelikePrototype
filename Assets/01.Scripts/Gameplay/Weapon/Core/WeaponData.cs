@@ -18,15 +18,20 @@ namespace Penwyn.Game
 
         [Header("Bullet")]
         public Projectile Projectile;
+        public float Damage = 1;
 
+        [Header("Iterations")]
+        [Tooltip("Number of times to shoot in a single input")]
+        public int Iteration = 1;
+        public float DelayBetweenIterations = 0.1F;
         [Header("Settings")]
         public int BulletPerShot = 1;
         public float DelayBetweenBullets = 0.1F;
         public float Angle = 0;
         public float Cooldown = 1;
         [Header("Energy Requirements")]
-        public bool RequiresEnergy = false;
-        public float EnergyPerUse = 0;
+        public bool RequiresHealth = false;
+        public float HealthPerUse = 0;
         [Header("Add-On")]
         public bool ProjectileRotating = false;
         public float RotateSpeed = 1;

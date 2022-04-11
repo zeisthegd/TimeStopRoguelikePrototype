@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 614565485682820543}
   - component: {fileID: 614565485682820542}
   - component: {fileID: 614565485682820516}
-  - component: {fileID: 1741529411}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -177,7 +176,6 @@ MonoBehaviour:
   Model: {fileID: 614565486169196504}
   Animator: {fileID: 0}
   Health: {fileID: 614565485682820516}
-  Energy: {fileID: 1741529411}
   AbilitiesContainer:
   - {fileID: 614565487340159096}
 --- !u!114 &614565485682820542
@@ -211,20 +209,6 @@ MonoBehaviour:
   InvulnerableDuration: 1
   DamageTakenFlickerColor: {r: 1, g: 0, b: 0, a: 1}
   _health: 0
---- !u!114 &1741529411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614565485682820541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53063e11ff4bc5442877832e49c04ab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxEnergy: 10
-  _energy: 0
 --- !u!1 &614565485822407723
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,9 +395,9 @@ MonoBehaviour:
   Name: Slow Time
   forbidStates: 
   SlowTimeScale: 0.8
-  TimeZoneRange: 4
+  TimeZoneRange: 1
   TimeSlowZone: {fileID: 3191496777183214233, guid: 910ba73857f52c74aa5792e0bbed2c46, type: 3}
-  EnergyPerObject: 1
+  HealthPerObject: 1
   ZoneClosingDuration: 0.1
   DelayBeforeRecoverDuration: 0.5
   RecoverDuration: 0.75
@@ -430,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityPermitted: 1
-  Name: Normal Weapon Handler
+  Name: Weapon Handler
   forbidStates: 
   InitialWeaponPrefab: {fileID: 248487134125919222, guid: 55a61cca81f3765499a6070d8584390b, type: 3}
   InitialWeaponData: {fileID: 11400000, guid: 8b0d1be3086e7c04784f7049323a5426, type: 2}

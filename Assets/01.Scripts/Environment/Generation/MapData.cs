@@ -10,9 +10,11 @@ namespace Penwyn.Game
     public class MapData : ScriptableObject
     {
         public string Name;
+        [Header("Enemies")]
         public EnemySpawnSettings[] SpawnSettings;
         public float StartingThreatLevel = 3;
         public float ThreatLevelIncrementPerSecond = 0.1F;
+        //        [Header("Environment")]
 
         public EnemySpawnSettings GetRandomEnemySpawnSettings()
         {

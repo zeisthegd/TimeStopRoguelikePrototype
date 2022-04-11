@@ -20,7 +20,7 @@ namespace Penwyn.Game
         public TimeSlowZone TimeSlowZone;
 
         [Header("The Grab")]
-        public float EnergyPerObject = 0.2F;
+        public float HealthPerObject = 0.2F;
         public float ZoneClosingDuration = 0.5F;
 
         [Header("Cooldown After Grab")]
@@ -38,6 +38,12 @@ namespace Penwyn.Game
             _timeSlowZone.Initialization(this);
         }
 
+        public override void UpdateAbility()
+        {
+            base.UpdateAbility();
+            //TODO slow amount of hp will be healed when grabbing projectiles.
+        }
+
         /// <summary>
         /// Grab the slowed projectiles inside of the time zone.
         /// </summary>
@@ -50,7 +56,7 @@ namespace Penwyn.Game
                 foreach (GameObject item in grabableInRange)
                 {
                     item.SetActive(false);
-                    _character.Energy.Add(EnergyPerObject);
+                    _character.Health.Get(HealthPerObject);
                     //TODO Play feedback
                 }
                 _timeSlowZone.CloseZone();

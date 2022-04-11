@@ -80,6 +80,12 @@ namespace Penwyn.Game
             }
         }
 
+        public virtual void ClearPool()
+        {
+            if (_objectPool != null)
+                _objectPool.Clear();
+        }
+
         public virtual GameObject PullOneObject()
         {
             foreach (GameObject item in _objectPool.PooledObjects)
@@ -106,6 +112,8 @@ namespace Penwyn.Game
             Debug.LogWarning("No Object to pool. Please insert");
             return null;
         }
+
+
 
         /// <summary>
         /// Determine the parent of this pool.

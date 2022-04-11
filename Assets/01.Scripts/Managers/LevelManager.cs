@@ -13,7 +13,7 @@ namespace Penwyn.Game
         public GameObject PlayerToSpawn;
         public GameObject ExistedPlayer;
 
-        public LevelGeneration LevelGeneration;
+        public LevelGenerator LevelGenerator;
         public EnemySpawner EnemySpawner;
 
 
@@ -50,10 +50,10 @@ namespace Penwyn.Game
         public virtual void ChangeToRandomData()
         {
             MapData randomData = MapDatas[Randomizer.RandomNumber(0, MapDatas.Count)];
-            LevelGeneration.MapData = randomData;
+            LevelGenerator.MapData = randomData;
             EnemySpawner.MapData = randomData;
 
-            LevelGeneration.LoadData();
+            LevelGenerator.LoadData();
             EnemySpawner.LoadData();
 
             ThreatLevel = 0;

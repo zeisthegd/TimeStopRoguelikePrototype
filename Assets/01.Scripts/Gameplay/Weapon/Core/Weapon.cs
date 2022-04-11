@@ -30,19 +30,12 @@ namespace Penwyn.Game
         protected WeaponAutoAim _weaponAutoAim;
         protected Coroutine _cooldownCoroutine;
 
-
-        public virtual void Initialization()
+        protected virtual void Awake()
         {
             GetComponents();
-            SetEnergyRequirements();
         }
-
-        protected virtual void Update()
+        public virtual void Initialization()
         {
-            if (InputType == WeaponInputType.NormalAttack && InputReader.Instance.IsHoldingNormalAttack)
-                RequestWeaponUse();
-            if (InputType == WeaponInputType.SpecialAttack && InputReader.Instance.IsHoldingSpecialAttack)
-                RequestWeaponUse();
         }
 
         public virtual void RequestWeaponUse()
@@ -65,7 +58,7 @@ namespace Penwyn.Game
         {
             do
             {
-                if (Owner.Energy.CurrentEnergy < CurrentData.EnergyPerUse)
+                if (Owner.Health.CurrentHealth < CurrentData.HealthPerUse)
                     break;
                 if (_weaponAutoAim)
                 {
@@ -78,7 +71,6 @@ namespace Penwyn.Game
             }
             while (true);
         }
-
         public virtual void StartCooldown()
         {
             _currentWeaponState = WeaponState.WeaponCooldown;
@@ -93,21 +85,21 @@ namespace Penwyn.Game
 
         protected virtual void UseEnergy()
         {
-            if (Owner.Energy != null)
-                Owner.Energy.Use(CurrentData.EnergyPerUse);
+            if (Owner.Health != null)
+                Owner.Health.Lose(CurrentData.HealthPerUse);
         }
 
-        protected virtual void OnEnergyChanged()
+        protected virtual void OnHealthChanged()
         {
-            if (Owner.Energy.CurrentEnergy < CurrentData.EnergyPerUse)
+            if (Owner.Health.CurrentHealth <= CurrentData.HealthPerUse)
             {
                 if (_currentWeaponState == WeaponState.WeaponCooldown && _cooldownCoroutine != null)
                     StopCoroutine(_cooldownCoroutine);
-                _currentWeaponState = WeaponState.WeaponNoEnergy;
+                _currentWeaponState = WeaponState.WeaponNotEnoughHealth;
             }
             else
             {
-                if (_currentWeaponState == WeaponState.WeaponNoEnergy)
+                if (_currentWeaponState == WeaponState.WeaponNotEnoughHealth)
                     _currentWeaponState = WeaponState.WeaponIdle;
             }
         }
@@ -119,6 +111,7 @@ namespace Penwyn.Game
         {
             CurrentData = data;
             SpriteRenderer.sprite = data.Icon;
+            SetHealthRequirements();
         }
 
         [Button("Load Weapon Data")]
@@ -142,17 +135,17 @@ namespace Penwyn.Game
                 Debug.Log("Please insert Weapon Data");
         }
 
-        public virtual void SetEnergyRequirements()
+        public virtual void SetHealthRequirements()
         {
-            if (CurrentData.RequiresEnergy)
+            if (CurrentData.RequiresHealth)
             {
-                if (Owner.Energy != null)
+                if (Owner.Health != null)
                 {
-                    Owner.Energy.OnChanged += OnEnergyChanged;
+                    Owner.Health.OnChanged += OnHealthChanged;
                 }
                 else
                 {
-                    Debug.LogWarning($"No energy assigned to {Owner.name} although this {CurrentData.Name} requires energy!");
+                    Debug.LogWarning($"No health assigned to {Owner.name} although this {CurrentData.Name} requires health!");
                 }
             }
         }
@@ -170,8 +163,8 @@ namespace Penwyn.Game
 
         protected virtual void OnDisable()
         {
-            if (Owner.Energy != null)
-                Owner.Energy.OnChanged -= OnEnergyChanged;
+            if (CurrentData.RequiresHealth && Owner.Health != null)
+                Owner.Health.OnChanged -= OnHealthChanged;
         }
     }
 }

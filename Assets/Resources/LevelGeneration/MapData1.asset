@@ -18,5 +18,5 @@ MonoBehaviour:
     Prefab: {fileID: 7637248474599472495, guid: 51ed6fbc041363a47aeb4f88f11a8bf6, type: 3}
     Datas:
     - {fileID: 11400000, guid: c6984846f49d25a4ab47aee502e689f0, type: 2}
-  StartingThreatLevel: 3
+  StartingThreatLevel: 10
   ThreatLevelIncrementPerSecond: 0.1

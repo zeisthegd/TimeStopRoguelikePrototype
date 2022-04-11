@@ -10,7 +10,7 @@ namespace Penwyn.Game
         WeaponIdle,
         WeaponUse,
         WeaponCooldown,
-        WeaponNoEnergy
+        WeaponNotEnoughHealth
     }
 }
 

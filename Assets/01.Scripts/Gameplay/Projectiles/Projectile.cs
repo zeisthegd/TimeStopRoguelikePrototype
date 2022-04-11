@@ -11,17 +11,12 @@ namespace Penwyn.Game
         [HorizontalLine]
         [Header("Velocity")]
         public float Speed;
-
-        protected CharacterController _controller;
-
-        protected virtual void Awake()
-        {
-            _controller = GetComponent<CharacterController>();
-        }
-
+        public DamageOnTouch DamageOnTouch;
+        public CharacterController Controller;
+        
         public virtual void FlyTowards(Vector3 direction)
         {
-            _controller.SetVelocity(direction.normalized * Speed);
+            Controller.SetVelocity(direction.normalized * Speed);
         }
 
         protected override void OnEnable()
@@ -32,10 +27,9 @@ namespace Penwyn.Game
         protected override void OnDisable()
         {
             base.OnDisable();
-            _controller.SetVelocity(Vector3.zero);
+            Controller.SetVelocity(Vector3.zero);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
     }
 
 }

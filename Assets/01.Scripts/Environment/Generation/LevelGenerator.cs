@@ -8,7 +8,7 @@ using Penwyn.Tools;
 
 namespace Penwyn.Game
 {
-    public class LevelGeneration : MonoBehaviour
+    public class LevelGenerator : MonoBehaviour
     {
         public MapData MapData;
 
