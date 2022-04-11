@@ -28,7 +28,7 @@ namespace Penwyn.Game
         protected HealthBar _healthBar;
 
         public event UnityAction OnHit;
-        public event UnityAction OnDeath;
+        public event UnityAction<Character> OnDeath;
 
         void Start()
         {
@@ -64,7 +64,7 @@ namespace Penwyn.Game
         public virtual void Kill()
         {
             _health = 0;
-            OnDeath?.Invoke();
+            OnDeath?.Invoke(_character);
             gameObject.SetActive(false);
         }
         #endregion

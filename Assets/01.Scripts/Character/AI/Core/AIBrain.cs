@@ -46,10 +46,6 @@ namespace Penwyn.Game
                 else
                     Debug.LogWarning($"State {stateName} was not found.");
             }
-            else
-            {
-                Debug.Log("State not change since stateName is null.");
-            }
         }
 
         /// <summary>
@@ -76,12 +72,14 @@ namespace Penwyn.Game
 
         public virtual void OnEnable()
         {
-            CurrentState.Enter();
+            if (Enabled)
+                CurrentState.Enter();
         }
 
         public virtual void OnDisable()
         {
-            CurrentState.Exit();
+            if (Enabled)
+                CurrentState.Exit();
         }
 
         public Character Character => _character;

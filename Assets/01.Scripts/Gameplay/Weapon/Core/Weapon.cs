@@ -130,6 +130,18 @@ namespace Penwyn.Game
                 Debug.Log("Please insert Weapon Data");
         }
 
+        [Button("Upgrade")]
+        public virtual void Upgrade()
+        {
+            if (CurrentData != null)
+            {
+                if (CurrentData.Upgrade != null)
+                    LoadWeapon(CurrentData.Upgrade);
+            }
+            else
+                Debug.Log("Please insert Weapon Data");
+        }
+
         public virtual void SetEnergyRequirements()
         {
             if (CurrentData.RequiresEnergy)

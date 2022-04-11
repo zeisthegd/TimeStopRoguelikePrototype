@@ -31,6 +31,8 @@ namespace Penwyn.Game
         public bool ProjectileRotating = false;
         public float RotateSpeed = 1;
 
+        [Header("Upgrade")]
+        public WeaponData Upgrade;
     }
 }
 

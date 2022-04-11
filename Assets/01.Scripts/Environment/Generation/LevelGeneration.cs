@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGeneration : MonoBehaviour
+using NaughtyAttributes;
+
+using Penwyn.Tools;
+
+namespace Penwyn.Game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class LevelGeneration : MonoBehaviour
     {
-        
+        public MapData MapData;
+
+        public virtual void LoadData()
+        {
+
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
+

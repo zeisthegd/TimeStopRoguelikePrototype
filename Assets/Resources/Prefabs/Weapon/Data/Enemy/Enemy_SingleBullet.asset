@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 749f694307429a94ab09f1c96bebdff1, type: 3}
-  m_Name: Player_Single_Slow
+  m_Name: Enemy_SingleBullet
   m_EditorClassIdentifier: 
   Name: 
   Description: 
   Icon: {fileID: 0}
   Animator: {fileID: 0}
-  Projectile: {fileID: 221415823, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
+  Projectile: {fileID: 221415823, guid: 549e601aa82b47a41abe15309070c4d3, type: 3}
   BulletPerShot: 1
   DelayBetweenBullets: 0
   Angle: 0
-  Cooldown: 0.25
-  RequiresEnergy: 1
-  EnergyPerUse: 0.5
+  Cooldown: 2
+  RequiresEnergy: 0
+  EnergyPerUse: 0
+  ProjectileRotating: 1
+  RotateSpeed: 50

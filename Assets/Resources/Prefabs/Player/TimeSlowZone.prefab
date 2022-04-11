@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 360
   SlowTimeScale: 0.5
-  NormalizeDuration: 1
+  NormalizeDuration: 0.5
   State: 0
 --- !u!58 &3191496777183214232
 CircleCollider2D:

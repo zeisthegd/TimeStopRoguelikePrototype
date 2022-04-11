@@ -10,9 +10,9 @@ namespace Penwyn.Game
     public class AIActionMoveTowardsPlayer : AIAction
     {
         [Header("Base")]
-        public float Speed = 1;
         public float MinDistance = 2;
         public AnimationCurve DistanceToSpeedCurve;
+
         [Header("Random Movement")]
         public Vector2 MinMaxAngle;
         public Vector2 TimeBeforeChangingDirecion;
@@ -28,14 +28,15 @@ namespace Penwyn.Game
         public override void UpdateComponent()
         {
             _target = Characters.Player.gameObject;
-            float distanceToPlayer = Vector2.Distance(_target.transform.position, _character.transform.position);
+            float distanceToPlayer = Vector2.Distance(_target.transform.position, _character.Position);
             if (_target != null && distanceToPlayer > MinDistance)
             {
-                Vector2 dirToPlayer = _target.transform.position - _character.transform.position;
+                Vector2 dirToPlayer = _target.transform.position - _character.Position;
                 dirToPlayer = Quaternion.AngleAxis(_randomAngle, Vector3.forward) * dirToPlayer;
 
-                _character.Controller.SetVelocity((dirToPlayer).normalized * Speed * DistanceToSpeedCurve.Evaluate(distanceToPlayer));
-                Debug.DrawRay(_character.transform.position, _character.Controller.Velocity);
+                _character.CharacterRun.RunRaw(dirToPlayer);
+                _character.Controller.MultiplyVelocity(DistanceToSpeedCurve.Evaluate(distanceToPlayer));
+                Debug.DrawRay(_character.Position, _character.Controller.Velocity);
             }
         }
 

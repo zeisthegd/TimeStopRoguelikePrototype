@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca367fc739a7cd44b0d990ee74bcbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
   MinDistance: 5
   DistanceToSpeedCurve:
     serializedVersion: 2
@@ -72,7 +71,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MinMaxAngle: {x: 45, y: 90}
-  TimeBeforeChangingDirecion: {x: 1, y: 3}
+  TimeBeforeChangingDirecion: {x: 1, y: 4}
 --- !u!114 &2625301013526094647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006300841245699177}
   - component: {fileID: 2006300841245699221}
-  - component: {fileID: 2006300841245699178}
+  - component: {fileID: 7637248474599472495}
   - component: {fileID: 2006300841245699176}
   - component: {fileID: 2006300841245699179}
   - component: {fileID: -5255441062222112624}
@@ -136,7 +135,7 @@ GameObject:
   - component: {fileID: -5845153555277089952}
   - component: {fileID: 3481002168413983432}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: SmallEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +180,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2006300841245699178
+--- !u!114 &7637248474599472495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,17 +189,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006300841245699223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 794aeb5480db01e4b8cfc7fc4c9d393e, type: 3}
+  m_Script: {fileID: 11500000, guid: 206534e806938b94bbd36b3eaf4431ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterID: Enm_1
+  CharacterID: Enem1
   Controller: {fileID: 2006300841245699179}
   Model: {fileID: 2006300842071046159}
-  Animator: {fileID: 0}
+  Animator: {fileID: 2006300842071046156}
   Health: {fileID: 2006300841245699183}
   Energy: {fileID: 0}
   AbilitiesContainer:
   - {fileID: 8487752395136312131}
+  AIBrain: {fileID: 2006300841245699176}
+  InitData: {fileID: 0}
 --- !u!114 &2006300841245699176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,16 +215,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   States:
-  - Name: Chase
+  - Name: ChaseShoot
     Actions:
     - {fileID: 2006300840360269481}
     - {fileID: 2625301013526094647}
-    Decisions: []
+    Decisions:
+    - Decision: {fileID: 2019213601434309049}
+      TrueState: IdleShoot
+      FalseState: 
+  - Name: IdleShoot
+    Actions:
+    - {fileID: 2625301013526094647}
+    Decisions:
+    - Decision: {fileID: 2019213601434309049}
+      TrueState: ChaseShoot
+      FalseState: 
   CurrentState:
     Name: 
     Actions: []
     Decisions: []
-  Enabled: 1
+  Enabled: 0
   CurrentStateName: 
 --- !u!114 &2006300841245699179
 MonoBehaviour:
@@ -374,7 +385,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1443844129
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4d62de070aa803a4581a6382260a194b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -416,6 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006300842171633557}
+  - component: {fileID: 2019213601434309049}
   m_Layer: 8
   m_Name: AIDecisions
   m_TagString: Untagged
@@ -438,6 +450,21 @@ Transform:
   m_Father: {fileID: 2006300840438366962}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2019213601434309049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006300842171633558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09f895ad2b1d8f479a894c987d7f7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Time: 0
+  IsRandom: 1
+  RandomTime: {x: 1, y: 3}
 --- !u!1 &8364317392560621495
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4869068508591139482}
   - component: {fileID: 3079752676553015885}
+  - component: {fileID: 7391999147760686329}
   m_Layer: 8
   m_Name: Abilities
   m_TagString: Untagged
@@ -569,6 +597,24 @@ MonoBehaviour:
   AbilityPermitted: 1
   Name: Enemy Weapon
   forbidStates: 
-  InitialWeaponPrefab: {fileID: 8562289339673371653, guid: ee3681cf023ad6f4f8f0cdaa3e52473e, type: 3}
+  InitialWeaponPrefab: {fileID: 248487134125919222, guid: a61a66f53f8629e4f86969c731bc4f6b, type: 3}
   InitialWeaponData: {fileID: 11400000, guid: 33ef187984bf38b419ca0dcf87079629, type: 2}
   WeaponHolder: {fileID: 4869068508591139482}
+--- !u!114 &7391999147760686329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487752395136312131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f393856b9359385439ec5445ae79c531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityPermitted: 1
+  Name: Run
+  forbidStates: 
+  RunSpeed: 5
+  Type: 1
+  Dust: {fileID: 0}

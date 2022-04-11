@@ -10,7 +10,7 @@ namespace Penwyn.Game
     public class ObjectPooler : MonoBehaviour
     {
         [Header("Pool Object")]
-        public PoolableObject ObjectToPool;
+        public GameObject ObjectToPool;
         public int Size = 1;
 
         [HorizontalLine]
@@ -52,7 +52,7 @@ namespace Penwyn.Game
                 _waitingPool = new GameObject(DefinePoolName());
                 SceneManager.MoveGameObjectToScene(_waitingPool, this.gameObject.scene);
                 _objectPool = _waitingPool.AddComponent<ObjectPool>();
-                _objectPool.PooledObjects = new List<PoolableObject>();
+                _objectPool.PooledObjects = new List<GameObject>();
                 ApplyNesting();
             }
         }
@@ -80,9 +80,9 @@ namespace Penwyn.Game
             }
         }
 
-        public virtual PoolableObject PullOneObject()
+        public virtual GameObject PullOneObject()
         {
-            foreach (PoolableObject item in _objectPool.PooledObjects)
+            foreach (GameObject item in _objectPool.PooledObjects)
             {
                 if (!item.gameObject.activeInHierarchy)
                     return item;
@@ -93,11 +93,11 @@ namespace Penwyn.Game
         /// <summary>
         /// Instantiate the object to pool. Then add it to the list.
         /// </summary>
-        public virtual PoolableObject AddOnePoolObject()
+        public virtual GameObject AddOnePoolObject()
         {
             if (ObjectToPool != null)
             {
-                PoolableObject poolObject = (PoolableObject)Instantiate(ObjectToPool);
+                GameObject poolObject = Instantiate(ObjectToPool);
                 poolObject.gameObject.SetActive(false);
                 poolObject.transform.SetParent(NestObjectsInPool ? _objectPool.transform : null);
                 _objectPool.PooledObjects.Add(poolObject);
@@ -125,6 +125,8 @@ namespace Penwyn.Game
         {
             return $"[{this.GetType().ToString()}] +[{ObjectToPool.name}]";
         }
+
+        public ObjectPool ObjectPool { get => _objectPool; }
     }
 }
 

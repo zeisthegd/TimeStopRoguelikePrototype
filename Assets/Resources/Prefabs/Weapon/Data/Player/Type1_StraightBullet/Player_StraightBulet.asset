@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 749f694307429a94ab09f1c96bebdff1, type: 3}
-  m_Name: Player_3Shot_Slow
+  m_Name: Player_StraightBulet
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
+  Name: Straight Bulet
+  Description: Base Weapon of the Avarage Man class.
   Icon: {fileID: 0}
   Animator: {fileID: 0}
   Projectile: {fileID: 221415823, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
-  BulletPerShot: 3
+  BulletPerShot: 1
   DelayBetweenBullets: 0
-  Angle: 30
-  Cooldown: 0.25
+  Angle: 0
+  Cooldown: 1
   RequiresEnergy: 1
   EnergyPerUse: 0.5
   ProjectileRotating: 0
   RotateSpeed: 1
+  Upgrade: {fileID: 11400000, guid: cd89b284e5a52a644ae909074af0b9ba, type: 2}

@@ -7,14 +7,14 @@ namespace Penwyn.Game
 {
     public class ObjectPool : MonoBehaviour
     {
-        [ReadOnly] public List<PoolableObject> PooledObjects;
+        [ReadOnly] public List<GameObject> PooledObjects;
 
         [Button("Enable All Objects", EButtonEnableMode.Always)]
         public virtual void EnableAllObjects()
         {
             for (int i = 0; i < PooledObjects.Count; i++)
             {
-                PooledObjects[i].gameObject.SetActive(true);
+                PooledObjects[i].SetActive(true);
             }
         }
         
@@ -23,7 +23,7 @@ namespace Penwyn.Game
         {
             for (int i = 0; i < PooledObjects.Count; i++)
             {
-                PooledObjects[i].gameObject.SetActive(true);
+                PooledObjects[i].SetActive(true);
             }
         }
     }

@@ -9,8 +9,11 @@ namespace Penwyn.Game
 {
     public class CharacterRun : CharacterAbility
     {
-        [BoxGroup("Speed")]
+        [Header("Speed")]
         public float RunSpeed = 5;
+        public ControlType Type;
+        [Header("Feedbacks")]
+        public ParticleSystem Dust;
 
         public override void AwakeAbility(Character character)
         {
@@ -26,12 +29,31 @@ namespace Penwyn.Game
         public override void FixedUpdateAbility()
         {
             base.FixedUpdateAbility();
-            RunRaw(InputReader.Instance.MoveInput);
+            if (Type == ControlType.PlayerInput)
+                RunRaw(InputReader.Instance.MoveInput);
+            DustHandling();
+
         }
 
-        public void RunRaw(Vector2 input)
+        public void RunRaw(Vector2 direction)
         {
-            _controller.SetVelocity(input.normalized * RunSpeed);
+            _controller.SetVelocity(direction.normalized * RunSpeed);
+        }
+
+        protected virtual void DustHandling()
+        {
+            if (Dust != null)
+            {
+                if (_controller.Velocity.magnitude > 0)
+                {
+                    if (!Dust.isPlaying)
+                        Dust.Play();
+                }
+                else
+                {
+                    Dust.Stop();
+                }
+            }
         }
 
         public override void ConnectEvents()
@@ -47,6 +69,12 @@ namespace Penwyn.Game
         public override void OnDisable()
         {
             base.OnDisable();
+        }
+
+        public enum ControlType
+        {
+            PlayerInput,
+            Script
         }
     }
 }

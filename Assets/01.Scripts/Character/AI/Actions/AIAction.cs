@@ -6,6 +6,7 @@ namespace Penwyn.Game
 {
     public class AIAction : AIComponent
     {
+        protected bool _isOperatable;
         public override void AwakeComponent(Character character)
         {
             base.AwakeComponent(character);

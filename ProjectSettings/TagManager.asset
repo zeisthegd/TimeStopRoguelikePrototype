@@ -49,14 +49,14 @@ TagManager:
   - name: Midground
     uniqueID: 2051558207
     locked: 0
+  - name: Projectiles
+    uniqueID: 3788314135
+    locked: 0
   - name: Enemies
     uniqueID: 2851123167
     locked: 0
   - name: Player
     uniqueID: 980877933
-    locked: 0
-  - name: Projectiles
-    uniqueID: 3788314135
     locked: 0
   - name: Paricles
     uniqueID: 1891490645

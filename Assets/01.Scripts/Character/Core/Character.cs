@@ -10,7 +10,7 @@ namespace Penwyn.Game
     {
         [Header("Character ID")]
         public string CharacterID;
-        
+
         [Header("Controller")]
         public CharacterController Controller;
 
@@ -36,8 +36,20 @@ namespace Penwyn.Game
             WakeUpAbilities();
             GetGeneralAbilities();
         }
-
         protected virtual void Update()
+        {
+            UpdateAbilities();
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            FixedUpdateAbilities();
+        }
+
+
+        #region Abilities Handling
+
+        protected virtual void UpdateAbilities()
         {
             for (int i = 0; i < _abilities.Count; i++)
             {
@@ -47,8 +59,7 @@ namespace Penwyn.Game
                 }
             }
         }
-
-        protected virtual void FixedUpdate()
+        protected virtual void FixedUpdateAbilities()
         {
             for (int i = 0; i < _abilities.Count; i++)
             {
@@ -75,8 +86,6 @@ namespace Penwyn.Game
             _characterRun = FindAbility<CharacterRun>();
             _characterWeaponHandler = FindAbility<CharacterWeaponHandler>();
         }
-
-        #region Ability Utilities
 
         public virtual T FindAbility<T>() where T : CharacterAbility
         {

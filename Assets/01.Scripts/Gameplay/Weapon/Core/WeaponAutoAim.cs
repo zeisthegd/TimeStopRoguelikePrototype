@@ -59,8 +59,9 @@ namespace Penwyn.Game
         {
             if (Target != null && Target.gameObject.activeInHierarchy)
             {
-                Vector3 dirToTarget = Target.position - _weapon.transform.position;
+                Vector3 dirToTarget = (Target.position - _weapon.transform.position).normalized;
                 _weapon.transform.right = dirToTarget;
+                Debug.DrawRay(_weapon.transform.position, dirToTarget);
             }
         }
     }

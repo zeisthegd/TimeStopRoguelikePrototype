@@ -6,9 +6,10 @@ using Penwyn.Game;
 
 namespace Penwyn.Tools
 {
+    [RequireComponent(typeof(ObjectPooler))]
     public class CharacterGhostTrail : MonoBehaviour
     {
-        public PoolableObject GhostPrefab;
+        public GameObject GhostPrefab;
         public ObjectPooler GhostPooler;
         public float Delay = 1F;
         public SortingLayer Layer;
@@ -43,7 +44,6 @@ namespace Penwyn.Tools
 
         public virtual void CreateGhost()
         {
-            Debug.Log("CreateGhost");
             GameObject ghostObject = GhostPooler.PullOneObject().gameObject;
             ghostObject.gameObject.SetActive(true);
             ghostObject.transform.localScale = _targetRenderer.gameObject.transform.localScale;

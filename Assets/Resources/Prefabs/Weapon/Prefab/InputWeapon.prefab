@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1090797985896204363}
   - component: {fileID: -1368405924357492}
   m_Layer: 6
-  m_Name: NormalAttackWeapon
+  m_Name: InputWeapon
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 980877933
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,7 +124,7 @@ MonoBehaviour:
   CurrentData: {fileID: 0}
   Animator: {fileID: 8021821169114175549}
   SpriteRenderer: {fileID: 8021821169114175548}
-  InputType: 2
+  InputType: 0
   Owner: {fileID: 0}
   _currentWeaponState: 0
 --- !u!114 &2599031266288734798
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1d1861112919447b8e0672fd0e515a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToPool: {fileID: 221415823, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
+  ObjectToPool: {fileID: 3383801527214349399, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
   Size: 10
   UseSharedInstance: 0
   InitAtStart: 0

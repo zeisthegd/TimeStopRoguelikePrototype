@@ -14,7 +14,7 @@ namespace Penwyn.Game
         {
             base.Initialization();
             _projectilePooler = GetComponent<ObjectPooler>();
-            _projectilePooler.ObjectToPool = CurrentData.Projectile;
+            _projectilePooler.ObjectToPool = CurrentData.Projectile.gameObject;
             _projectilePooler.Init();
         }
 
@@ -29,7 +29,7 @@ namespace Penwyn.Game
             float projectileStep = GetProjectileStep();
             if (_weaponAim)
                 _weaponAim.enabled = false;
-            gameObject.RotateZ(CurrentData.Angle / 2);
+            gameObject.RotateZ(CurrentData.Angle / 2F);
             for (int i = 0; i < CurrentData.BulletPerShot; i++)
             {
                 SpawnProjectile();
@@ -49,7 +49,7 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void SpawnProjectile()
         {
-            Projectile projectile = (Projectile)_projectilePooler.PullOneObject();
+            Projectile projectile = _projectilePooler.PullOneObject().GetComponent<Projectile>();
             projectile.transform.position = this.transform.position;
             projectile.transform.rotation = this.transform.rotation;
             projectile.gameObject.SetActive(true);
@@ -62,7 +62,7 @@ namespace Penwyn.Game
         protected virtual float GetProjectileStep()
         {
             if (CurrentData.BulletPerShot != 0)
-                return CurrentData.Angle / CurrentData.BulletPerShot;
+                return 1F * CurrentData.Angle / CurrentData.BulletPerShot;
             return 0;
         }
 
