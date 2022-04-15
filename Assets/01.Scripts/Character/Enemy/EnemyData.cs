@@ -7,6 +7,7 @@ namespace Penwyn.Game
     [CreateAssetMenu(menuName = "Character/EnemyDat")]
     public class EnemyData : ScriptableObject
     {
+        public float Health = 1;
         public float MoveSpeed = 1;
         public float ThreatLevel = 1;
         public RuntimeAnimatorController RuntimeAnimatorController;

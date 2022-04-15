@@ -49,8 +49,11 @@ namespace Penwyn.Game
         /// </summary>
         public virtual void SetHealthSlidersValue()
         {
-            _currentHPBar.SetMaxValue(_health.StartingHealth);
-            _currentHPBar.SetValue(_health.CurrentHealth);
+            if (_currentHPBar != null)
+            {
+                _currentHPBar.SetMaxValue(_health.StartingHealth);
+                _currentHPBar.SetValue(_health.CurrentHealth);
+            }
         }
 
         /// <summary>
@@ -65,7 +68,13 @@ namespace Penwyn.Game
                 _currentHPBar.LostValue.GetComponent<RectTransform>().sizeDelta = sizeOfSlider;
             }
         }
-
+        public virtual void SetHealth()
+        {
+            if (_currentHPBar)
+            {
+                _currentHPBar.SetValue(_health.CurrentHealth);
+            }
+        }
         public virtual void SetHealth(float newHealth)
         {
             if (_currentHPBar)
@@ -76,11 +85,12 @@ namespace Penwyn.Game
 
         public virtual void OnEnable()
         {
-
+            _health.OnChanged += SetHealth;
         }
 
         public virtual void OnDisable()
         {
+            _health.OnChanged -= SetHealth;
 
         }
     }

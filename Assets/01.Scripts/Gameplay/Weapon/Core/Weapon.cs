@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using NaughtyAttributes;
 using Penwyn.Tools;
@@ -30,12 +31,21 @@ namespace Penwyn.Game
         protected WeaponAutoAim _weaponAutoAim;
         protected Coroutine _cooldownCoroutine;
 
+        public event UnityAction RequestUpgradeEvent;
+
         protected virtual void Awake()
         {
             GetComponents();
         }
+
         public virtual void Initialization()
         {
+
+        }
+
+        protected virtual void Update()
+        {
+            CheckUpgradeRequirements();
         }
 
         public virtual void RequestWeaponUse()
@@ -110,8 +120,12 @@ namespace Penwyn.Game
         public virtual void LoadWeapon(WeaponData data)
         {
             CurrentData = data;
-            SpriteRenderer.sprite = data.Icon;
+            //SpriteRenderer.sprite = data.Icon;
             SetHealthRequirements();
+            if (CurrentData.AutoUpgrade)
+            {
+                Owner.Health.Set(CurrentData.RequiredUpgradeValue * 0.5F, CurrentData.RequiredUpgradeValue);
+            }
         }
 
         [Button("Load Weapon Data")]
@@ -119,18 +133,6 @@ namespace Penwyn.Game
         {
             if (CurrentData != null)
                 LoadWeapon(CurrentData);
-            else
-                Debug.Log("Please insert Weapon Data");
-        }
-
-        [Button("Upgrade")]
-        public virtual void Upgrade()
-        {
-            if (CurrentData != null)
-            {
-                if (CurrentData.Upgrade != null)
-                    LoadWeapon(CurrentData.Upgrade);
-            }
             else
                 Debug.Log("Please insert Weapon Data");
         }
@@ -149,6 +151,52 @@ namespace Penwyn.Game
                 }
             }
         }
+
+
+
+        #region Upgrade
+
+        [Button("Reques Upgrade", EButtonEnableMode.Playmode)]
+        public virtual void RequestUpgrade()
+        {
+            RequestUpgradeEvent?.Invoke();
+        }
+
+        [Button("Upgrade (Random Data)")]
+        public virtual void RandomUpgrade()
+        {
+            Upgrade(CurrentData.Upgrades[Randomizer.RandomNumber(0, CurrentData.Upgrades.Count)]);
+        }
+
+        public virtual void Upgrade(WeaponData data)
+        {
+            if (CurrentData != null)
+            {
+                if (CurrentData.Upgrades != null)
+                {
+                    LoadWeapon(data);
+                    Owner.Health.Set(Owner.Health.CurrentHealth, CurrentData.RequiredUpgradeValue);
+                }
+                else
+                {
+                    Debug.Log("Max level reached!");
+                }
+            }
+            else
+                Debug.Log("Please insert Weapon Data!");
+        }
+
+        public virtual void CheckUpgradeRequirements()
+        {
+            if (CurrentData.AutoUpgrade)
+            {
+                if (Owner.Health.CurrentHealth == CurrentData.RequiredUpgradeValue)
+                    RequestUpgrade();
+            }
+        }
+
+        #endregion
+
 
         public virtual void GetComponents()
         {

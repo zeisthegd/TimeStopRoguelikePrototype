@@ -27,6 +27,7 @@ namespace Penwyn.Game
         public virtual void LoadEnemy()
         {
             this.Animator.runtimeAnimatorController = _data.RuntimeAnimatorController;
+            this.Health.Set(_data.Health, _data.Health);
             this._characterRun.RunSpeed = _data.MoveSpeed;
             this._characterWeaponHandler.ChangeWeapon(_data.WeaponData);
         }

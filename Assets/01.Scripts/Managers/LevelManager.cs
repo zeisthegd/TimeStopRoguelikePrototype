@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using Penwyn.Tools;
+using NaughtyAttributes;
+
 
 namespace Penwyn.Game
 {
@@ -17,8 +19,10 @@ namespace Penwyn.Game
         public EnemySpawner EnemySpawner;
 
 
-        public float ThreatLevel;
+        public float CurrentThreatLevel;
         protected float _maxThreatLevel;
+        protected float _progress;
+        protected MapData _mapData;
 
 
         public static event UnityAction PlayerSpawned;
@@ -26,11 +30,22 @@ namespace Penwyn.Game
         protected virtual void Start()
         {
             ChangeToRandomData();
-            SpawnPlayer();
+            StartCoroutine(SpawnPlayer());
             LoadLevel();
         }
 
-        public virtual void SpawnPlayer()
+        protected virtual void Update()
+        {
+            IncreaseThreatLevelAndProgress();
+        }
+
+        public virtual void IncreaseThreatLevelAndProgress()
+        {
+            _maxThreatLevel += _mapData.ThreatLevelIncrementPerSecond * Time.deltaTime;
+            _progress += _mapData.ThreatLevelIncrementPerSecond * Time.deltaTime;
+        }
+
+        public virtual IEnumerator SpawnPlayer()
         {
             if (ExistedPlayer != null)
                 Characters.Player = ExistedPlayer.GetComponent<Character>();
@@ -38,6 +53,7 @@ namespace Penwyn.Game
             {
                 Characters.Player = Instantiate(PlayerToSpawn).GetComponent<Character>();
             }
+            yield return new WaitForSeconds(1);
             PlayerSpawned?.Invoke();
         }
 
@@ -50,15 +66,18 @@ namespace Penwyn.Game
         public virtual void ChangeToRandomData()
         {
             MapData randomData = MapDatas[Randomizer.RandomNumber(0, MapDatas.Count)];
-            LevelGenerator.MapData = randomData;
-            EnemySpawner.MapData = randomData;
+            _mapData = Instantiate(randomData);
+            LevelGenerator.MapData = _mapData;
+            EnemySpawner.MapData = _mapData;
 
             LevelGenerator.LoadData();
             EnemySpawner.LoadData();
 
-            ThreatLevel = 0;
-            _maxThreatLevel = randomData.StartingThreatLevel;
+            CurrentThreatLevel = 0;
+            _progress = 0;
+            _maxThreatLevel = _mapData.StartingThreatLevel;
         }
         public float MaxThreatLevel { get => _maxThreatLevel; }
+        public float Progress { get => _progress; }
     }
 }

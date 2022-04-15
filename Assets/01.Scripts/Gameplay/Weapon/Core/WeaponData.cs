@@ -37,7 +37,10 @@ namespace Penwyn.Game
         public float RotateSpeed = 1;
 
         [Header("Upgrade")]
-        public WeaponData Upgrade;
+        public List<WeaponData> Upgrades;
+        public bool AutoUpgrade = false;
+        public int RequiredUpgradeValue = 0;
     }
+
 }
 

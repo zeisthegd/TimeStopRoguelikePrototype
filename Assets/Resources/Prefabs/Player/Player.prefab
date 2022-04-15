@@ -175,6 +175,7 @@ MonoBehaviour:
   Controller: {fileID: 614565485682820542}
   Model: {fileID: 614565486169196504}
   Animator: {fileID: 0}
+  ShouldFlipModel: 1
   Health: {fileID: 614565485682820516}
   AbilitiesContainer:
   - {fileID: 614565487340159096}
@@ -206,9 +207,10 @@ MonoBehaviour:
   StartingHealth: 20
   Invincible: 0
   InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  InvulnerableDuration: 1
-  DamageTakenFlickerColor: {r: 1, g: 0, b: 0, a: 1}
+  InvulnerableDuration: 0.5
+  DamageTakenFlickerColor: {r: 0.66, g: 0.18744004, b: 0.18744004, a: 1}
   _health: 0
+  _maxHealth: 0
 --- !u!1 &614565485822407723
 GameObject:
   m_ObjectHideFlags: 0

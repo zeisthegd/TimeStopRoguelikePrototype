@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Penwyn.Tools;
+
 namespace Penwyn.Game
 {
     public class Character : MonoBehaviour
@@ -17,6 +19,7 @@ namespace Penwyn.Game
         [Header("Graphics")]
         public GameObject Model;
         public Animator Animator;
+        public bool ShouldFlipModel;
 
         [Header("Stats")]
         public Health Health;
@@ -37,6 +40,7 @@ namespace Penwyn.Game
         }
         protected virtual void Update()
         {
+            FlipModel();
             UpdateAbilities();
         }
 
@@ -44,6 +48,17 @@ namespace Penwyn.Game
         {
             FixedUpdateAbilities();
         }
+
+        #region Graphics
+        public virtual void FlipModel()
+        {
+            if (ShouldFlipModel && Controller.Velocity.x != 0)
+            {
+                Model.transform.localScale = new Vector3(Mathf.Sign(Controller.Velocity.x) * Mathf.Abs(Model.transform.localScale.x), Model.transform.localScale.y, Model.transform.localScale.z);
+            }
+        }
+
+        #endregion
 
 
         #region Abilities Handling

@@ -49,7 +49,7 @@ namespace Penwyn.Game
         {
             if (MapData.SpawnSettings.Length > 0)
             {
-                while (LevelManager.Instance.ThreatLevel < LevelManager.Instance.MaxThreatLevel)
+                while (LevelManager.Instance.CurrentThreatLevel < LevelManager.Instance.MaxThreatLevel)
                 {
                     EnemySpawnSettings settings = MapData.GetRandomEnemySpawnSettings();
                     EnemyData randomEnemyData = settings.GetRandomEnemyData();
@@ -77,7 +77,7 @@ namespace Penwyn.Game
             enemy.LoadEnemy(data);
             enemy.transform.position = new Vector3(Randomizer.RandomNumber(DistanceToPlayer.x, DistanceToPlayer.y) * Randomizer.RandomBetween(-1, 1), Randomizer.RandomNumber(DistanceToPlayer.x, DistanceToPlayer.y) * Randomizer.RandomBetween(-1, 1)) + Characters.Player.transform.position;
 
-            LevelManager.Instance.ThreatLevel += data.ThreatLevel;
+            LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
         }
 
         public virtual void ConnectEnemyInPoolWithDeathEvent(ObjectPooler pooler)
@@ -91,7 +91,7 @@ namespace Penwyn.Game
         public virtual void HandleEnemyDeath(Character character)
         {
             Enemy enemy = character.GetComponent<Enemy>();
-            LevelManager.Instance.ThreatLevel -= enemy.Data.ThreatLevel;
+            LevelManager.Instance.CurrentThreatLevel -= enemy.Data.ThreatLevel;
             StartWaitToSpawnEnemyCounter();
         }
 

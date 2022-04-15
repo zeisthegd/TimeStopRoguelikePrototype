@@ -12,7 +12,6 @@ namespace Penwyn.Game
         public float MaxEnergy = 10;
 
         public event UnityAction OnChanged;
-        public event UnityAction OnOutOfEnergy;
 
         [SerializeField][ReadOnly] protected float _energy = 0;
         protected Character _character;

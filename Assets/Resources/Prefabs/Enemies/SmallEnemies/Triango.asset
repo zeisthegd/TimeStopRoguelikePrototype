@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502cd353fc381c046851721985415b83, type: 3}
   m_Name: Triango
   m_EditorClassIdentifier: 
+  Health: 1
   MoveSpeed: 3
-  ThreatLevel: 1
+  ThreatLevel: 0.5
   RuntimeAnimatorController: {fileID: 0}
   WeaponData: {fileID: 11400000, guid: 33ef187984bf38b419ca0dcf87079629, type: 2}

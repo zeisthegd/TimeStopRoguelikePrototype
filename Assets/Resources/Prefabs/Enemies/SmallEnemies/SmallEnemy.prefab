@@ -196,8 +196,8 @@ MonoBehaviour:
   Controller: {fileID: 2006300841245699179}
   Model: {fileID: 2006300842071046159}
   Animator: {fileID: 2006300842071046156}
+  ShouldFlipModel: 1
   Health: {fileID: 2006300841245699183}
-  Energy: {fileID: 0}
   AbilitiesContainer:
   - {fileID: 8487752395136312131}
   AIBrain: {fileID: 2006300841245699176}
@@ -281,6 +281,7 @@ MonoBehaviour:
   InvulnerableDuration: 0.001
   DamageTakenFlickerColor: {r: 0.9622642, g: 0.27905324, b: 0.24964403, a: 1}
   _health: 0
+  _maxHealth: 0
 --- !u!114 &-5845153555277089952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006300841245699223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6d5573a300be054983139ded7b6dcf5, type: 3}
   m_Name: 

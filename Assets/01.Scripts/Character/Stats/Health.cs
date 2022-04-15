@@ -22,6 +22,7 @@ namespace Penwyn.Game
         public Color DamageTakenFlickerColor = Color.red;
 
         [SerializeField][ReadOnly] protected float _health = 0;
+        [SerializeField][ReadOnly] protected float _maxHealth = 0;
         protected float _invulnerableTime = 0;
         protected bool _currentlyInvulnerable = false;
         protected Character _character;
@@ -30,11 +31,16 @@ namespace Penwyn.Game
         public event UnityAction OnChanged;
         public event UnityAction<Character> OnDeath;
 
-        void Start()
+        void Awake()
         {
             _character = GetComponent<Character>();
             _health = StartingHealth;
+            _maxHealth = StartingHealth;
 
+        }
+
+        void Start()
+        {
             CreateHealthBar();
         }
 
@@ -45,12 +51,11 @@ namespace Penwyn.Game
             if (_health > 0 && !_currentlyInvulnerable && !Invincible)
             {
                 _health -= damage;
+                _health = Mathf.Clamp(_health, 0, _maxHealth);
+                OnChanged?.Invoke();
                 if (_health > 0)
                 {
                     MakeInvulnerable();
-                    OnChanged?.Invoke();
-                    if (_healthBar)
-                        _healthBar.SetHealth(_health);
                 }
                 else
                 {
@@ -66,16 +71,10 @@ namespace Penwyn.Game
         public virtual void Lose(float health)
         {
             _health -= health;
-            if (_health > 0)
-            {
-                OnChanged?.Invoke();
-                if (_healthBar)
-                    _healthBar.SetHealth(_health);
-            }
-            else
-            {
+            _health = Mathf.Clamp(_health, 0, _maxHealth);
+            OnChanged?.Invoke();
+            if (_health <= 0)
                 Kill();
-            }
         }
 
         /// <summary>
@@ -87,6 +86,19 @@ namespace Penwyn.Game
             if (health < 0)
                 return;
             _health += health;
+            _health = Mathf.Clamp(_health, 0, _maxHealth);
+            OnChanged?.Invoke();
+        }
+
+        /// <summary>
+        /// Get a flat amount of HP, positive value only.
+        /// </summary>
+        /// <param name="curretHealth">Current HP</param>
+        /// <param name="maxHealth">Max HP</param>
+        public virtual void Set(float curretHealth, float maxHealth)
+        {
+            _maxHealth = maxHealth;
+            _health = curretHealth;
             OnChanged?.Invoke();
         }
 
@@ -155,6 +167,13 @@ namespace Penwyn.Game
                 _healthBar.Initialization();
         }
 
+        public virtual void Reset()
+        {
+            StopAllCoroutines();
+            if (_character != null && _character.SpriteRenderer != null)
+                _character.SpriteRenderer.color = Color.white;
+        }
+
         public virtual void OnEnable()
         {
             _health = StartingHealth;
@@ -166,10 +185,11 @@ namespace Penwyn.Game
 
         public virtual void OnDisable()
         {
-            StopAllCoroutines();
+            Reset();
         }
 
         public Character Character { get => _character; }
         public float CurrentHealth { get => _health; }
+        public float MaxHealth { get => _maxHealth; }
     }
 }
