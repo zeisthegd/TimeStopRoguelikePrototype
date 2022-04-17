@@ -31,6 +31,7 @@ namespace Penwyn.Game
         {
             ChangeToRandomData();
             StartCoroutine(SpawnPlayer());
+            InputReader.Instance.EnableGameplayInput();
             LoadLevel();
         }
 

@@ -29,6 +29,7 @@ namespace Penwyn.Game
         public float DelayBetweenBullets = 0.1F;
         public float Angle = 0;
         public float Cooldown = 1;
+        public bool DisableAutoAimWhenShooting = false;
         [Header("Energy Requirements")]
         public bool RequiresHealth = false;
         public float HealthPerUse = 0;

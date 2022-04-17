@@ -17,11 +17,17 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Animator: {fileID: 0}
   Projectile: {fileID: 221415823, guid: 549e601aa82b47a41abe15309070c4d3, type: 3}
+  Damage: 1
+  Iteration: 1
+  DelayBetweenIterations: 0.1
   BulletPerShot: 1
   DelayBetweenBullets: 0
   Angle: 0
-  Cooldown: 2
-  RequiresEnergy: 0
-  EnergyPerUse: 0
+  Cooldown: 5
+  RequiresHealth: 0
+  HealthPerUse: 0
   ProjectileRotating: 1
   RotateSpeed: 50
+  Upgrades: []
+  AutoUpgrade: 0
+  RequiredUpgradeValue: 0

@@ -77,7 +77,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Keyboard"",
                     ""id"": ""b1d54260-8e32-4b73-83e0-93c9bf00774a"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -91,7 +91,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard;Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -102,7 +102,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard;Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -113,7 +113,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard;Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -124,7 +124,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard;Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -146,7 +146,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -157,7 +157,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -168,7 +168,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -179,7 +179,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -187,7 +187,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Xbox D-Pad"",
                     ""id"": ""78f9f60c-e85f-49b4-b0fd-d760c5a17a76"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -201,7 +201,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -212,7 +212,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -223,7 +223,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -234,7 +234,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -245,7 +245,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""NormalAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -256,7 +256,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -267,7 +267,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -278,7 +278,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""GrabProjectiles"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -297,46 +297,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": [
-        {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Keyboard and Mouse"",
-            ""bindingGroup"": ""Keyboard and Mouse"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Controller"",
-            ""bindingGroup"": ""Controller"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<XInputController>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        }
-    ]
+    ""controlSchemes"": []
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
@@ -465,33 +426,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
-    {
-        get
-        {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
-        }
-    }
-    private int m_KeyboardandMouseSchemeIndex = -1;
-    public InputControlScheme KeyboardandMouseScheme
-    {
-        get
-        {
-            if (m_KeyboardandMouseSchemeIndex == -1) m_KeyboardandMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard and Mouse");
-            return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
-        }
-    }
-    private int m_ControllerSchemeIndex = -1;
-    public InputControlScheme ControllerScheme
-    {
-        get
-        {
-            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
-            return asset.controlSchemes[m_ControllerSchemeIndex];
-        }
-    }
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);

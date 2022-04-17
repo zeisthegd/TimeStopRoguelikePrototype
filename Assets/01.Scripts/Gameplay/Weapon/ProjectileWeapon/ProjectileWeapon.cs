@@ -19,18 +19,24 @@ namespace Penwyn.Game
 
         protected virtual IEnumerator IterationCoroutine()
         {
+            if (_weaponAim)
+                _weaponAim.enabled = false;
             for (int i = 0; i < CurrentData.Iteration; i++)
             {
                 StartCoroutine(UseWeaponCoroutine());
                 yield return new WaitForSeconds(CurrentData.DelayBetweenIterations);
             }
+            if (_weaponAim)
+                _weaponAim.enabled = true;
+            if (_weaponAutoAim != null && _weaponAutoAim.enabled == false)
+                _weaponAutoAim.enabled = true;
+            StartCooldown();
         }
 
         protected virtual IEnumerator UseWeaponCoroutine()
         {
             float projectileStep = GetProjectileStep();
-            if (_weaponAim)
-                _weaponAim.enabled = false;
+
             gameObject.RotateZ(CurrentData.Angle / 2F);
             for (int i = 0; i < CurrentData.BulletPerShot; i++)
             {
@@ -42,8 +48,6 @@ namespace Penwyn.Game
                     gameObject.RotateZ(-projectileStep);
                 }
             }
-            if (_weaponAim)
-                _weaponAim.enabled = true;
         }
 
         /// <summary>

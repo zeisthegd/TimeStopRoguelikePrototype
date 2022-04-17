@@ -60,7 +60,6 @@ namespace Penwyn.Game
         protected virtual void UseWeapon()
         {
             _currentWeaponState = WeaponState.WeaponUse;
-            StartCooldown();
             UseEnergy();
         }
 
@@ -211,6 +210,7 @@ namespace Penwyn.Game
 
         protected virtual void OnDisable()
         {
+            StopAllCoroutines();
             if (CurrentData.RequiresHealth && Owner.Health != null)
                 Owner.Health.OnChanged -= OnHealthChanged;
         }

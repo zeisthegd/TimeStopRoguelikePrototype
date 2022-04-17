@@ -55,7 +55,7 @@
                 {
                     "name": "Keyboard",
                     "id": "b1d54260-8e32-4b73-83e0-93c9bf00774a",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -69,7 +69,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard;Keyboard and Mouse",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -80,7 +80,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard;Keyboard and Mouse",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -91,7 +91,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard;Keyboard and Mouse",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -102,7 +102,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard;Keyboard and Mouse",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -124,7 +124,7 @@
                     "path": "<XInputController>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -135,7 +135,7 @@
                     "path": "<XInputController>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -146,7 +146,7 @@
                     "path": "<XInputController>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -157,7 +157,7 @@
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -165,7 +165,7 @@
                 {
                     "name": "Xbox D-Pad",
                     "id": "78f9f60c-e85f-49b4-b0fd-d760c5a17a76",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -179,7 +179,7 @@
                     "path": "<XInputController>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -190,7 +190,7 @@
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -201,7 +201,7 @@
                     "path": "<XInputController>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -212,7 +212,7 @@
                     "path": "<XInputController>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -223,7 +223,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
+                    "groups": "",
                     "action": "NormalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -234,7 +234,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
+                    "groups": "",
                     "action": "SpecialAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -245,7 +245,7 @@
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
+                    "groups": "",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -256,7 +256,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
+                    "groups": "",
                     "action": "GrabProjectiles",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -275,44 +275,5 @@
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Keyboard and Mouse",
-            "bindingGroup": "Keyboard and Mouse",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Controller",
-            "bindingGroup": "Controller",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }
