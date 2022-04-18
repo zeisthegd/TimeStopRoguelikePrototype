@@ -54,13 +54,13 @@ namespace Penwyn.Game
             {
                 Characters.Player = Instantiate(PlayerToSpawn).GetComponent<Character>();
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0);
             PlayerSpawned?.Invoke();
         }
 
         protected virtual void LoadLevel()
         {
-            //LevelGeneration.LoadData();
+            LevelGenerator.GenerateLevel();
             StartCoroutine(EnemySpawner.SpawnRandomEnemies());
         }
 
@@ -71,12 +71,16 @@ namespace Penwyn.Game
             LevelGenerator.MapData = _mapData;
             EnemySpawner.MapData = _mapData;
 
-            LevelGenerator.LoadData();
             EnemySpawner.LoadData();
 
             CurrentThreatLevel = 0;
             _progress = 0;
             _maxThreatLevel = _mapData.StartingThreatLevel;
+        }
+
+        public virtual void MovePlayerTo(Vector2 position)
+        {
+            Characters.Player.transform.position = position;
         }
         public float MaxThreatLevel { get => _maxThreatLevel; }
         public float Progress { get => _progress; }

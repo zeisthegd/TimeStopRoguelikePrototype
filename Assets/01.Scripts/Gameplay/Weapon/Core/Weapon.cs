@@ -40,12 +40,11 @@ namespace Penwyn.Game
 
         public virtual void Initialization()
         {
-
         }
 
         protected virtual void Update()
         {
-            CheckUpgradeRequirements();
+
         }
 
         public virtual void RequestWeaponUse()
@@ -67,7 +66,7 @@ namespace Penwyn.Game
         {
             do
             {
-                if (Owner.Health.CurrentHealth < CurrentData.HealthPerUse)
+                if (Owner.Health.CurrentHealth <= CurrentData.HealthPerUse)
                     break;
                 if (_weaponAutoAim)
                 {
@@ -111,6 +110,7 @@ namespace Penwyn.Game
                 if (_currentWeaponState == WeaponState.WeaponNotEnoughHealth)
                     _currentWeaponState = WeaponState.WeaponIdle;
             }
+            CheckUpgradeRequirements();
         }
 
         /// <summary>
@@ -123,6 +123,7 @@ namespace Penwyn.Game
             SetHealthRequirements();
             if (CurrentData.AutoUpgrade)
             {
+                Owner.Health.StartingHealth = CurrentData.RequiredUpgradeValue;
                 Owner.Health.Set(CurrentData.RequiredUpgradeValue * 0.5F, CurrentData.RequiredUpgradeValue);
             }
         }

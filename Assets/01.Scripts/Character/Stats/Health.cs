@@ -31,17 +31,23 @@ namespace Penwyn.Game
         public event UnityAction OnChanged;
         public event UnityAction<Character> OnDeath;
 
-        void Awake()
+        protected virtual void Awake()
         {
             _character = GetComponent<Character>();
-            _health = StartingHealth;
-            _maxHealth = StartingHealth;
-
+            SetHealthAtAwake();
         }
 
-        void Start()
+
+
+        protected virtual void Start()
         {
             CreateHealthBar();
+        }
+
+        public virtual void SetHealthAtAwake()
+        {
+            _maxHealth = StartingHealth;
+            _health = StartingHealth;
         }
 
         #region Damage Taken

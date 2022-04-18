@@ -18,5 +18,12 @@ MonoBehaviour:
     Prefab: {fileID: 7637248474599472495, guid: 51ed6fbc041363a47aeb4f88f11a8bf6, type: 3}
     Datas:
     - {fileID: 11400000, guid: c6984846f49d25a4ab47aee502e689f0, type: 2}
-  StartingThreatLevel: 4
+  StartingThreatLevel: 2
   ThreatLevelIncrementPerSecond: 0.5555556
+  Width: 98
+  Height: 98
+  FillPercent: 45
+  ResmoothWallTimes: 4
+  MinNeighborWalls: 4
+  Seed: PenwyRandom
+  UseRandomSeed: 1

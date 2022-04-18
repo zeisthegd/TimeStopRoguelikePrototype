@@ -35,8 +35,8 @@ namespace Penwyn.Game
         protected virtual void Awake()
         {
             GetAbilities();
-            WakeUpAbilities();
             GetGeneralAbilities();
+            WakeUpAbilities();
         }
         protected virtual void Update()
         {

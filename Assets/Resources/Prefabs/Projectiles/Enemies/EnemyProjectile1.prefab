@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -7243949194675849221}
   - component: {fileID: -8381563678912500393}
   - component: {fileID: 2366856227260652313}
+  - component: {fileID: 3634972838224958758}
   m_Layer: 9
   m_Name: EnemyProjectile1
   m_TagString: Untagged
@@ -225,3 +226,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameObjectToRotate: {fileID: 3383801527214349399}
   Speed: 100
+--- !u!114 &3634972838224958758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383801527214349399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 880720ae79d3f1a42aa25d7d9a380d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalOffset: {x: 0, y: -0.5, z: 0}

@@ -12,7 +12,6 @@ namespace Penwyn.Game
     {
         public Transform ContentTransform;
         public ObjectPooler TextPool;
-        public TMP_Text TextPrefab;
 
         int _currentLast = 0;
 

@@ -75,7 +75,7 @@ namespace Penwyn.Game
             enemy.AIBrain.Enabled = true;
             enemy.gameObject.SetActive(true);
             enemy.LoadEnemy(data);
-            enemy.transform.position = new Vector3(Randomizer.RandomNumber(DistanceToPlayer.x, DistanceToPlayer.y) * Randomizer.RandomBetween(-1, 1), Randomizer.RandomNumber(DistanceToPlayer.x, DistanceToPlayer.y) * Randomizer.RandomBetween(-1, 1)) + Characters.Player.transform.position;
+            enemy.transform.position = LevelManager.Instance.LevelGenerator.GetRandomEmptyPosition();
 
             LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
         }

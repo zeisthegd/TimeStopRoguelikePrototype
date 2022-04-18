@@ -56,7 +56,6 @@ namespace Penwyn.Tools
             {
                 MoveInput = context.ReadValue<Vector2>();
                 Move?.Invoke(MoveInput);
-                DebugManager.Instance.Log(InputReader.Instance.MoveInput);
             }
             else
                 MoveInput = Vector2.zero;
@@ -105,7 +104,6 @@ namespace Penwyn.Tools
 
         public void OnGrabProjectiles(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            DebugManager.Instance.Log("OnGrabProjectiles");
             if (context.started)
             {
                 GrabProjectilesPressed?.Invoke();
