@@ -46,6 +46,10 @@ namespace Penwyn.Game
             }
         }
 
+        /// <summary>
+        /// Spawn new enemies until the 
+        /// </summary>
+        /// <returns></returns>
         public virtual IEnumerator SpawnRandomEnemies()
         {
             if (MapData.SpawnSettings.Length > 0)
@@ -70,17 +74,25 @@ namespace Penwyn.Game
                 Debug.LogWarning("Not enemy spawn settings inserted");
         }
 
+        /// <summary>
+        /// Spawn a new enemy, load data if needed.
+        /// Spawn near the player.
+        /// </summary>
         public virtual void SpawnOneEnemy(GameObject pooledObject, EnemyData data)
         {
             Enemy enemy = pooledObject.GetComponent<Enemy>();
             enemy.AIBrain.Enabled = true;
             enemy.gameObject.SetActive(true);
-            enemy.LoadEnemy(data);
+            if (enemy.Data != data)
+                enemy.LoadEnemy(data);
             enemy.transform.position = GetPositionNearPlayer();
-
             LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
+            Debug.Log($"{LevelManager.Instance.CurrentThreatLevel}|{data.ThreatLevel}");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual void ConnectEnemyInPoolWithDeathEvent(ObjectPooler pooler)
         {
             foreach (GameObject pooledbject in pooler.ObjectPool.PooledObjects)
@@ -89,6 +101,10 @@ namespace Penwyn.Game
             }
         }
 
+        /// <summary>
+        /// Get an empty position near the player.
+        /// </summary>
+        /// <returns></returns>
         protected virtual Vector3 GetPositionNearPlayer()
         {
             Vector3 randomPosNearPlayer;
@@ -102,6 +118,10 @@ namespace Penwyn.Game
             return randomPosNearPlayer;
         }
 
+
+        /// <summary>
+        /// When an enemy dies, delay a bit before spawning new ones.
+        /// </summary>
         public virtual void HandleEnemyDeath(Character character)
         {
             Enemy enemy = character.GetComponent<Enemy>();

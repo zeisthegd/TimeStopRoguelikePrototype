@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using NaughtyAttributes;
 using Penwyn.Game;
 
+using Penwyn.Tools;
+
 namespace Penwyn.UI
 {
-    public class HUD : MonoBehaviour
+    public class HUD : SingletonMonoBehaviour<HUD>
     {
         [Header("Player")]
         public ProgressBar PlayerHealth;
@@ -108,7 +110,6 @@ namespace Penwyn.UI
         }
 
         #endregion
-
 
         protected virtual void OnEnable()
         {

@@ -76,7 +76,8 @@ namespace Penwyn.Game
         {
             base.LoadWeapon(data);
             CurrentData.Projectile.DamageOnTouch.DamageDeal = CurrentData.Damage;
-            CreateNewPool();
+            if (_projectilePooler.NoPoolFound())
+                CreateNewPool();
         }
 
         public virtual void CreateNewPool()

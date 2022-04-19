@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using NaughtyAttributes;
 
 using Penwyn.Tools;
+using Penwyn.UI;
 
 namespace Penwyn.Game
 {
@@ -13,8 +15,23 @@ namespace Penwyn.Game
         public Transform ContentTransform;
         public ObjectPooler TextPool;
 
-        int _currentLast = 0;
+        public TMP_Text FPSText;
 
+        [HorizontalLine]
+        public bool ShowFPS = true;
+        protected int _currentLast = 0;
+        public virtual void Update()
+        {
+            LogFPS();
+        }
+
+        public virtual void LogFPS()
+        {
+            if (ShowFPS)
+            {
+                FPSText?.SetText($"{(int)(1 / Time.deltaTime)}");
+            }
+        }
         public void Log(object objectToLog)
         {
             if (TextPool.ObjectPool == null)
