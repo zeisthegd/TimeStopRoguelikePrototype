@@ -15,7 +15,8 @@ namespace Penwyn.Game
         public MapData MapData;
 
         [Header("Settings")]
-        public Vector2 DistanceToPlayer;
+        public float MinDistanceToPlayer;
+        public float MaxDistanceToPlayer;
         public float TimeTillSpawnNewEnemies = 2;
 
 
@@ -75,7 +76,7 @@ namespace Penwyn.Game
             enemy.AIBrain.Enabled = true;
             enemy.gameObject.SetActive(true);
             enemy.LoadEnemy(data);
-            enemy.transform.position = LevelManager.Instance.LevelGenerator.GetRandomEmptyPosition();
+            enemy.transform.position = GetPositionNearPlayer();
 
             LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
         }
@@ -86,6 +87,19 @@ namespace Penwyn.Game
             {
                 pooledbject.GetComponent<Enemy>().Health.OnDeath += HandleEnemyDeath;
             }
+        }
+
+        protected virtual Vector3 GetPositionNearPlayer()
+        {
+            Vector3 randomPosNearPlayer;
+            float dst = 0;
+            do
+            {
+                randomPosNearPlayer = LevelManager.Instance.LevelGenerator.GetRandomEmptyPosition();
+                dst = Vector3.Distance(randomPosNearPlayer, Characters.Player.Position);
+            }
+            while (dst < MinDistanceToPlayer || dst > MaxDistanceToPlayer);
+            return randomPosNearPlayer;
         }
 
         public virtual void HandleEnemyDeath(Character character)

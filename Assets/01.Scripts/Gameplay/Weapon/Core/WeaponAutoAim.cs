@@ -11,6 +11,7 @@ namespace Penwyn.Game
     {
         [Header("Mask")]
         public LayerMask TargetsMask;
+        public LayerMask ObstacleMask;
 
         [ReadOnly] public Transform Target;
         protected Weapon _weapon;
@@ -42,7 +43,7 @@ namespace Penwyn.Game
 
             foreach (Collider2D collider in _detectionColliders)
             {
-                if (!_targetList.Contains(collider.transform))
+                if (!Physics2D.Raycast(_weapon.Owner.transform.position, collider.transform.position - _weapon.Owner.transform.position, Vector2.Distance(collider.transform.position, _weapon.Owner.transform.position), ObstacleMask) && !_targetList.Contains(collider.transform))
                 {
                     _targetList.Add(collider.transform);
                 }

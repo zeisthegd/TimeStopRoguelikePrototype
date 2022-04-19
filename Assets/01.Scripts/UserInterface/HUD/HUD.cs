@@ -46,7 +46,6 @@ namespace Penwyn.UI
             {
                 PlayerHealth.SetMaxValue(Characters.Player.Health.MaxHealth);
                 PlayerHealth.SetValue(Characters.Player.Health.CurrentHealth);
-                Debug.Log($"{Characters.Player.gameObject.name}|{Characters.Player.Health.MaxHealth}|{Characters.Player.Health.CurrentHealth}");
             }
         }
 

@@ -37,8 +37,10 @@ namespace Penwyn.Game
             {
                 for (int y = 0; y < MapData.Height; y++)
                 {
-                    int randomNext = rndNumber.Next(0, 100);
-                    _map[x, y] = (randomNext < MapData.FillPercent) ? 1 : 0;
+                    if (x == 0 || y == 0 || x == MapData.Width - 1 || y == MapData.Height - 1)
+                        _map[x, y] = 1;
+                    else
+                        _map[x, y] = (rndNumber.Next(0, 100) < MapData.FillPercent) ? 1 : 0;
                 }
             }
 

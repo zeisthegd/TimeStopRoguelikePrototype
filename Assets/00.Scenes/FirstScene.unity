@@ -929,10 +929,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 50, y: 50}
-      - {x: -50, y: 50}
-      - {x: -50, y: -50}
-      - {x: 50, y: -50}
+    - - {x: 150, y: 150}
+      - {x: -150, y: 150}
+      - {x: -150, y: -150}
+      - {x: 150, y: -150}
 --- !u!1 &431301231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,8 +1805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1}
+  m_SizeDelta: {x: 0, y: -2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &792740075
 CanvasRenderer:
@@ -2071,7 +2071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -310, y: 0}
+  m_AnchoredPosition: {x: -310, y: -2}
   m_SizeDelta: {x: 300, y: 16}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1009643621
@@ -4324,7 +4324,8 @@ MonoBehaviour:
   EnemyPoolPrefab: {fileID: 4593764963747494999, guid: de44938b2c6c253419dc03e344c13915, type: 3}
   ObjectPoolers: []
   MapData: {fileID: 11400000, guid: c125aab481063284189393cd537668f8, type: 2}
-  DistanceToPlayer: {x: 12, y: 12}
+  MinDistanceToPlayer: 10
+  MaxDistanceToPlayer: 30
   TimeTillSpawnNewEnemies: 2
 --- !u!114 &1803318216
 MonoBehaviour:
@@ -4373,6 +4374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tilemap: {fileID: 1048791791}
   Tile: {fileID: 11400000, guid: 08b1d46a26e2afa4696a7b8afb5dc2d6, type: 2}
+  LevelBounds: {fileID: 412061994}
 --- !u!1 &1804646187
 GameObject:
   m_ObjectHideFlags: 0

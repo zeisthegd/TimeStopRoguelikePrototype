@@ -20,8 +20,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c6984846f49d25a4ab47aee502e689f0, type: 2}
   StartingThreatLevel: 2
   ThreatLevelIncrementPerSecond: 0.5555556
-  Width: 98
-  Height: 98
+  Width: 168
+  Height: 168
   FillPercent: 45
   ResmoothWallTimes: 4
   MinNeighborWalls: 4

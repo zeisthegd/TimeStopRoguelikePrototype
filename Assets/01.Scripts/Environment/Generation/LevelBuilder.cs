@@ -11,12 +11,14 @@ namespace Penwyn.Game
     {
         public Tilemap Tilemap;
         public TileBase Tile;
+        public PolygonCollider2D LevelBounds;
         protected LevelGenerator _generator;
 
         public virtual void BuildMap(LevelGenerator generator)
         {
             _generator = generator;
             SetWallTiles();
+            SetLevelBounds();
         }
 
         public virtual void SetWallTiles()
@@ -34,6 +36,13 @@ namespace Penwyn.Game
                     }
                 }
             }
+        }
+
+        public virtual void SetLevelBounds()
+        {
+            float width = _generator.MapData.Width / 2;
+            float height = _generator.MapData.Height / 2;
+            LevelBounds.SetPath(0, new Vector2[] { new Vector2(width, height), new Vector2(-width, height), new Vector2(-width, -height), new Vector2(width, -height) });
         }
     }
 }
