@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using NaughtyAttributes;
-using Penwyn.Game;
+using TMPro;
 
+using Penwyn.Game;
 using Penwyn.Tools;
 
 namespace Penwyn.UI
@@ -14,6 +15,7 @@ namespace Penwyn.UI
     {
         [Header("Player")]
         public ProgressBar PlayerHealth;
+        public TMP_Text PlayerMoney;
         public Button WeaponButton;
         public List<WeaponUpgradeButton> WeaponUpgradeButtons;
 
@@ -61,8 +63,18 @@ namespace Penwyn.UI
             }
         }
 
+        protected virtual void UpdateMoney()
+        {
+            if (PlayerMoney != null)
+                PlayerMoney.SetText(Characters.Player.CharacterMoney.CurrentMoney + "");
+        }
+
+        #region Weapon Upgrades
+
         public virtual void LoadAvailableUpgrades()
         {
+            if (Characters.Player.CharacterWeaponHandler.CurrentWeapon.CurrentData.Upgrades.Count <= 0)
+                return;
             Time.timeScale = 0;
             for (int i = 0; i < Characters.Player.CharacterWeaponHandler.CurrentWeapon.CurrentData.Upgrades.Count; i++)
             {
@@ -102,6 +114,8 @@ namespace Penwyn.UI
                 WeaponButton.image.sprite = Characters.Player.CharacterWeaponHandler.CurrentWeapon.CurrentData.Icon;
         }
 
+        #endregion
+
         protected virtual void OnPlayerSpawned()
         {
             SetHealthBar();
@@ -124,6 +138,7 @@ namespace Penwyn.UI
         public virtual void ConnectEvents()
         {
             Characters.Player.Health.OnChanged += UpdateHealth;
+            Characters.Player.CharacterMoney.MoneyChanged += UpdateMoney;
             Characters.Player.CharacterWeaponHandler.CurrentWeapon.RequestUpgradeEvent += LoadAvailableUpgrades;
             ConnectEndWeaponUpgradesEvents();
         }
@@ -131,6 +146,7 @@ namespace Penwyn.UI
         public virtual void DisconnectEvents()
         {
             Characters.Player.Health.OnChanged -= UpdateHealth;
+            Characters.Player.CharacterMoney.MoneyChanged -= UpdateMoney;
             Characters.Player.CharacterWeaponHandler.CurrentWeapon.RequestUpgradeEvent -= LoadAvailableUpgrades;
             DisconnectEndWeaponUpgradesEvents();
         }

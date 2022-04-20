@@ -31,7 +31,6 @@ namespace Penwyn.Game
             this._characterRun.RunSpeed = _data.MoveSpeed;
             this._characterWeaponHandler.ChangeWeapon(_data.WeaponData);
         }
-
         public EnemyData Data { get => _data; }
     }
 }

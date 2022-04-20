@@ -64,7 +64,7 @@ namespace Penwyn.Game
 
         public virtual void OnTriggerEnter2D(Collider2D col)
         {
-            if (TargetMask.Contains(col.gameObject.layer))
+            if (this.gameObject.activeInHierarchy && TargetMask.Contains(col.gameObject.layer))
             {
                 DealDamage(col.gameObject);
                 HandleRecoilDamage();

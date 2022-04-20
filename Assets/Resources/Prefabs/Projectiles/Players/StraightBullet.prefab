@@ -17,8 +17,6 @@ GameObject:
   - component: {fileID: 8512598768966799358}
   - component: {fileID: -7243949194675849221}
   - component: {fileID: 2565002095738983625}
-  - component: {fileID: 6059676733440404028}
-  - component: {fileID: 4783907418154875091}
   m_Layer: 0
   m_Name: StraightBullet
   m_TagString: Untagged
@@ -224,42 +222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalOffset: {x: 0, y: -0.5, z: 0}
---- !u!114 &6059676733440404028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383801527214349399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1d1861112919447b8e0672fd0e515a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToPool: {fileID: 0}
-  Size: 1
-  UseSharedInstance: 0
-  InitAtStart: 0
-  EnableObjectsAtStart: 0
-  NestPoolBelowThis: 1
-  NestObjectsInPool: 1
---- !u!114 &4783907418154875091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3383801527214349399}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e1d1b1b3f589e3448170da45eed3deb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GhostPrefab: {fileID: 5240482625104278368, guid: c9cfed78587589d419a223cf9351905e, type: 3}
-  GhostCount: 5
-  Delay: 0.001
-  Color: {r: 1, g: 1, b: 1, a: 0.50980395}
-  Material: {fileID: 0}
 --- !u!1 &9101829487803037273
 GameObject:
   m_ObjectHideFlags: 0

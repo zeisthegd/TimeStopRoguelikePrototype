@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 614565487340159098}
   - component: {fileID: 614565487340159099}
   - component: {fileID: 614565487340159100}
+  - component: {fileID: 4147484079930388929}
   m_Layer: 6
   m_Name: MandatoryAbilities
   m_TagString: Untagged
@@ -421,6 +422,22 @@ MonoBehaviour:
   InitialWeaponPrefab: {fileID: 248487134125919222, guid: 55a61cca81f3765499a6070d8584390b, type: 3}
   InitialWeaponData: {fileID: 11400000, guid: 8b0d1be3086e7c04784f7049323a5426, type: 2}
   WeaponHolder: {fileID: 614565487340159101}
+--- !u!114 &4147484079930388929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614565487340159096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546e25156f143974987b5358d3f24386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityPermitted: 1
+  Name: Money Handler
+  forbidStates: 
+  CurrentMoney: 1
 --- !u!1001 &7676210429882529789
 PrefabInstance:
   m_ObjectHideFlags: 0

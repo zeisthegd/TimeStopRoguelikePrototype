@@ -24,6 +24,7 @@ MonoBehaviour:
   DelayBetweenBullets: 0
   Angle: 0
   Cooldown: 5
+  DisableAutoAimWhenShooting: 0
   RequiresHealth: 0
   HealthPerUse: 0
   ProjectileRotating: 1

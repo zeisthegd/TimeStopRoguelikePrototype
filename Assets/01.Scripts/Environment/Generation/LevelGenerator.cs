@@ -16,7 +16,7 @@ namespace Penwyn.Game
         protected string _seed;
         [Expandable] public MapData MapData;
 
-        [Button("Generate Level")]
+        [Button("Generate Level", EButtonEnableMode.Playmode)]
         public virtual void GenerateLevel()
         {
             _map = new int[MapData.Width, MapData.Height];

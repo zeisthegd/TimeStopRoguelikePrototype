@@ -9,6 +9,7 @@ namespace Penwyn.Game
 {
     public class LevelBuilder : MonoBehaviour
     {
+        [Header("Tile Settings")]
         public Tilemap Tilemap;
         public TileBase Tile;
         public PolygonCollider2D LevelBounds;

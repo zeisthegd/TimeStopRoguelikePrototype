@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1d1861112919447b8e0672fd0e515a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToPool: {fileID: 3383801527214349399, guid: a7e2bb6e138570d479c5a770aa12a8db, type: 3}
+  ObjectToPool: {fileID: 0}
   Size: 3
   UseSharedInstance: 1
   InitAtStart: 0

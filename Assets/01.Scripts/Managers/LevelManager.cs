@@ -11,14 +11,17 @@ namespace Penwyn.Game
 {
     public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
+        [Header("Map Datas")]
         public List<MapData> MapDatas;
+        [Header("Player")]
         public GameObject PlayerToSpawn;
         public GameObject ExistedPlayer;
 
+        [Header("Sub-components")]
         public LevelGenerator LevelGenerator;
         public EnemySpawner EnemySpawner;
 
-
+        [Header("Threat Level")]
         public float CurrentThreatLevel;
         protected float _maxThreatLevel;
         protected float _progress;
@@ -30,9 +33,9 @@ namespace Penwyn.Game
         protected virtual void Start()
         {
             ChangeToRandomData();
-            StartCoroutine(SpawnPlayer());
-            InputReader.Instance.EnableGameplayInput();
+            SpawnPlayer();
             LoadLevel();
+            InputReader.Instance.EnableGameplayInput();
         }
 
         protected virtual void Update()
@@ -40,30 +43,40 @@ namespace Penwyn.Game
             IncreaseThreatLevelAndProgress();
         }
 
+        /// <summary>
+        /// Increase the max threat level of enemies.
+        /// Increase the level progress.
+        /// </summary>
         public virtual void IncreaseThreatLevelAndProgress()
         {
             _maxThreatLevel += _mapData.ThreatLevelIncrementPerSecond * Time.deltaTime;
             _progress += _mapData.ThreatLevelIncrementPerSecond * Time.deltaTime;
         }
 
-        public virtual IEnumerator SpawnPlayer()
+        /// <summary>
+        /// Spawn player if they are not existed.
+        /// </summary>
+        public virtual void SpawnPlayer()
         {
             if (ExistedPlayer != null)
                 Characters.Player = ExistedPlayer.GetComponent<Character>();
             else if (PlayerToSpawn != null)
-            {
                 Characters.Player = Instantiate(PlayerToSpawn).GetComponent<Character>();
-            }
-            yield return new WaitForSeconds(0);
             PlayerSpawned?.Invoke();
         }
 
+        /// <summary>
+        /// Generate the level and spawn the enemies.
+        /// </summary>
         protected virtual void LoadLevel()
         {
             LevelGenerator.GenerateLevel();
             StartCoroutine(EnemySpawner.SpawnRandomEnemies());
         }
 
+        /// <summary>
+        /// Change the level's data to a random one of the list.
+        /// </summary>
         public virtual void ChangeToRandomData()
         {
             MapData randomData = MapDatas[Randomizer.RandomNumber(0, MapDatas.Count)];
@@ -82,6 +95,7 @@ namespace Penwyn.Game
         {
             Characters.Player.transform.position = position;
         }
+
         public float MaxThreatLevel { get => _maxThreatLevel; }
         public float Progress { get => _progress; }
     }

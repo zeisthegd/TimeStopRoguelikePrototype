@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2006300841245699183}
   - component: {fileID: 3481002168413983432}
   m_Layer: 8
-  m_Name: SmallEnemy
+  m_Name: Lesser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +296,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.25
 --- !u!1 &2006300842071046159
 GameObject:
   m_ObjectHideFlags: 0

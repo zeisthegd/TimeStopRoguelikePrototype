@@ -115,7 +115,8 @@ namespace Penwyn.Game
 
         public virtual bool NoPoolFound()
         {
-            FindSharedPool();
+            if (ObjectPool != null)
+                FindSharedPool();
             return _objectPool == null;
         }
 

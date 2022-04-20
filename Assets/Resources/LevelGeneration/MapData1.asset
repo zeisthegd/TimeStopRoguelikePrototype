@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Darko
   SpawnSettings:
-  - Name: Small Enemies
+  - Name: Lesser Enemies
     Prefab: {fileID: 7637248474599472495, guid: 51ed6fbc041363a47aeb4f88f11a8bf6, type: 3}
     Datas:
     - {fileID: 11400000, guid: c6984846f49d25a4ab47aee502e689f0, type: 2}
+  - Name: Greater Enemies
+    Prefab: {fileID: 7637248474599472495, guid: d220a0d565533ca41bd3fc6c0b6f9856, type: 3}
+    Datas:
+    - {fileID: 11400000, guid: 927b68549b89f5d40bdd8a58a59e80e4, type: 2}
   StartingThreatLevel: 2
   ThreatLevelIncrementPerSecond: 0.5555556
-  Width: 168
-  Height: 168
-  FillPercent: 45
+  Width: 198
+  Height: 198
+  FillPercent: 42
   ResmoothWallTimes: 4
   MinNeighborWalls: 4
   Seed: PenwyRandom

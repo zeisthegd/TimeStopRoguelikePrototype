@@ -31,6 +31,7 @@ namespace Penwyn.Game
         protected List<CharacterAbility> _abilities;
         protected CharacterWeaponHandler _characterWeaponHandler;
         protected CharacterRun _characterRun;
+        protected CharacterHandleMoney _characterMoney;
 
         protected virtual void Awake()
         {
@@ -99,6 +100,7 @@ namespace Penwyn.Game
         {
             _characterRun = FindAbility<CharacterRun>();
             _characterWeaponHandler = FindAbility<CharacterWeaponHandler>();
+            _characterMoney = FindAbility<CharacterHandleMoney>();
         }
 
         public virtual T FindAbility<T>() where T : CharacterAbility
@@ -130,6 +132,7 @@ namespace Penwyn.Game
         public Vector3 Position { get => transform.position; }
         public List<CharacterAbility> Abilities { get => _abilities; }
         public CharacterRun CharacterRun { get => _characterRun; }
+        public CharacterHandleMoney CharacterMoney { get => _characterMoney; }
         public CharacterWeaponHandler CharacterWeaponHandler { get => _characterWeaponHandler; }
     }
 }
