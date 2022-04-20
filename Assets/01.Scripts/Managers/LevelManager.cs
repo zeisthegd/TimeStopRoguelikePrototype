@@ -20,6 +20,7 @@ namespace Penwyn.Game
         [Header("Sub-components")]
         public LevelGenerator LevelGenerator;
         public EnemySpawner EnemySpawner;
+        public LootDropManager LootDropManager;
 
         [Header("Threat Level")]
         public float CurrentThreatLevel;
@@ -81,8 +82,10 @@ namespace Penwyn.Game
         {
             MapData randomData = MapDatas[Randomizer.RandomNumber(0, MapDatas.Count)];
             _mapData = Instantiate(randomData);
+            
             LevelGenerator.MapData = _mapData;
             EnemySpawner.MapData = _mapData;
+            LootDropManager.MapData = _mapData;
 
             EnemySpawner.LoadData();
 

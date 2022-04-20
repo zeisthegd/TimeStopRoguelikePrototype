@@ -9,41 +9,42 @@ namespace Penwyn.Game
 {
     public class LootDropManager : SingletonMonoBehaviour<LootDropManager>
     {
-        public GameObject LesserLoot;
-        public GameObject GreaterLoot;
-        public GameObject EliteLoot;
+        public MapData MapData;
+        protected ObjectPooler _coinPooler;
 
-        public virtual void HandleEnemyDeath(Enemy enemy)
+        protected virtual void Awake()
         {
-            switch (enemy.Data.Type)
+            _coinPooler = GetComponent<ObjectPooler>();
+        }
+
+        public virtual void HandleEnemyDeath(Character enemy)
+        {
+            SpawnEnemyCoinDrop(GetMoneyDropSettings(enemy.GetComponent<Enemy>().Data.Type), enemy.Position);
+        }
+
+        public virtual void SpawnEnemyCoinDrop(CoinDrop coinDrop, Vector3 spawnPos)
+        {
+            GameObject moneyObj = _coinPooler.PullOneObject();
+            moneyObj.GetComponent<SpriteRenderer>().sprite = coinDrop.CoinSprite;
+            moneyObj.GetComponent<HealCharacterAction>().Amount = coinDrop.HealAmount;
+            moneyObj.GetComponent<AddMoneyAction>().Amount = coinDrop.MoneyAmount;
+            moneyObj.transform.position = spawnPos;
+            moneyObj.SetActive(true);
+        }
+
+        public virtual CoinDrop GetMoneyDropSettings(EnemyType enemyType)
+        {
+            switch (enemyType)
             {
                 case EnemyType.Lesser:
-                    HandleLesserEnemyDeath();
-                    break;
+                    return MapData.LesserMoneyDrop;
                 case EnemyType.Greater:
-                    HandleGreaterEnemyDeath();
-                    break;
+                    return MapData.GreaterMoneyDrop;
                 case EnemyType.Elite:
-                    HandleEliteEnemyDeath();
-                    break;
+                    return MapData.EliteMoneyDrop;
                 default:
-                    break;
+                    return new CoinDrop();
             }
-        }
-
-        public virtual void HandleLesserEnemyDeath()
-        {
-
-        }
-
-        public virtual void HandleGreaterEnemyDeath()
-        {
-
-        }
-
-        public virtual void HandleEliteEnemyDeath()
-        {
-
         }
 
         public virtual void HandleBossEnemyDeath()

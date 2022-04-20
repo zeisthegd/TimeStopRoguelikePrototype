@@ -31,3 +31,15 @@ MonoBehaviour:
   MinNeighborWalls: 4
   Seed: PenwyRandom
   UseRandomSeed: 1
+  LesserMoneyDrop:
+    CoinSprite: {fileID: 21300000, guid: 211ccd1fe3134a04ab57c90581ac8897, type: 3}
+    MoneyAmount: 1
+    HealAmount: 1
+  GreaterMoneyDrop:
+    CoinSprite: {fileID: 21300000, guid: b98ca1071527cd0408dc7a44b5628ca3, type: 3}
+    MoneyAmount: 3
+    HealAmount: 3
+  EliteMoneyDrop:
+    CoinSprite: {fileID: 21300000, guid: 211ccd1fe3134a04ab57c90581ac8897, type: 3}
+    MoneyAmount: 5
+    HealAmount: 5

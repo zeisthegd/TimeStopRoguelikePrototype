@@ -108,6 +108,7 @@ namespace Penwyn.Game
             foreach (GameObject pooledbject in pooler.ObjectPool.PooledObjects)
             {
                 pooledbject.GetComponent<Enemy>().Health.OnDeath += HandleEnemyDeath;
+                pooledbject.GetComponent<Enemy>().Health.OnDeath += LevelManager.Instance.LootDropManager.HandleEnemyDeath;
             }
         }
 

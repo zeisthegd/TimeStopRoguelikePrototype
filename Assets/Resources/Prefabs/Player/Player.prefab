@@ -437,7 +437,7 @@ MonoBehaviour:
   AbilityPermitted: 1
   Name: Money Handler
   forbidStates: 
-  CurrentMoney: 1
+  CurrentMoney: 0
 --- !u!1001 &7676210429882529789
 PrefabInstance:
   m_ObjectHideFlags: 0

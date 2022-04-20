@@ -26,6 +26,12 @@ namespace Penwyn.Game
         public string Seed;
         public bool UseRandomSeed;
 
+        [HorizontalLine(1, EColor.Green)]
+        [Header("Drop")]
+        public CoinDrop LesserMoneyDrop;
+        public CoinDrop GreaterMoneyDrop;
+        public CoinDrop EliteMoneyDrop;
+
 
         public virtual EnemySpawnSettings GetRandomEnemySpawnSettings()
         {
@@ -49,6 +55,14 @@ namespace Penwyn.Game
             Debug.Log("No enemy data inserted!");
             return null;
         }
+    }
+
+    [System.Serializable]
+    public struct CoinDrop
+    {
+        public Sprite CoinSprite;
+        public int MoneyAmount;
+        public int HealAmount;
     }
 }
 

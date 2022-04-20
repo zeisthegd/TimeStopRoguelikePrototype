@@ -11,12 +11,15 @@ namespace Penwyn.Tools
         public LayerMask TargetMask;
         public bool DisableAfterTouch = true;
 
-        protected virtual void OnTriggerEnter2D()
+        protected virtual void OnTriggerEnter2D(Collider2D col)
         {
-            ActionsOnTouch?.Invoke();
-            if (DisableAfterTouch)
-                gameObject.SetActive(false);
-            //TODO Play sound.
+            if (TargetMask.Contains(col.gameObject.layer))
+            {
+                ActionsOnTouch?.Invoke();
+                if (DisableAfterTouch)
+                    gameObject.SetActive(false);
+                //TODO Play sound.
+            }
         }
     }
 }
