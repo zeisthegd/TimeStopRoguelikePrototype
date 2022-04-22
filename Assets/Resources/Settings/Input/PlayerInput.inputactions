@@ -253,7 +253,7 @@
                 {
                     "name": "",
                     "id": "21def52b-fb47-48eb-a01d-c148a3a1b6ec",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -265,6 +265,28 @@
                     "name": "",
                     "id": "7596c032-1376-451b-8449-9912219b67c8",
                     "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabProjectiles",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0668ee0-9cf3-40de-a0e5-88295afbe02f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrabProjectiles",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1154c0a3-eece-4e25-8450-68e2c514466d",
+                    "path": "<VirtualMouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

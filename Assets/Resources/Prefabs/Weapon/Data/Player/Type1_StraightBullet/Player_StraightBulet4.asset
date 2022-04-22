@@ -26,7 +26,7 @@ MonoBehaviour:
   Cooldown: 1
   DisableAutoAimWhenShooting: 0
   RequiresHealth: 1
-  HealthPerUse: 1
+  HealthPerUse: 3
   ProjectileRotating: 0
   RotateSpeed: 1
   Upgrades: []

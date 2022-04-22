@@ -44,7 +44,7 @@ namespace Penwyn.Game
 
         protected virtual void Update()
         {
-
+            UpdateInputEvents();
         }
 
         public virtual void RequestWeaponUse()
@@ -62,22 +62,17 @@ namespace Penwyn.Game
             UseEnergy();
         }
 
-        public virtual IEnumerator UseWeaponTillNoTargetOrEnergy()
+        public virtual void UseWeaponTillNoTargetOrEnergy()
         {
-            do
+            if (Owner.Health.CurrentHealth <= CurrentData.HealthPerUse)
+                return;
+            if (_weaponAutoAim)
             {
-                if (Owner.Health.CurrentHealth <= CurrentData.HealthPerUse)
-                    break;
-                if (_weaponAutoAim)
-                {
-                    _weaponAutoAim.FindTarget();
-                    if (_weaponAutoAim.Target == null)
-                        break;
-                }
-                RequestWeaponUse();
-                yield return null;
+                _weaponAutoAim.FindTarget();
+                if (_weaponAutoAim.Target == null)
+                    return;
             }
-            while (true);
+            RequestWeaponUse();
         }
         public virtual void StartCooldown()
         {
@@ -195,6 +190,16 @@ namespace Penwyn.Game
             }
         }
 
+        #endregion
+
+        #region  Input Events
+        public virtual void UpdateInputEvents()
+        {
+            if (InputType == WeaponInputType.GrabProjectiles && InputReader.Instance.IsHoldingGrabProjectiles)
+            {
+                UseWeaponTillNoTargetOrEnergy();
+            }
+        }
         #endregion
 
 

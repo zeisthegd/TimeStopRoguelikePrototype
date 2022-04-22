@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 using NaughtyAttributes;
 using Penwyn.Tools;
@@ -25,6 +26,10 @@ namespace Penwyn.Game
         public int MinNeighborWalls = 4;
         public string Seed;
         public bool UseRandomSeed;
+        [Header("Tilemap")]
+        public TileBase GroundTile;
+        public TileBase WallTile;
+
 
         [HorizontalLine(1, EColor.Green)]
         [Header("Drop")]

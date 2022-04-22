@@ -794,8 +794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c391024bc0f70ef4985a62d15a5af4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tilemap: {fileID: 1048791791}
-  Tile: {fileID: 11400000, guid: 08b1d46a26e2afa4696a7b8afb5dc2d6, type: 2}
+  GroundTilemap: {fileID: 1202865928}
+  WallTilemap: {fileID: 1048791791}
   LevelBounds: {fileID: 412061994}
 --- !u!114 &223680849
 MonoBehaviour:
@@ -2576,6 +2576,7 @@ GameObject:
   - component: {fileID: 1048791793}
   - component: {fileID: 1048791794}
   - component: {fileID: 1048791792}
+  - component: {fileID: 1048791795}
   m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
@@ -2689,28 +2690,30 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 0
+      e00: 1e-45
       e01: 0
-      e02: 5.3126924e+19
-      e03: 5.3126924e+19
+      e02: -1.2348047e+10
+      e03: -1.2348047e+10
       e10: 0
       e11: 0
-      e12: 9.78e-43
-      e13: 9.78e-43
-      e20: 456581.5
-      e21: 8.94e-43
-      e22: -6.518386e-19
-      e23: -9.497838e+9
-      e30: 4.5904e-41
+      e12: 8.11e-43
+      e13: 8.11e-43
+      e20: 7.502065e+33
+      e21: 1e-45
+      e22: 1.3268203e-28
+      e23: 9.227272e+9
+      e30: 4.5905e-41
       e31: 0
-      e32: 9.78e-43
-      e33: 9.81e-43
+      e32: 8.13e-43
+      e33: 8.16e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 3.4985e-41, g: 3.4985e-41, b: 3.4985e-41, a: 3.4985e-41}
+    m_Data: {r: 3.5052e-41, g: 3.5052e-41, b: 3.5052e-41, a: 3.5052e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2796,6 +2799,27 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1048791795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048791788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2b1d796c05c51458e0a14b948e5421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTags:
+  - Player
+  - Enemies
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  ContactPointMaskLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1123651734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,7 +3187,7 @@ GameObject:
   - component: {fileID: 1202865928}
   - component: {fileID: 1202865927}
   m_Layer: 0
-  m_Name: BG
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3994,6 +4018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapData: {fileID: 0}
+  _destructileTilemap: {fileID: 1048791795}
 --- !u!114 &1412198793
 MonoBehaviour:
   m_ObjectHideFlags: 0

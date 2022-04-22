@@ -45,7 +45,8 @@ namespace Penwyn.Game
                     DisableAllCorners();
                     return;
                 }
-                targetSR = _weaponAutoAim.Target.Find("Model").GetComponent<SpriteRenderer>();
+                if (_weaponAutoAim.Target.Find("Model"))
+                    targetSR = _weaponAutoAim.Target.Find("Model").GetComponent<SpriteRenderer>();
                 if (targetSR == null)
                 {
                     DisableAllCorners();

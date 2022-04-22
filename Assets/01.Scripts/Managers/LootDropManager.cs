@@ -10,6 +10,7 @@ namespace Penwyn.Game
     public class LootDropManager : SingletonMonoBehaviour<LootDropManager>
     {
         public MapData MapData;
+        public DestructileTilemap _destructileTilemap;
         protected ObjectPooler _coinPooler;
 
         protected virtual void Awake()
@@ -52,10 +53,21 @@ namespace Penwyn.Game
 
         }
 
-        public virtual void HandleWallDestroyed()
+        public virtual void HandleWallDestroyed(Vector3 wallPosition)
         {
-
+            Vector3 truePos = new Vector3(wallPosition.x + 0.5F, wallPosition.y + 0.5F, 0);
+            
         }
+
+        protected virtual void OnEnable()
+        {
+            _destructileTilemap.TileDestroyed += HandleWallDestroyed;
+        }
+        protected virtual void OnDisable()
+        {
+            _destructileTilemap.TileDestroyed -= HandleWallDestroyed;
+        }
+
     }
 }
 

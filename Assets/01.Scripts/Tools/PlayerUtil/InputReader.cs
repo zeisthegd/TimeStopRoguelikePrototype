@@ -36,6 +36,7 @@ namespace Penwyn.Tools
 
         public bool IsHoldingNormalAttack { get; set; }
         public bool IsHoldingSpecialAttack { get; set; }
+        public bool IsHoldingGrabProjectiles { get; set; }
 
         #endregion
 
@@ -107,10 +108,12 @@ namespace Penwyn.Tools
             if (context.started)
             {
                 GrabProjectilesPressed?.Invoke();
+                IsHoldingGrabProjectiles = true;
             }
             else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)
             {
                 GrabProjectilesReleased?.Invoke();
+                IsHoldingGrabProjectiles = false;
             }
         }
 

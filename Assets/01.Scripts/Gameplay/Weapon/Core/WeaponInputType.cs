@@ -6,5 +6,6 @@ public enum WeaponInputType
 {
     NormalAttack,
     SpecialAttack,
+    GrabProjectiles,
     Script
 }

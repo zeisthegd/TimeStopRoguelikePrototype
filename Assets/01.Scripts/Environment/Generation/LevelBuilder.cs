@@ -10,8 +10,8 @@ namespace Penwyn.Game
     public class LevelBuilder : MonoBehaviour
     {
         [Header("Tile Settings")]
-        public Tilemap Tilemap;
-        public TileBase Tile;
+        public Tilemap GroundTilemap;
+        public Tilemap WallTilemap;
         public PolygonCollider2D LevelBounds;
         protected LevelGenerator _generator;
 
@@ -30,11 +30,12 @@ namespace Penwyn.Game
             {
                 for (int y = 0; y < _generator.MapData.Height; y++)
                 {
+                    tilePos = new Vector3Int(-_generator.MapData.Width / 2 + x, -_generator.MapData.Height / 2 + y);
                     if (walls[x, y] == 1)
                     {
-                        tilePos = new Vector3Int(-_generator.MapData.Width / 2 + x, -_generator.MapData.Height / 2 + y);
-                        Tilemap.SetTile(tilePos, Tile);
+                        WallTilemap.SetTile(tilePos, _generator.MapData.WallTile);
                     }
+                    GroundTilemap.SetTile(tilePos, _generator.MapData.GroundTile);
                 }
             }
         }

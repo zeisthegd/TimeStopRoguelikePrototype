@@ -22,23 +22,33 @@ namespace Penwyn.Game
             switch (AimType)
             {
                 case WeaponAimType.Mouse:
-                    Aim();
+                    MouseAim();
+                    break;
+                case WeaponAimType.ForwardMovement:
+                    ForwardMovementAim();
                     break;
                 default:
                     break;
             }
         }
 
-        protected virtual void Aim()
+        protected virtual void MouseAim()
         {
             Vector3 dirToMouse = CursorUtility.GetMousePosition() - _weapon.transform.position;
             _weapon.transform.right = dirToMouse;
+        }
+
+        protected virtual void ForwardMovementAim()
+        {
+            if (InputReader.Instance.MoveInput.magnitude > 0)
+                _weapon.transform.right = InputReader.Instance.MoveInput;
         }
     }
 
     public enum WeaponAimType
     {
         Mouse,
+        ForwardMovement,
         Script
     }
 }
