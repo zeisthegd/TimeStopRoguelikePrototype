@@ -190,7 +190,6 @@ namespace Penwyn.Game
 
         public virtual void OnEnable()
         {
-            _health = StartingHealth;
             _currentlyInvulnerable = false;
             _invulnerableTime = 0;
             if (_healthBar)

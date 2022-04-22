@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3cf32072f0c0a40bc95332b82d2b72, type: 3}
-  m_Name: AttackableOutline
+  m_Script: {fileID: 11500000, guid: 4ab075de53fc68740a1c1825d70f2365, type: 3}
+  m_Name: WeaponUseShake
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.7169812, g: 0.26029944, b: 0.15895337, a: 1}
+  Duration: 0.5
+  Amplitude: 2
+  Frequency: 1.2

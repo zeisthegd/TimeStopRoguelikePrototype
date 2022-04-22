@@ -25,6 +25,16 @@ namespace Penwyn.Tools
         {
 
         }
+
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void OnDisable()
+        {
+
+        }
     }
 
 }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+using NaughtyAttributes;
+
 namespace Penwyn.Tools
 {
     public class FeedbackScreenShake : Feedback
     {
-        public float ShakeDuration = 1;
-        public float AmplitudeGain = 1;
-        public float FrequencyGain = 1;
-
+        [Expandable] public FeedbackCameraShakeData ShakeData;
         protected static float _shakeElapsedTime = 0;
         protected CinemachineVirtualCamera _virtualCamera;
         protected CinemachineBasicMultiChannelPerlin _virtualCameraNoise;
@@ -27,10 +26,10 @@ namespace Penwyn.Tools
         protected override void Update()
         {
             base.Update();
-            if (_shakeElapsedTime >= 0)
+            if (_shakeElapsedTime > 0)
             {
                 _shakeElapsedTime -= Time.deltaTime;
-                if (_shakeElapsedTime < 0)
+                if (_shakeElapsedTime <= 0)
                     StopFeedback();
             }
         }
@@ -38,11 +37,11 @@ namespace Penwyn.Tools
         public override void PlayFeedback()
         {
             base.PlayFeedback();
-            if (_virtualCamera != null && _virtualCameraNoise != null)
+            if (_virtualCamera != null && _virtualCameraNoise != null && ShakeData != null)
             {
-                _virtualCameraNoise.m_AmplitudeGain = AmplitudeGain;
-                _virtualCameraNoise.m_FrequencyGain = FrequencyGain;
-                _shakeElapsedTime = ShakeDuration;
+                _virtualCameraNoise.m_AmplitudeGain = ShakeData.Amplitude;
+                _virtualCameraNoise.m_FrequencyGain = ShakeData.Frequency;
+                _shakeElapsedTime = ShakeData.Duration;
             }
         }
 
@@ -53,7 +52,7 @@ namespace Penwyn.Tools
             {
                 _virtualCameraNoise.m_AmplitudeGain = 0;
                 _virtualCameraNoise.m_FrequencyGain = 0;
-                _shakeElapsedTime = -1;
+                _shakeElapsedTime = 0;
             }
         }
     }

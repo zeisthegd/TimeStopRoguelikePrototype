@@ -98,6 +98,7 @@ namespace Penwyn.Game
             enemy.transform.position = GetPositionNearPlayer();
             LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
             enemy.gameObject.SetActive(true);
+            Debug.Break();
         }
 
         /// <summary>

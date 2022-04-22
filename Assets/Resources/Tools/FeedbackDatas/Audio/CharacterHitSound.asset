@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3cf32072f0c0a40bc95332b82d2b72, type: 3}
-  m_Name: BashableOutline
+  m_Script: {fileID: 11500000, guid: ccf6310cf53c16542a07f0a659d5d019, type: 3}
+  m_Name: CharacterHitSound
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.8784314, g: 0.60784316, b: 0.83003175, a: 1}
+  Name: CharacterHitSound
+  Sound: {fileID: 8300000, guid: 3323e3017386d024db207c8d7121b420, type: 3}

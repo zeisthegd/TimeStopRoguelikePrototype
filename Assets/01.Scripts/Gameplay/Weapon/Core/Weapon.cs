@@ -23,6 +23,9 @@ namespace Penwyn.Game
         [Header("Input")]
         public WeaponInputType InputType;
 
+        [Header("Feedbacks")]
+        public Feedbacks UseFeedbacks;
+
         [Header("Owner")]
         [ReadOnly] public Character Owner;
 
@@ -59,6 +62,8 @@ namespace Penwyn.Game
         protected virtual void UseWeapon()
         {
             _currentWeaponState = WeaponState.WeaponUse;
+            if (UseFeedbacks != null)
+                UseFeedbacks.PlayFeedbacks();
             UseEnergy();
         }
 

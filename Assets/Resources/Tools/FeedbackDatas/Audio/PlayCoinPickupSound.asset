@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502cd353fc381c046851721985415b83, type: 3}
-  m_Name: GreaterTriango
+  m_Script: {fileID: 11500000, guid: ccf6310cf53c16542a07f0a659d5d019, type: 3}
+  m_Name: PlayCoinPickupSound
   m_EditorClassIdentifier: 
-  Health: 3
-  MoveSpeed: 1
-  ThreatLevel: 3
-  Type: 1
-  WeaponData: {fileID: 11400000, guid: 01ac03d7c335b4b48805178ef6a006a5, type: 2}
-  RuntimeAnimatorController: {fileID: 0}
+  Name: CoinPickUpSound
+  Sound: {fileID: 8300000, guid: 3894bb6325ebee6499c14e60ff4c8594, type: 3}
