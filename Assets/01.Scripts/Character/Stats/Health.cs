@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 using NaughtyAttributes;
-
+using Penwyn.Tools;
 
 namespace Penwyn.Game
 {
@@ -20,6 +20,10 @@ namespace Penwyn.Game
         public float InvulnerableDuration = 1;
         [Header("Damaged Feedback")]
         public Color DamageTakenFlickerColor = Color.red;
+
+        [Header("Feedbacks")]
+        public Feedbacks HitFeedbacks;
+        public Feedbacks DeathFeedbacks;
 
         [SerializeField][ReadOnly] protected float _health = 0;
         [SerializeField][ReadOnly] protected float _maxHealth = 0;
@@ -59,12 +63,16 @@ namespace Penwyn.Game
                 _health -= damage;
                 _health = Mathf.Clamp(_health, 0, _maxHealth);
                 OnChanged?.Invoke();
+                if (HitFeedbacks != null)
+                    HitFeedbacks.PlayFeedbacks();
                 if (_health > 0)
                 {
                     MakeInvulnerable();
                 }
                 else
                 {
+                    if (DeathFeedbacks != null)
+                        DeathFeedbacks.PlayFeedbacks();
                     Kill();
                 }
             }

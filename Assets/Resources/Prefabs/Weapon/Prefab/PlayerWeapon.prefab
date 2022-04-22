@@ -174,10 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetsMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 256
   ObstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   Target: {fileID: 0}
 --- !u!114 &7850991737136522351
 MonoBehaviour:

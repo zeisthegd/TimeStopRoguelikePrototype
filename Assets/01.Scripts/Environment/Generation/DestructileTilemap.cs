@@ -26,7 +26,6 @@ namespace Penwyn.Game
                 Vector3 colPoint = collider.transform.position;
                 Vector3 hitPoint = GetHitPoint(colPoint);
                 _tilemap.SetTile(_tilemap.WorldToCell(hitPoint), null);
-                Debug.Log($"Destroyed: {_tilemap.WorldToCell(hitPoint)}");
                 TileDestroyed?.Invoke(_tilemap.CellToWorld(_tilemap.WorldToCell(hitPoint)));
             }
         }

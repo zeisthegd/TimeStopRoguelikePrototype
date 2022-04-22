@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &393414839858911083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946087265096494107}
+  - component: {fileID: 6124321981230395076}
+  - component: {fileID: 7179173705356254717}
+  m_Layer: 8
+  m_Name: Feedbacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946087265096494107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393414839858911083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2006300841245699177}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6124321981230395076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393414839858911083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0dfef011d977b9498a3e8678787e79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeedbacksList:
+  - {fileID: 7179173705356254717}
+--- !u!114 &7179173705356254717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393414839858911083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badaaa148cb46e24dbe84fbe848d43da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.5
+  AmplitudeGain: 1.2
+  FrequencyGain: 2
 --- !u!1 &2006300840360269524
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +217,7 @@ Transform:
   - {fileID: 2006300842071046158}
   - {fileID: 4869068508591139482}
   - {fileID: 2006300840438366962}
+  - {fileID: 2946087265096494107}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,6 +342,8 @@ MonoBehaviour:
   InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   InvulnerableDuration: 0.001
   DamageTakenFlickerColor: {r: 0.9622642, g: 0.27905324, b: 0.24964403, a: 1}
+  HitFeedbacks: {fileID: 6124321981230395076}
+  DeathFeedbacks: {fileID: 0}
   _health: 0
   _maxHealth: 0
 --- !u!58 &3481002168413983432
