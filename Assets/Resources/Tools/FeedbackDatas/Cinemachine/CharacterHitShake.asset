@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab075de53fc68740a1c1825d70f2365, type: 3}
   m_Name: CharacterHitShake
   m_EditorClassIdentifier: 
-  Duration: 0.75
-  Amplitude: 2.5
-  Frequency: 1.2
+  Duration: 0.5
+  Amplitude: 0.75
+  Frequency: 1

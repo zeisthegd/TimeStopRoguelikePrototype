@@ -404,10 +404,10 @@ MonoBehaviour:
   SlowTimeScale: 0.8
   TimeZoneRange: 1.25
   TimeSlowZone: {fileID: 3191496777183214233, guid: 910ba73857f52c74aa5792e0bbed2c46, type: 3}
-  HealthPerObject: 0.75
+  HealthPerObject: 0.5
   ZoneClosingDuration: 0.1
-  DelayBeforeRecoverDuration: 0.5
-  RecoverDuration: 0.75
+  DelayBeforeRecoverDuration: 2
+  RecoverDuration: 1
 --- !u!114 &614565487340159100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2466481719072096461
 Transform:
   m_ObjectHideFlags: 0

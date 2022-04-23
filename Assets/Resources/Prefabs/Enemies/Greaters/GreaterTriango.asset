@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502cd353fc381c046851721985415b83, type: 3}
   m_Name: GreaterTriango
   m_EditorClassIdentifier: 
-  Health: 3
+  Health: 2
   MoveSpeed: 1
   ThreatLevel: 3
   Type: 1
