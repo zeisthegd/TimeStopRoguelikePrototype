@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 702950053439556720}
   - component: {fileID: 702950053439556721}
   - component: {fileID: -6534037574789119227}
+  - component: {fileID: 6525066810858142411}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -144,6 +145,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6525066810858142411}
+        m_TargetAssemblyTypeName: Penwyn.Tools.FeedbackPlaySound, Penwyn.Game
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   TargetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -187,3 +200,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalOffset: {x: 0, y: -0.15, z: 0}
+--- !u!114 &6525066810858142411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702950053439556730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d6e5a549b9b594898504bc89e975c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 43004db5061cad24c89e0abe5c74f459, type: 2}

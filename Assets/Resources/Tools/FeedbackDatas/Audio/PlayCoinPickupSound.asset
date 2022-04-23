@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayCoinPickupSound
   m_EditorClassIdentifier: 
   Name: CoinPickUpSound
-  Sound: {fileID: 8300000, guid: 3894bb6325ebee6499c14e60ff4c8594, type: 3}
+  Sound: {fileID: 8300000, guid: 04e9dfaa548586a46b255aaa298ef264, type: 3}

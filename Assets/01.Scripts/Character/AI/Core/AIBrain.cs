@@ -80,6 +80,7 @@ namespace Penwyn.Game
         {
             if (Enabled)
                 CurrentState.Exit();
+            Enabled = false;
         }
 
         public Character Character => _character;

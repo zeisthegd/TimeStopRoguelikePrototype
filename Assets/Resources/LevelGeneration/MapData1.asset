@@ -22,11 +22,11 @@ MonoBehaviour:
     Prefab: {fileID: 7637248474599472495, guid: d220a0d565533ca41bd3fc6c0b6f9856, type: 3}
     Datas:
     - {fileID: 11400000, guid: 927b68549b89f5d40bdd8a58a59e80e4, type: 2}
-  StartingThreatLevel: 2
-  ThreatLevelIncrementPerSecond: 0.5555556
+  StartingThreatLevel: 3
+  ThreatLevelIncrementPerSecond: 0.5
   Width: 198
   Height: 198
-  FillPercent: 36
+  FillPercent: 46
   ResmoothWallTimes: 4
   MinNeighborWalls: 4
   Seed: PenwyRandom

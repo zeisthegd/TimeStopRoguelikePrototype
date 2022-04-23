@@ -2,43 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Penwyn.Game;
+
 namespace Penwyn.Tools
 {
     public class FeedbackPlaySound : Feedback
     {
         public FeedbackPlaySoundData Data;
         protected AudioSource _audioSource;
+        protected static ObjectPooler AudioSourcePooler;
 
         protected override void Start()
         {
             base.Start();
-            InitAudioSource();
+            InitAudioSourcePooler();
         }
 
         public override void PlayFeedback()
         {
             StopAllCoroutines();
-            if (_audioSource == null)
-                InitAudioSource();
+            _audioSource = AudioSourcePooler.PullOneObject().GetComponent<AudioSource>();
+            _audioSource.GetComponent<PoolableObject>().LifeTime = Data.Sound.length;
             _audioSource.gameObject.SetActive(true);
-            StartCoroutine(PlaySoundCoroutine());
-        }
-
-        protected IEnumerator PlaySoundCoroutine()
-        {
             _audioSource.transform.position = this.transform.position;
-            _audioSource.Play();
-            yield return _audioSource.clip.length;
-            _audioSource.gameObject.SetActive(false);
+            _audioSource.PlayOneShot(Data.Sound);
         }
 
-        public virtual void InitAudioSource()
+        public virtual void InitAudioSourcePooler()
         {
-            GameObject audioObject = new GameObject(GetSourceName());
-            _audioSource = audioObject.AddComponent<AudioSource>();
-            _audioSource.clip = Data.Sound;
-            _audioSource.playOnAwake = true;
+            if (AudioSourcePooler == null)
+            {
+                GameObject poolerObject = new GameObject("AudioSourcePooler");
+                AudioSourcePooler = poolerObject.AddComponent<ObjectPooler>();
+                AudioSourcePooler.Size = 100;
+                AudioSourcePooler.UseSharedInstance = true;
+
+                AudioSourcePooler.InitAtStart = false;
+                AudioSourcePooler.EnableObjectsAtStart = false;
+                AudioSourcePooler.NestPoolBelowThis = true;
+                AudioSourcePooler.NestObjectsInPool = true;
+
+                GameObject audioObject = new GameObject(GetSourceName());
+                audioObject.AddComponent<PoolableObject>();
+                _audioSource = audioObject.AddComponent<AudioSource>();
+                _audioSource.playOnAwake = true;
+
+                AudioSourcePooler.ObjectToPool = _audioSource.gameObject;
+                AudioSourcePooler.Init();
+            }
         }
+
 
         protected override void OnDisable()
         {

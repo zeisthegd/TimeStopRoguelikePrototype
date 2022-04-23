@@ -13,6 +13,13 @@ namespace Penwyn.Game
         public float Speed;
         public DamageOnTouch DamageOnTouch;
         public CharacterController Controller;
+
+        protected Health _health;
+
+        void Awake()
+        {
+            _health = GetComponent<Health>();
+        }
         
         public virtual void FlyTowards(Vector3 direction)
         {
@@ -22,6 +29,7 @@ namespace Penwyn.Game
         protected override void OnEnable()
         {
             base.OnEnable();
+            _health?.SetHealthAtAwake();
         }
 
         protected override void OnDisable()

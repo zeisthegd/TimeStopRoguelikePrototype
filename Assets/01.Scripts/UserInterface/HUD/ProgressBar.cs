@@ -12,7 +12,7 @@ public class ProgressBar : MonoBehaviour
     [Header("Sliders")]
     public Slider ActualValue;
     public Slider LostValue;
-    
+
     [Header("Times")]
     public float SetDuration = 0.5F;
     public float LostDuration = 0.5F;
@@ -90,9 +90,9 @@ public class ProgressBar : MonoBehaviour
     public virtual string GetText()
     {
         if (TextType == ValueTextType.CurrentValueOnly)
-            return $"{(int)ActualValue.value}";
+            return $"{ActualValue.value.ToString("0.0")}";
         if (TextType == ValueTextType.BothCurrentAndMax)
-            return $"{(int)ActualValue.value}/{(int)ActualValue.maxValue}";
+            return $"{ActualValue.value.ToString("0.0")}/{ActualValue.maxValue.ToString("0.0")}";
         return "";
     }
 

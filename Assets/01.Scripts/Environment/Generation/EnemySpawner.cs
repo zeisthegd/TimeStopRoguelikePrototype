@@ -93,12 +93,10 @@ namespace Penwyn.Game
         {
             Enemy enemy = pooledObject.GetComponent<Enemy>();
             enemy.AIBrain.Enabled = true;
-            if (enemy.Data != data)
-                enemy.LoadEnemy(data);
+            enemy.LoadEnemy(data);
             enemy.transform.position = GetPositionNearPlayer();
             LevelManager.Instance.CurrentThreatLevel += data.ThreatLevel;
             enemy.gameObject.SetActive(true);
-            Debug.Break();
         }
 
         /// <summary>

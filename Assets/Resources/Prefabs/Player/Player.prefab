@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 10
-  Invincible: 1
+  Invincible: 0
   InvincibleFlickerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   InvulnerableDuration: 0
   DamageTakenFlickerColor: {r: 0.66, g: 0.18744004, b: 0.18744004, a: 1}
@@ -404,7 +404,7 @@ MonoBehaviour:
   SlowTimeScale: 0.8
   TimeZoneRange: 1.25
   TimeSlowZone: {fileID: 3191496777183214233, guid: 910ba73857f52c74aa5792e0bbed2c46, type: 3}
-  HealthPerObject: 1
+  HealthPerObject: 0.75
   ZoneClosingDuration: 0.1
   DelayBeforeRecoverDuration: 0.5
   RecoverDuration: 0.75
@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2466481719072096461
 Transform:
   m_ObjectHideFlags: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.6
+  m_FalloffIntensity: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
@@ -540,8 +540,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 12
+  m_PointLightInnerRadius: 10
+  m_PointLightOuterRadius: 10
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 3630471815209104911}
   - component: {fileID: 603896595935614320}
   - component: {fileID: 2330191453375591452}
+  - component: {fileID: 1777651122}
   m_Layer: 6
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -610,9 +611,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badaaa148cb46e24dbe84fbe848d43da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShakeDuration: 0.5
-  AmplitudeGain: 1.2
-  FrequencyGain: 2
+  ShakeData: {fileID: 11400000, guid: 942f8d72321d94c43a3d0febb40b1ff1, type: 2}
+--- !u!114 &1777651122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010789907951252950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d6e5a549b9b594898504bc89e975c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 6f2f5a55e782c7644bd54af188a87ee0, type: 2}
 --- !u!1001 &7676210429882529789
 PrefabInstance:
   m_ObjectHideFlags: 0

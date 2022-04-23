@@ -11,6 +11,8 @@ namespace Penwyn.Game
 
         protected EnemyData _data;
 
+        protected bool newData;
+
         protected override void Awake()
         {
             base.Awake();
@@ -20,16 +22,22 @@ namespace Penwyn.Game
 
         public virtual void LoadEnemy(EnemyData data)
         {
+            newData = false;
+            if (this._data != data)
+                newData = true;
             this._data = data;
             LoadEnemy();
         }
 
         public virtual void LoadEnemy()
         {
-            this.Animator.runtimeAnimatorController = _data.RuntimeAnimatorController;
             this.Health.Set(_data.Health, _data.Health);
-            this._characterRun.RunSpeed = _data.MoveSpeed;
-            this._characterWeaponHandler.ChangeWeapon(_data.WeaponData);
+            if (newData)
+            {
+                this.Animator.runtimeAnimatorController = _data.RuntimeAnimatorController;
+                this._characterRun.RunSpeed = _data.MoveSpeed;
+                this._characterWeaponHandler.ChangeWeapon(_data.WeaponData);
+            }
         }
         public EnemyData Data { get => _data; }
     }
