@@ -214,7 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c532e4ef231988d4d8d639125e6c06ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 9b256f3d3cfa23842aee9c6360becf33, type: 2}
+  Settings: {fileID: 0}
+  Dust: {fileID: 0}
 --- !u!1 &614565485822407723
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +347,7 @@ GameObject:
   - component: {fileID: 614565487340159099}
   - component: {fileID: 614565487340159100}
   - component: {fileID: 4147484079930388929}
+  - component: {fileID: 2279001848211336340}
   m_Layer: 6
   m_Name: MandatoryAbilities
   m_TagString: Untagged
@@ -382,8 +384,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityPermitted: 1
   Name: Run
-  forbidStates: 
-  RunSpeed: 6
+  ForbidPermissionCharacterStates: 
+  ForbidPermissionControllerStates: 
+  RunSpeed: 7
   Type: 0
   Dust: {fileID: 1641108727}
 --- !u!114 &614565487340159099
@@ -400,7 +403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityPermitted: 1
   Name: Slow Time
-  forbidStates: 
+  ForbidPermissionCharacterStates: 
+  ForbidPermissionControllerStates: 
   SlowTimeScale: 0.8
   TimeZoneRange: 1.25
   TimeSlowZone: {fileID: 3191496777183214233, guid: 910ba73857f52c74aa5792e0bbed2c46, type: 3}
@@ -422,7 +426,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityPermitted: 1
   Name: Weapon Handler
-  forbidStates: 
+  ForbidPermissionCharacterStates: 
+  ForbidPermissionControllerStates: 
   InitialWeaponPrefab: {fileID: 248487134125919222, guid: 55a61cca81f3765499a6070d8584390b, type: 3}
   InitialWeaponData: {fileID: 11400000, guid: 8b0d1be3086e7c04784f7049323a5426, type: 2}
   WeaponHolder: {fileID: 614565487340159101}
@@ -440,8 +445,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityPermitted: 1
   Name: Money Handler
-  forbidStates: 
+  ForbidPermissionCharacterStates: 
+  ForbidPermissionControllerStates: 
   CurrentMoney: 0
+--- !u!114 &2279001848211336340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614565487340159096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bbac323dbb610c428fab9e856bb81aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityPermitted: 1
+  Name: 
+  ForbidPermissionCharacterStates: 
+  ForbidPermissionControllerStates: 
+  DashDuration: 0.1
+  DashSpeed: 40
 --- !u!1 &7295517325157190045
 GameObject:
   m_ObjectHideFlags: 0

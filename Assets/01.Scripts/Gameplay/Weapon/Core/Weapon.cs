@@ -74,8 +74,6 @@ namespace Penwyn.Game
             if (_weaponAutoAim)
             {
                 _weaponAutoAim.FindTarget();
-                if (_weaponAutoAim.Target == null)
-                    return;
             }
             RequestWeaponUse();
         }

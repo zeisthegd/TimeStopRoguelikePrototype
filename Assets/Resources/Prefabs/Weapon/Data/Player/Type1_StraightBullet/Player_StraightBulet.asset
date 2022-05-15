@@ -24,7 +24,7 @@ MonoBehaviour:
   DelayBetweenBullets: 0
   Angle: 0
   Cooldown: 0.1
-  DisableAutoAimWhenShooting: 1
+  DisableAutoAimWhenShooting: 0
   RequiresHealth: 1
   HealthPerUse: 0.1
   ProjectileRotating: 0
@@ -32,4 +32,4 @@ MonoBehaviour:
   Upgrades:
   - {fileID: 11400000, guid: cd89b284e5a52a644ae909074af0b9ba, type: 2}
   AutoUpgrade: 1
-  RequiredUpgradeValue: 20
+  RequiredUpgradeValue: 10

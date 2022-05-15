@@ -18,6 +18,8 @@ namespace Penwyn.Game
         [Header("Damage To Damageable")]
         public float DamageDeal = 1;
         public float RecoilDamage = 1;
+        [Header("Feedbacks")]
+        public Feedbacks HitFeedbacks;
         [Header("Collide With Non-Damageable")]
         public bool DestroyWhenCollidingNonDamageable = true;
 
@@ -68,13 +70,14 @@ namespace Penwyn.Game
             {
                 DealDamage(col.gameObject);
                 HandleRecoilDamage();
+                HitFeedbacks?.PlayFeedbacks();
             }
             else if (ObstacleMask.Contains(col.gameObject.layer))
             {
                 HandleCollideNonDamageable();
+                HitFeedbacks?.PlayFeedbacks();
             }
         }
-
 
 
         public virtual void OnEnable()

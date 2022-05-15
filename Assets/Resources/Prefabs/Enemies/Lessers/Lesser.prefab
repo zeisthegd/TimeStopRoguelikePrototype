@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2946087265096494107}
   - component: {fileID: 6124321981230395076}
   - component: {fileID: 7179173705356254717}
-  - component: {fileID: 2065031732638998359}
   m_Layer: 8
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -48,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FeedbacksList:
   - {fileID: 7179173705356254717}
-  - {fileID: 2065031732638998359}
 --- !u!114 &7179173705356254717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,19 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShakeData: {fileID: 11400000, guid: 942f8d72321d94c43a3d0febb40b1ff1, type: 2}
---- !u!114 &2065031732638998359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393414839858911083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d6e5a549b9b594898504bc89e975c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 6f2f5a55e782c7644bd54af188a87ee0, type: 2}
 --- !u!1 &2006300840360269524
 GameObject:
   m_ObjectHideFlags: 0

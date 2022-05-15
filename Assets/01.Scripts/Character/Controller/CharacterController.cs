@@ -5,19 +5,24 @@ using UnityEngine.Events;
 
 public class CharacterController : MonoBehaviour
 {
-    [SerializeField] PhysicsSettings settings;
-    Rigidbody2D body2D;
-    new Collider2D collider;
+    public PhysicsSettings Settings;
+
+    [Header("Feedbacks")]
+    public ParticleSystem Dust;
+    protected Rigidbody2D _body;
+    protected Collider2D _collider;
+
+    private StateMachine<ControllerState> _states;
 
     void Awake()
     {
-        body2D = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        _body = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
     }
 
     public virtual void AddForce(Vector2 force, ForceMode2D mode = ForceMode2D.Force)
     {
-        body2D.AddForce(force, mode);
+        _body.AddForce(force, mode);
     }
 
     public virtual void AddPosition(Vector3 positionAddition)
@@ -32,12 +37,12 @@ public class CharacterController : MonoBehaviour
 
     public virtual void MultiplyVelocity(Vector2 multiplier)
     {
-        SetVelocity(body2D.velocity * multiplier);
+        SetVelocity(_body.velocity * multiplier);
     }
 
     public virtual void SetVelocity(Vector2 newVelocity)
     {
-        body2D.velocity = newVelocity;
+        _body.velocity = newVelocity;
     }
 
     #region Physics Check
@@ -62,8 +67,7 @@ public class CharacterController : MonoBehaviour
     }
 
 
-    public Rigidbody2D Body2D { get => body2D; }
-    public PhysicsSettings Settings { get => settings; }
-    public Collider2D Collider { get => collider; set => collider = value; }
-    public Vector3 Velocity { get => body2D.velocity; }
+    public Rigidbody2D Body2D { get => _body; }
+    public Vector3 Velocity { get => _body.velocity; }
+    public StateMachine<ControllerState> States { get => _states; }
 }

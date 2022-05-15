@@ -32,6 +32,8 @@ namespace Penwyn.Game
         protected CharacterWeaponHandler _characterWeaponHandler;
         protected CharacterRun _characterRun;
         protected CharacterHandleMoney _characterMoney;
+        private StateMachine<CharacterAbilityStates> _states;
+
 
         protected virtual void Awake()
         {
@@ -134,5 +136,7 @@ namespace Penwyn.Game
         public CharacterRun CharacterRun { get => _characterRun; }
         public CharacterHandleMoney CharacterMoney { get => _characterMoney; }
         public CharacterWeaponHandler CharacterWeaponHandler { get => _characterWeaponHandler; }
+        public StateMachine<CharacterAbilityStates> States { get => _states; }
+
     }
 }

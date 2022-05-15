@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 2
   MoveSpeed: 1
-  ThreatLevel: 3
+  ThreatLevel: 1
   Type: 1
   WeaponData: {fileID: 11400000, guid: 01ac03d7c335b4b48805178ef6a006a5, type: 2}
   RuntimeAnimatorController: {fileID: 0}

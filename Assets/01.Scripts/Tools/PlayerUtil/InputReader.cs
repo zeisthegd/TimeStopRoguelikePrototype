@@ -95,6 +95,7 @@ namespace Penwyn.Tools
         {
             if (context.started)
             {
+                Debug.Log("Dash Pressed");
                 DashPressed?.Invoke();
             }
             else if (context.phase == UnityEngine.InputSystem.InputActionPhase.Canceled)

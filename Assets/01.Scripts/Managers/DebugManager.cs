@@ -54,6 +54,7 @@ namespace Penwyn.Game
             TextPool.ObjectPool.DisableAllObjects();
         }
 
+        /// <returns>Top most text mesh.</returns>
         public TMP_Text GetLatestText()
         {
             for (int i = 0; i < TextPool.ObjectPool.PooledObjects.Count; i++)

@@ -26,7 +26,7 @@ MonoBehaviour:
   ThreatLevelIncrementPerSecond: 0.5
   Width: 198
   Height: 198
-  FillPercent: 46
+  FillPercent: 49
   ResmoothWallTimes: 4
   MinNeighborWalls: 4
   Seed: PenwyRandom
